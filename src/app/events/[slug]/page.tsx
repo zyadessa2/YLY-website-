@@ -1,21 +1,22 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Metadata } from "next";
 import { getEventBySlug } from "../_data/events";
-
 import { notFound } from "next/navigation";
 import { EventDetailHero } from "../_components/EventDetailHero";
 import { EventContent } from "../_components/EventContent";
 import { RelatedEvents } from "../_components/RelatedEvents";
 
-interface EventPageProps {
-  params: {
-    slug: string;
-  };
-}
+// Update the interface to match Next.js expected types
+type Props = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
 export async function generateMetadata({
   params,
-}: EventPageProps): Promise<Metadata> {
-  const event = getEventBySlug(params.slug);
+  searchParams,
+}: Props): Promise<Metadata> {
+  const event = await getEventBySlug(params.slug);
 
   if (!event) {
     return {
@@ -34,8 +35,8 @@ export async function generateMetadata({
   };
 }
 
-export default function EventPage({ params }: EventPageProps) {
-  const event = getEventBySlug(params.slug);
+export default async function EventPage({ params, searchParams }: Props) {
+  const event = await getEventBySlug(params.slug);
 
   if (!event) {
     notFound();
