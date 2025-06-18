@@ -11,6 +11,11 @@ export interface EventItem {
   slug: string;
 }
 
+export type EventPageParams = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
 export const eventsData: EventItem[] = [
   {
     id: "5-in-1",
@@ -96,6 +101,6 @@ export const eventsData: EventItem[] = [
   // More events can be added here
 ];
 
-export const getEventBySlug = (slug: string) => {
+export const getEventBySlug = (slug: string): EventItem | undefined => {
   return eventsData.find((event) => event.slug === slug);
 };
