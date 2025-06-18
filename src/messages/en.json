@@ -111,6 +111,28 @@
       }
     }
   },
+  "governments": {
+    "title": "We Are Present In All Governorates",
+    "description": "Explore our presence across Egypt's diverse regions.",
+    "governorates": {
+      "cairo": "Cairo",
+      "giza": "Giza",
+      "alexandria": "Alexandria",
+      "aswan": "Aswan",
+      "luxor": "Luxor",
+      "port-said": "Port Said",
+      "suez": "Suez",
+      "damietta": "Damietta",
+      "dakahlia": "Dakahlia",
+      "sharqia": "Sharqia",
+      "monufia": "Monufia",
+      "kafr-el-sheikh": "Kafr El Sheikh",
+      "beheira": "Beheira",
+      "matrouh": "Matrouh",
+      "north-sinai": "North Sinai",
+      "south-sinai": "South Sinai"
+    }
+  },
   "common": {
     "readMore": "Read More",
     "learnMore": "Learn More",

@@ -71,11 +71,28 @@
         "label": "متطوع"
       }
     },
-    "egyptMap": {
-      "title": "تواجدنا في أنحاء مصر",
-      "description": "نفخر بخدمة المجتمعات في جميع أنحاء مصر، مع وجود نشط في محافظات متعددة",
-      "learnMore": "اعرف المزيد"
-    },
+    "governments": {
+    "title": "نتواجد في جميع المحافظات",
+    "description": "استكشف تواجدنا في مختلف مناطق مصر",
+    "governorates": {
+      "cairo": "Cairo",
+      "giza": "Giza",
+      "alexandria": "Alexandria",
+      "aswan": "Aswan",
+      "luxor": "Luxor",
+      "port-said": "Port Said",
+      "suez": "Suez",
+      "damietta": "Damietta",
+      "dakahlia": "Dakahlia",
+      "sharqia": "Sharqia",
+      "monufia": "Monufia",
+      "kafr-el-sheikh": "Kafr El Sheikh",
+      "beheira": "Beheira",
+      "matrouh": "Matrouh",
+      "north-sinai": "North Sinai",
+      "south-sinai": "South Sinai"
+    }
+  },
     "board": {
       "title": "مجلس إدارة YLY",
       "description": "تعرف على أعضاء مجلس إدارتنا المتفانين الذين يقودون مهمة YLY",

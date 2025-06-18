@@ -508,54 +508,53 @@ class App {
   ) {
     const defaultItems = [
       {
-        image: `https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/495001393_1129012882601988_8466711288958964632_n.jpg?stp=c160.0.640.640a_dst-jpg_s206x206_tt6&_nc_cat=101&ccb=1-7&_nc_sid=50ad20&_nc_ohc=-fvUMbWGxYQQ7kNvwGzFQ8u&_nc_oc=Adl3GOo5ScZLxkFQHvqrdzWisLDp4lM5u9UEhWlxfkxMWDoZgt6P8Ui0jnNhhqXYXNQ&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=J-5Iz2oKgF7eho8vdOIEUg&oh=00_AfNZD-sLK8odUV7w_P8avK8l_xo8o3szagrfoDmFg4qnEw&oe=684B6D25`,
+        image: `/images/gallery/yly.jpg`,
         text: "",
       },
       {
-        image: `https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/495428029_1129013312601945_8829273888679855546_n.jpg?stp=c160.0.640.640a_dst-jpg_s206x206_tt6&_nc_cat=104&ccb=1-7&_nc_sid=50ad20&_nc_ohc=nlafzMRTBvQQ7kNvwEWsw1c&_nc_oc=Adk6k2SpTQ-NKONd_bjVxHSO4wS9pKZudEE59wLPj7r1lo-y9lZ0ALlhBOZ-1tVBLrk&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=J-5Iz2oKgF7eho8vdOIEUg&oh=00_AfN6UkVXX4j8rA58HXy8ZwYr6mp96tEQB9jFhSzliuVSUQ&oe=684B6705`,
+        image: `/images/gallery/yly2.jpg`,
         text: "",
       },
       {
-        image: `https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/495210845_1131486802354596_6843235905019116264_n.jpg?stp=c120.0.720.720a_dst-jpg_s206x206_tt6&_nc_cat=106&ccb=1-7&_nc_sid=50ad20&_nc_ohc=NwUHq9r59RAQ7kNvwF-5V5g&_nc_oc=AdkB1aEKWcDLM_w3vzPyhtpqtzGbC2Eth0nBpfsQ8Blb-hHfzZJdJo8muFJOGmdw9_Y&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=ecf0ZqM0L-gpTIdAfzcYOA&oh=00_AfMV2qLZDU374T9x6KuhQIi-yOPUMkrtADmgjsn-SSazNQ&oe=684B5BC8`,
+        image: `/images/gallery/yly3.jpg`,
         text: "",
       },
       {
-        image: `https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/497012921_1137547808415162_9174467080916421890_n.jpg?stp=c120.0.720.720a_dst-jpg_s206x206_tt6&_nc_cat=103&ccb=1-7&_nc_sid=50ad20&_nc_ohc=-MJi_aFfvOoQ7kNvwEugp2p&_nc_oc=AdktyIvzOtr7_9alMJcUnP-34Hd2KWZBeCHMTpp5Yg6JC6TlbdSOme-JAYADatBJ0OY&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=8qfoiOPdHtWbNc4_N7iEng&oh=00_AfNF65hWzGTNBH18uu6i8h7TD79e2MueUkCzDFTnsHVMvA&oe=684B6BD6`,
+        image: `/images/gallery/yly4.jpg`,
         text: "",
       },
       {
-        image: `https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/497755770_1139656654870944_1506413837898180555_n.jpg?stp=c120.0.720.720a_dst-jpg_s206x206_tt6&_nc_cat=104&ccb=1-7&_nc_sid=50ad20&_nc_ohc=Z55Cxlqa6h4Q7kNvwFSJhvq&_nc_oc=Adnzi8DFVNSb6xGP2pR7a1y27Kw_9e_7vV8UUP2THYh_cQRPJ83RlP4wZCXDxFxLDo8&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=XFJGBR6TILMbCoArwHqtnw&oh=00_AfMlX6bGkS5No6TT8DUhTCDShGMF77W0XcLBbkJXVjiNCA&oe=684B6415`,
+        image: `/images/gallery/yly5.jpg`,
         text: "",
       },
       {
-        image: `https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/500074598_1143970497772893_8063292281192072812_n.jpg?stp=c120.0.720.720a_dst-jpg_s206x206_tt6&_nc_cat=108&ccb=1-7&_nc_sid=50ad20&_nc_ohc=wMWBDu0iQ9AQ7kNvwEFSp5M&_nc_oc=Adn6K_waCIv5kjTxU8ZHzlGikBv61VC74riokz1Bxwm2PrVgcKkRD0zNtPLE3y4pDiU&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=3ydXez5Mx4YbAwYHV85Okw&oh=00_AfPhDEvUR8xHwDV1HJk4ul9dhpKF7beuvYJV3eDfSzuHtg&oe=684B592F`,
+        image: `/images/gallery/yly6.jpg`,
         text: "",
       },
       {
-        image: `https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/500066451_1146811427488800_672045571973791589_n.jpg?stp=c160.0.640.640a_dst-jpg_s206x206_tt6&_nc_cat=110&ccb=1-7&_nc_sid=50ad20&_nc_ohc=kM1li-uTMVEQ7kNvwE8lEvj&_nc_oc=Adn9Qi1GfHQi_6jVNzUXbpzogBS4iwl3FWybkOiq7YP2j8q-0vUi_c4KPOuMeHXaH3M&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=03Sa8_j5lnxjnHzmU6p_Zw&oh=00_AfMh0uytazBwnN3KvlzzeV6DLSjWew_W9EXlJBmcSRKOzQ&oe=684B4DE8`,
+        image: `/images/gallery/yly7.jpg`,
         text: "",
       },
       {
-        image: `https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/502667060_1152303380272938_9207012249130494756_n.jpg?stp=c195.0.570.570a_dst-jpg_s206x206_tt6&_nc_cat=100&ccb=1-7&_nc_sid=50ad20&_nc_ohc=icyFsBnSHYAQ7kNvwH1dsHl&_nc_oc=AdkdqE-ccO_oXSxTsZl5jRH2_xgMIGmMZLrAeBLBslzidD7pRYZITr5cEmi0ov440IU&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=0Ath0SPOyHjvsBEXAkts9g&oh=00_AfPXKIsYg_G6nzIIuItiPGt9jf-yn8s8vcTh29DNz2wMAw&oe=684B7754`,
+        image: `/images/gallery/yly8.jpg`,
         text: "",
       },
       {
-        image: `https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/502961385_1152326590270617_8277987710011768143_n.jpg?stp=c195.0.570.570a_dst-jpg_s206x206_tt6&_nc_cat=105&ccb=1-7&_nc_sid=50ad20&_nc_ohc=fhJpUBFxTmYQ7kNvwHke0aX&_nc_oc=Adm6yZnc5q0uVm-RwtPPNcimSHIbQZKjyNuAl6Pwqh73Bf2xcJRwBD9AeDV46Ka3yvM&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=g0yIbBjah_DBl6v_ujyL_w&oh=00_AfO4E1FzYdadJDVofkcnlOmQEZDtXZcV4So_erO2wJA3tw&oe=684B5943`,
+        image: `/images/gallery/yly9.jpg`,
         text: "",
       },
       {
-        image: `https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/503843227_1156155626554380_8054458885724218710_n.jpg?stp=c260.0.760.760a_dst-jpg_s206x206_tt6&_nc_cat=103&ccb=1-7&_nc_sid=50ad20&_nc_ohc=IatNMHLK7P4Q7kNvwE1PN_J&_nc_oc=AdlHDHlWMlxxkJYlT1OnA5-Yqj_abtfPLyTwKL839AXl3MMg-sRG_y_Vg_m-xdJjUo4&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=f9KGppaDBkLMwIRVHQz_1Q&oh=00_AfOgrSm6PEZJLTuTDE4uHTDYrPL-IqJ7u2lGtmdO9PEPbw&oe=684B5AB5`,
+        image: `/images/gallery/yly10.jpg`,
         text: "",
       },
       {
-        image: `https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/497012921_1137547808415162_9174467080916421890_n.jpg?stp=c120.0.720.720a_dst-jpg_s206x206_tt6&_nc_cat=103&ccb=1-7&_nc_sid=50ad20&_nc_ohc=-MJi_aFfvOoQ7kNvwEugp2p&_nc_oc=AdktyIvzOtr7_9alMJcUnP-34Hd2KWZBeCHMTpp5Yg6JC6TlbdSOme-JAYADatBJ0OY&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=8qfoiOPdHtWbNc4_N7iEng&oh=00_AfNF65hWzGTNBH18uu6i8h7TD79e2MueUkCzDFTnsHVMvA&oe=684B6BD6`,
+        image: `/images/gallery/yly4.jpg`, // Repeated as per user's provided list structure
         text: "",
       },
       {
-        image: `https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/497755770_1139656654870944_1506413837898180555_n.jpg?stp=c120.0.720.720a_dst-jpg_s206x206_tt6&_nc_cat=104&ccb=1-7&_nc_sid=50ad20&_nc_ohc=Z55Cxlqa6h4Q7kNvwFSJhvq&_nc_oc=Adnzi8DFVNSb6xGP2pR7a1y27Kw_9e_7vV8UUP2THYh_cQRPJ83RlP4wZCXDxFxLDo8&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=XFJGBR6TILMbCoArwHqtnw&oh=00_AfMlX6bGkS5No6TT8DUhTCDShGMF77W0XcLBbkJXVjiNCA&oe=684B6415`,
+        image: `/images/gallery/yly5.jpg`, // Repeated as per user's provided list structure
         text: "",
       },
-     
     ];
     const galleryItems = items && items.length ? items : defaultItems;
     this.mediasImages = galleryItems.concat(galleryItems);

@@ -51,7 +51,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <Link
-              href="/about"
+              href="/news"
               className="inline-flex items-center gap-2 px-8 py-4 bg-accent hover:bg-accent/90 
               text-white rounded-lg transition-all duration-300 transform hover:scale-105 group"
             >

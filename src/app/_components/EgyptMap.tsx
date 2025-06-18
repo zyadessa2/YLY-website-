@@ -6,6 +6,8 @@ import { MapPin, Search } from "lucide-react";
 import TitleMotion from "@/components/my-components/TitleMotion";
 import Link from "@/components/my-components/link/link";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+
 
 type GovernorateProps = {
   name: string;
@@ -71,6 +73,7 @@ const governorates = [
 
 const EgyptMap = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const t = useTranslations('home.governments')
 
   const filteredGovernorates = governorates.filter((gov) =>
     gov.toLowerCase().includes(searchQuery.toLowerCase())
@@ -84,14 +87,14 @@ const EgyptMap = () => {
 
       <div className="relative container mx-auto px-4">
         <div className="max-w-2xl mx-auto text-center mb-16">
-          <TitleMotion title="We Are Present In All Governorates" />
+          <TitleMotion title={t("title")} />
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-6 text-lg text-muted-foreground"
           >
-            Explore our presence across Egypt&apos;s diverse regions
+             {t(`description`)}
           </motion.p>
 
           {/* Search Bar */}

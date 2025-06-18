@@ -1,5 +1,4 @@
 "use client";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 // import { ModeToggle } from "@/components/Mode-toggle";
 import {
   Navbar,
@@ -50,7 +49,6 @@ export function NavbarDemo() {
           <NavItems items={navItems} />{" "}
           <div className="flex items-center gap-4">
             <SocialIcons />
-            {/* <LanguageSwitcher /> */}
           </div>
         </NavBody>
 
@@ -87,7 +85,6 @@ export function NavbarDemo() {
                 <ModeToggle/> */}
               {/* </NavbarButton> */}
               <SocialIcons></SocialIcons>
-              <LanguageSwitcher />
             </div>
           </MobileNavMenu>
         </MobileNav>
