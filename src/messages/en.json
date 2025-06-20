@@ -72,27 +72,27 @@
       }
     },
     "governments": {
-    "title": "We Are Present In All Governorates",
-    "description": "Explore our presence across Egypt's diverse regions.",
-    "governorates": {
-      "cairo": "Cairo",
-      "giza": "Giza",
-      "alexandria": "Alexandria",
-      "aswan": "Aswan",
-      "luxor": "Luxor",
-      "port-said": "Port Said",
-      "suez": "Suez",
-      "damietta": "Damietta",
-      "dakahlia": "Dakahlia",
-      "sharqia": "Sharqia",
-      "monufia": "Monufia",
-      "kafr-el-sheikh": "Kafr El Sheikh",
-      "beheira": "Beheira",
-      "matrouh": "Matrouh",
-      "north-sinai": "North Sinai",
-      "south-sinai": "South Sinai"
-    }
-  },
+      "title": "We Are Present In All Governorates",
+      "description": "Explore our presence across Egypt's diverse regions.",
+      "governorates": {
+        "cairo": "Cairo",
+        "giza": "Giza",
+        "alexandria": "Alexandria",
+        "aswan": "Aswan",
+        "luxor": "Luxor",
+        "port-said": "Port Said",
+        "suez": "Suez",
+        "damietta": "Damietta",
+        "dakahlia": "Dakahlia",
+        "sharqia": "Sharqia",
+        "monufia": "Monufia",
+        "kafr-el-sheikh": "Kafr El Sheikh",
+        "beheira": "Beheira",
+        "matrouh": "Matrouh",
+        "north-sinai": "North Sinai",
+        "south-sinai": "South Sinai"
+      }
+    },
     "board": {
       "title": "YLY Board",
       "description": "Meet our dedicated board members who lead YLY's mission",
@@ -128,7 +128,7 @@
       }
     }
   },
-  
+
   "common": {
     "readMore": "Read More",
     "learnMore": "Learn More",
@@ -270,6 +270,50 @@
           }
         }
       }
+    }
+  },
+  "registration": {
+    "form": {
+      "title": "YLY Registration Form",
+      "name": {
+        "label": "Full Name"
+      },
+      "age": {
+        "label": "Age"
+      },
+      "college": {
+        "label": "College/University"
+      },
+      "phoneNumber": {
+        "label": "Phone Number"
+      },
+      "anotherPhoneNumber": {
+        "label": "Another Phone Number"
+      },
+      "nationalId": {
+        "label": "National ID"
+      },
+      "email": {
+        "label": "Email Address"
+      },
+      "committee": {
+        "label": "Choose Your Committee",
+        "placeholder": "Select a committee"
+      },
+      "whyChooseCommittee": {
+        "label": "Why did you choose this committee?"
+      },
+      "whereKnowAboutUs": {
+        "label": "How did you hear about us?"
+      },
+      "governorate": {
+        "label": "Governorate",
+        "placeholder": "Select your governorate"
+      },
+      "submitButton": "Register",
+      "submitting": "Registering...",
+      "successMessage": "Registration Successful! Welcome to YLY!",
+      "submitAnother": "Submit another registration"
     }
   }
 }

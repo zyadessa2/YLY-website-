@@ -33,8 +33,8 @@ export default async function RootLayout({
 }>) {
   // Default to 'en' if no lang param is provided
   let locale = lang || "en";
-  const cookieStore = cookies();
-  const localeCookie = (await cookieStore).get("NEXT_LOCALE");
+  const cookieStore = await cookies();
+  const localeCookie = cookieStore.get("NEXT_LOCALE");
 
   // Use cookie locale if available, otherwise use the lang param or default
   if (localeCookie?.value) {

@@ -72,27 +72,27 @@
       }
     },
     "governments": {
-    "title": "نتواجد في جميع المحافظات",
-    "description": "استكشف تواجدنا في مختلف مناطق مصر",
-    "governorates": {
-      "cairo": "Cairo",
-      "giza": "Giza",
-      "alexandria": "Alexandria",
-      "aswan": "Aswan",
-      "luxor": "Luxor",
-      "port-said": "Port Said",
-      "suez": "Suez",
-      "damietta": "Damietta",
-      "dakahlia": "Dakahlia",
-      "sharqia": "Sharqia",
-      "monufia": "Monufia",
-      "kafr-el-sheikh": "Kafr El Sheikh",
-      "beheira": "Beheira",
-      "matrouh": "Matrouh",
-      "north-sinai": "North Sinai",
-      "south-sinai": "South Sinai"
-    }
-  },
+      "title": "نتواجد في جميع المحافظات",
+      "description": "استكشف تواجدنا في مختلف مناطق مصر",
+      "governorates": {
+        "cairo": "Cairo",
+        "giza": "Giza",
+        "alexandria": "Alexandria",
+        "aswan": "Aswan",
+        "luxor": "Luxor",
+        "port-said": "Port Said",
+        "suez": "Suez",
+        "damietta": "Damietta",
+        "dakahlia": "Dakahlia",
+        "sharqia": "Sharqia",
+        "monufia": "Monufia",
+        "kafr-el-sheikh": "Kafr El Sheikh",
+        "beheira": "Beheira",
+        "matrouh": "Matrouh",
+        "north-sinai": "North Sinai",
+        "south-sinai": "South Sinai"
+      }
+    },
     "board": {
       "title": "مجلس إدارة YLY",
       "description": "تعرف على أعضاء مجلس إدارتنا المتفانين الذين يقودون مهمة YLY",
@@ -274,6 +274,50 @@
           }
         }
       }
+    }
+  },
+  "registration": {
+    "form": {
+      "title": "نموذج التسجيل في YLY",
+      "name": {
+        "label": "الاسم الكامل"
+      },
+      "age": {
+        "label": "العمر"
+      },
+      "college": {
+        "label": "الكلية/الجامعة"
+      },
+      "phoneNumber": {
+        "label": "رقم الهاتف"
+      },
+      "anotherPhoneNumber": {
+        "label": "رقم هاتف آخر"
+      },
+      "nationalId": {
+        "label": "الرقم القومي"
+      },
+      "email": {
+        "label": "البريد الإلكتروني"
+      },
+      "committee": {
+        "label": "اختر لجنتك",
+        "placeholder": "اختر لجنة"
+      },
+      "whyChooseCommittee": {
+        "label": "لماذا اخترت هذه اللجنة؟"
+      },
+      "whereKnowAboutUs": {
+        "label": "كيف علمت عنا؟"
+      },
+      "governorate": {
+        "label": "المحافظة",
+        "placeholder": "اختر محافظتك"
+      },
+      "submitButton": "تسجيل",
+      "submitting": "جاري التسجيل...",
+      "successMessage": "تم التسجيل بنجاح! مرحباً بك في YLY!",
+      "submitAnother": "تسجيل آخر"
     }
   }
 }
