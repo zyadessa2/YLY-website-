@@ -21,7 +21,7 @@ export function ModeToggle() {
     <div className="relative">
       <motion.button
         onClick={toggleMenu}
-        className="relative flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-neutral-600 transition-colors hover:bg-blue-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-blue-900"
+        className="relative flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 text-neutral-600 transition-colors hover:bg-blue-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-blue-900"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >

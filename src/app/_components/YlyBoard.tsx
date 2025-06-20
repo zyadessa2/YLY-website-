@@ -91,10 +91,9 @@ const BoardMemberCard = ({
         className={`overflow-hidden ${
           featured ? "w-80" : "w-72"
         } bg-gradient-to-br from-background via-background to-primary/5 dark:from-background dark:via-background dark:to-primary/10 border-primary/10 hover:border-primary/30 transition-colors duration-300 shadow-lg hover:shadow-primary/45`}
-      >
-        <div className="relative p-3">
+      >        <div className="relative p-3">
           <div className="relative overflow-hidden rounded-lg">
-            <div className="absolute inset-x-0 top-[10%] bottom-[10%] bg-gradient-to-br from-primary/10 to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+            <div className="absolute inset-x-0 top-[10%] bottom-[10%] bg-gradient-to-br from-primary/5 to-secondary/5 dark:from-primary/10 dark:to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
             <Image
               src={member.image}
               alt={member.name}
@@ -103,7 +102,7 @@ const BoardMemberCard = ({
               className="object-cover aspect-square transform transition-transform duration-500 group-hover:scale-105 rounded-lg"
               priority={featured}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/70 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/40 to-transparent dark:from-background/95 dark:via-background/70 dark:to-transparent" />
           </div>
           <div dir="ltr" className="absolute bottom-0 left-0 right-0 p-6 transform transition-transform duration-300">
             <h3 className="text-xl font-semibold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
