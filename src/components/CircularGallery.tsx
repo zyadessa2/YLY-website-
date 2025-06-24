@@ -429,7 +429,6 @@ class App {
     last: number;
     position?: number;
   };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onCheckDebounce: (...args: any[]) => void;
   renderer!: Renderer;
   gl!: GL;

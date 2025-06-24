@@ -45,6 +45,7 @@ export class ImageUploadService {
       const filePath = `${folderPath}${fileName}`;
 
       // Upload file to Supabase Storage
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { data, error } = await supabase.storage
         .from(bucket)
         .upload(filePath, file, {

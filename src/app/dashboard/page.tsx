@@ -14,9 +14,7 @@ import { Button } from "@/components/ui/button";
 import {
   Newspaper,
   Calendar,
-  // Plus,
   TrendingUp,
-  // Users,
   Eye,
 } from "lucide-react";
 import Link from "next/link";
