@@ -59,10 +59,7 @@ const schema = yup
       .required("Email is required"),
     committee: yup
       .string()
-      .oneOf(
-        [ "HR","SM", "OR", "PR"],
-        "Please select a valid committee"
-      )
+      .oneOf(["HR", "SM", "OR", "PR"], "Please select a valid committee")
       .required("Committee is required"),
     why_choose_committee: yup
       .string()
@@ -185,10 +182,9 @@ export const RegisterForm = () => {
 
   const handleAnotherResponse = () => {
     setIsSubmitted(false); // Hide success message
-  };
-  // Updated committee options to match database constraints
+  }; // Updated committee options to match database constraints
   const committeeOptions = [
-    { value: "OR", label: "Operations " },
+    { value: "OR", label: "Operations" },
     { value: "HR", label: "Human Resources" },
     { value: "SM", label: "Social Media" },
     { value: "PR", label: "PR" },
