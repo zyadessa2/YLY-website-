@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { EventHero } from "./_components/EventHero";
 import { CentralEvents } from "./_components/CentralEvents";
-import { EventDetails } from "./_components/EventDetails";
+import { EventDetailsServer } from "./_components/EventDetailsServer";
 
 export const metadata: Metadata = {
   title: "YLY Events | Youth Leading Youth",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: "YLY Events | Youth Leading Youth",
     description:
       "Join YLY's transformative events designed to empower youth through sports, education, and leadership activities.",
-    images: ["/images/eventLogos/YLY-Competition-1024x1024.png"],
+    images: ["/public/images/belo.png"],
   },
 };
 
@@ -20,7 +20,7 @@ export default function EventsPage() {
     <main className="min-h-screen">
       <EventHero />
       <CentralEvents />
-      <EventDetails />
+      <EventDetailsServer />
     </main>
   );
 }

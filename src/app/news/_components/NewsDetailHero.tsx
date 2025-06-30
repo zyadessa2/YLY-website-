@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { CalendarIcon, UserIcon, ClockIcon } from "lucide-react";
 
 interface NewsDetailHeroProps {
   title: string;
@@ -15,6 +16,43 @@ export const NewsDetailHero = ({
   author,
   image,
 }: NewsDetailHeroProps) => {
+  // Format the date nicely
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+
+    // Check if the date is valid
+    if (isNaN(date.getTime())) {
+      return dateString; // Return original string if date is invalid
+    }
+
+    // Format date as: June 30, 2025
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+
+    return date.toLocaleDateString("en-US", options);
+  };
+
+  // Format time
+  const formatTime = (dateString: string) => {
+    const date = new Date(dateString);
+
+    // Check if the date is valid
+    if (isNaN(date.getTime())) {
+      return ""; // Return empty string if date is invalid
+    }
+
+    // Format time as: 3:30 PM
+    const options: Intl.DateTimeFormatOptions = {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    };
+
+    return date.toLocaleTimeString("en-US", options);
+  };
   return (
     <section className="relative h-[70vh] overflow-hidden">
       {/* Background with overlay */}
@@ -43,10 +81,29 @@ export const NewsDetailHero = ({
           <h1 className="mb-4 bg-gradient-to-r from-white to-white/80 bg-clip-text text-4xl font-bold text-transparent md:text-6xl">
             {title}
           </h1>
-          <div className="flex items-center justify-center gap-4 text-white/90">
-            <span>{date}</span>
-            <span>•</span>
-            <span>{author}</span>
+          <div className="flex flex-col items-center justify-center space-y-2 text-white">
+            <div className="flex items-center justify-center gap-6 text-white/90">
+              <div className="flex items-center gap-2">
+                <CalendarIcon className="h-4 w-4 text-white/80" />
+                <span className="font-medium">{formatDate(date)}</span>
+              </div>
+              <span className="text-white/50">|</span>
+              <div className="flex items-center gap-2">
+                <ClockIcon className="h-4 w-4 text-white/80" />
+                <span>{formatTime(date)}</span>
+              </div>
+              <span className="text-white/50">|</span>
+              <div className="flex items-center gap-2">
+                <UserIcon className="h-4 w-4 text-white/80" />
+                <span>{author}</span>
+              </div>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, width: 0 }}
+              animate={{ opacity: 1, width: "100px" }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="mt-2 h-0.5 bg-white/30"
+            />
           </div>
         </motion.div>
       </div>

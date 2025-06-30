@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { BackgroundAnimation } from "../components/ui/BackgroundAnimation";
 import { NavbarDemo } from "../components/my-components/navbar/Navbar";
@@ -74,6 +75,20 @@ export default async function RootLayout({
             </div>
           </ThemeProviderWrapper>
         </NextIntlClientProvider>
+
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-N5L4K4PQC8"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-N5L4K4PQC8');
+          `}
+        </Script>
       </body>
     </html>
   );

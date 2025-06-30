@@ -1,65 +1,75 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { ImageUpload } from "@/components/ui/image-upload";
-import { ArrowLeft, Save, Loader2 } from "lucide-react";
-import Link from "next/link";
-import React from "react";
-import { EventsService } from "@/lib/database";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import * as yup from 'yup';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { ArrowLeft, Save, Loader2 } from 'lucide-react';
+import Link from 'next/link';
+import React from 'react';
+import { Switch } from '@/components/ui/switch';
+import { ImageUploader, MultiImageUploader } from '@/components/ui/image-uploader';
+import { EventsService, CreateEventData } from '@/lib/database';
+import { supabase } from '@/lib/supabase';
 
 // Form schema
-const schema = yup
-  .object({
-    title: yup
-      .string()
-      .required("Title is required")
-      .min(10, "Title must be at least 10 characters")
-      .max(200, "Title must be less than 200 characters"),
-    description: yup
-      .string()
-      .required("Description is required")
-      .min(20, "Description must be at least 20 characters")
-      .max(500, "Description must be less than 500 characters"),
-    content: yup
-      .string()
-      .required("Content is required")
-      .min(100, "Content must be at least 100 characters"),
-    location: yup.string().required("Location is required"),
-    event_date: yup.string().required("Date is required"),
-    event_time: yup.string().optional(),
-    logo_url: yup.string().url("Must be a valid URL").nullable().optional(),
-    slug: yup
-      .string()
-      .required("Slug is required")
-      .matches(
-        /^[a-z0-9-]+$/,
-        "Slug must contain only lowercase letters, numbers, and hyphens"
-      ),
-    registration_link: yup.string().optional(),
-    max_participants: yup
-      .number()
-      .optional()
-      .positive("Must be a positive number"),
-    published: yup.boolean().default(true),
-    featured: yup.boolean().default(false),
-  })
-  .required();
+const schema = yup.object({
+  title: yup
+    .string()
+    .required('Title is required')
+    .min(10, 'Title must be at least 10 characters')
+    .max(200, 'Title must be less than 200 characters'),
+  description: yup
+    .string()
+    .required('Description is required')
+    .min(20, 'Description must be at least 20 characters')
+    .max(500, 'Description must be less than 500 characters'),
+  content: yup
+    .string()
+    .required('Content is required')
+    .min(100, 'Content must be at least 100 characters'),
+  location: yup
+    .string()
+    .required('Location is required'),
+  event_date: yup
+    .string()
+    .required('Date is required'),
+  event_time: yup
+    .string()
+    .nullable(),
+  cover_image: yup
+    .string()
+    .nullable(),
+  content_images: yup
+    .array()
+    .of(yup.string())
+    .nullable(),
+  slug: yup
+    .string()
+    .required('Slug is required')
+    .matches(/^[a-z0-9-]+$/, 'Slug must contain only lowercase letters, numbers, and hyphens'),
+  registration_link: yup
+    .string()
+    .nullable(),
+  max_participants: yup
+    .number()
+    .transform((value) => (isNaN(value) ? undefined : value))
+    .nullable(),
+  published: yup
+    .boolean()
+    .default(false),
+  featured: yup
+    .boolean()
+    .default(false),
+}).required();
+
 type FormData = yup.InferType<typeof schema>;
 
 export default function AddEventPage() {
@@ -72,63 +82,95 @@ export default function AddEventPage() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resolver: yupResolver(schema) as any,
     defaultValues: {
-      title: "",
-      description: "",
-      content: "",
-      location: "",
-      event_date: "",
-      event_time: "",
-      logo_url: "",
-      slug: "",
-      registration_link: "",
-      max_participants: undefined,
-      published: true,
+      title: '',
+      description: '',
+      content: '',
+      location: '',
+      event_date: '',
+      event_time: '',
+      cover_image: null,
+      content_images: [],
+      slug: '',
+      registration_link: '',
+      max_participants: null,
+      published: false,
       featured: false,
     },
   });
 
   // Auto-generate slug from title
-  const watchTitle = form.watch("title");
+  const watchTitle = form.watch('title');
   React.useEffect(() => {
     if (watchTitle) {
       const slug = watchTitle
         .toLowerCase()
-        .replace(/[^a-z0-9\s-]/g, "")
-        .replace(/\s+/g, "-")
-        .replace(/-+/g, "-")
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
         .trim();
-      form.setValue("slug", slug);
+      form.setValue('slug', slug);
     }
   }, [watchTitle, form]);
+
+  // Handle cover image upload
+  const handleCoverImageUpload = (result: { url: string; path: string }) => {
+    form.setValue('cover_image', result.url);
+  };
+  
+  // Handle content images upload
+  const handleContentImagesUpload = (urls: string[]) => {
+    form.setValue('content_images', urls);
+  };
+  
+  // Handle image upload errors
+  const handleImageUploadError = (error: Error) => {
+    setError(error.message);
+  };
+  // Check authentication
+  React.useEffect(() => {
+    async function checkAuth() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        router.push('/signin');
+      }
+    }
+    checkAuth();
+  }, [router]);
 
   async function onSubmit(data: FormData) {
     try {
       setIsLoading(true);
       setError(null);
 
-      // Filter out null/undefined values and prepare data for the service
-      const eventData = {
-        ...data,
-        logo_url: data.logo_url || "",
-        event_time: data.event_time || "",
-        registration_link: data.registration_link || "",
-        max_participants: data.max_participants || 0,
+      const eventData: CreateEventData = {
+        title: data.title,
+        description: data.description,
+        content: data.content,
+        location: data.location,
+        event_date: data.event_date,
+        event_time: data.event_time || undefined,
+        cover_image: data.cover_image || '',
+        content_images: (data.content_images || []).filter((img): img is string => img !== undefined),
+        slug: data.slug,
+        registration_link: data.registration_link || undefined,
+        max_participants: data.max_participants || undefined,
+        published: data.published,
+        featured: data.featured,
       };
 
-      // Create event using Supabase service
+      // Save to database using Supabase
       await EventsService.createEvent(eventData);
 
       setSuccess(true);
 
       // Redirect after success
       setTimeout(() => {
-        router.push("/dashboard/events");
-      }, 2000);
+        router.push('/dashboard/events');
+      }, 1500);
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Failed to create event";
+      const errorMessage = err instanceof Error ? err.message : 'Failed to create event';
       setError(errorMessage);
-      console.error("Error creating event:", err);
+      console.error('Error creating event:', err);
     } finally {
       setIsLoading(false);
     }
@@ -184,22 +226,23 @@ export default function AddEventPage() {
                   id="title"
                   placeholder="Enter event title"
                   disabled={isLoading}
-                  {...form.register("title")}
+                  {...form.register('title')}
                 />
                 {form.formState.errors.title && (
                   <p className="text-sm text-red-500 mt-1">
                     {form.formState.errors.title.message}
                   </p>
                 )}
-              </div>{" "}
-              {/* Date */}
+              </div>
+
+              {/* Date and Time */}
               <div>
-                <Label htmlFor="event_date">Event Date *</Label>
+                <Label htmlFor="event_date">Date *</Label>
                 <Input
                   id="event_date"
                   type="date"
                   disabled={isLoading}
-                  {...form.register("event_date")}
+                  {...form.register('event_date')}
                 />
                 {form.formState.errors.event_date && (
                   <p className="text-sm text-red-500 mt-1">
@@ -207,14 +250,14 @@ export default function AddEventPage() {
                   </p>
                 )}
               </div>
-              {/* Time */}
+
               <div>
-                <Label htmlFor="event_time">Event Time (optional)</Label>
+                <Label htmlFor="event_time">Time (optional)</Label>
                 <Input
                   id="event_time"
                   type="time"
                   disabled={isLoading}
-                  {...form.register("event_time")}
+                  {...form.register('event_time')}
                 />
                 {form.formState.errors.event_time && (
                   <p className="text-sm text-red-500 mt-1">
@@ -222,6 +265,7 @@ export default function AddEventPage() {
                   </p>
                 )}
               </div>
+
               {/* Location */}
               <div>
                 <Label htmlFor="location">Location *</Label>
@@ -229,7 +273,7 @@ export default function AddEventPage() {
                   id="location"
                   placeholder="Event location"
                   disabled={isLoading}
-                  {...form.register("location")}
+                  {...form.register('location')}
                 />
                 {form.formState.errors.location && (
                   <p className="text-sm text-red-500 mt-1">
@@ -237,6 +281,7 @@ export default function AddEventPage() {
                   </p>
                 )}
               </div>
+
               {/* Slug */}
               <div>
                 <Label htmlFor="slug">URL Slug *</Label>
@@ -244,7 +289,7 @@ export default function AddEventPage() {
                   id="slug"
                   placeholder="url-friendly-slug"
                   disabled={isLoading}
-                  {...form.register("slug")}
+                  {...form.register('slug')}
                 />
                 {form.formState.errors.slug && (
                   <p className="text-sm text-red-500 mt-1">
@@ -252,37 +297,16 @@ export default function AddEventPage() {
                   </p>
                 )}
               </div>
-              {/* Max Participants */}
-              <div>
-                <Label htmlFor="max_participants">
-                  Max Participants (optional)
-                </Label>
-                <Input
-                  id="max_participants"
-                  type="number"
-                  placeholder="100"
-                  disabled={isLoading}
-                  {...form.register("max_participants", {
-                    valueAsNumber: true,
-                  })}
-                />
-                {form.formState.errors.max_participants && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.max_participants.message}
-                  </p>
-                )}
-              </div>
+
               {/* Registration Link */}
               <div>
-                <Label htmlFor="registration_link">
-                  Registration Link (optional)
-                </Label>
+                <Label htmlFor="registration_link">Registration Link (optional)</Label>
                 <Input
                   id="registration_link"
                   type="url"
                   placeholder="https://example.com/register"
                   disabled={isLoading}
-                  {...form.register("registration_link")}
+                  {...form.register('registration_link')}
                 />
                 {form.formState.errors.registration_link && (
                   <p className="text-sm text-red-500 mt-1">
@@ -290,21 +314,64 @@ export default function AddEventPage() {
                   </p>
                 )}
               </div>
-              {/* Event Logo */}
-              <div className="md:col-span-2">
-                <ImageUpload
-                  label="Event Logo"
-                  bucket="events"
-                  folder="logos"
-                  onImageUploaded={(url) => form.setValue("logo_url", url)}
+
+              {/* Max Participants */}
+              <div>
+                <Label htmlFor="max_participants">Max Participants (optional)</Label>
+                <Input
+                  id="max_participants"
+                  type="number"
+                  placeholder="100"
                   disabled={isLoading}
+                  {...form.register('max_participants')}
                 />
-                {form.formState.errors.logo_url && (
+                {form.formState.errors.max_participants && (
                   <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.logo_url.message}
+                    {form.formState.errors.max_participants.message}
                   </p>
                 )}
               </div>
+
+              {/* Cover Image */}
+              <div className="md:col-span-2">
+                <ImageUploader 
+                  id="cover_image"
+                  label="Cover Image"
+                  description="Upload a high-quality image that represents your event (16:9 aspect ratio recommended)"
+                  bucket="events"
+                  folder="covers"
+                  onUploadComplete={handleCoverImageUpload}
+                  onError={handleImageUploadError}
+                  disabled={isLoading}
+                  required={true}
+                />
+                {form.formState.errors.cover_image && (
+                  <p className="text-sm text-red-500 mt-1">
+                    {form.formState.errors.cover_image.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Content Images */}
+              <div className="md:col-span-2">
+                <MultiImageUploader 
+                  id="content_images"
+                  label="Content Images"
+                  description="Upload additional images to include in the event content (up to 10 images)"
+                  bucket="events"
+                  folder="content"
+                  onUploadComplete={handleContentImagesUpload}
+                  onError={handleImageUploadError}
+                  disabled={isLoading}
+                  className="mt-4"
+                />
+                {form.formState.errors.content_images && (
+                  <p className="text-sm text-red-500 mt-1">
+                    {form.formState.errors.content_images.message}
+                  </p>
+                )}
+              </div>
+
               {/* Description */}
               <div className="md:col-span-2">
                 <Label htmlFor="description">Description *</Label>
@@ -313,7 +380,7 @@ export default function AddEventPage() {
                   placeholder="Brief description of the event"
                   rows={3}
                   disabled={isLoading}
-                  {...form.register("description")}
+                  {...form.register('description')}
                 />
                 {form.formState.errors.description && (
                   <p className="text-sm text-red-500 mt-1">
@@ -321,15 +388,16 @@ export default function AddEventPage() {
                   </p>
                 )}
               </div>
+
               {/* Content */}
-              <div className="md:col-span-2">
+              <div className="md:col-span-2 mb-5">
                 <Label htmlFor="content">Content *</Label>
                 <Textarea
                   id="content"
                   placeholder="Full event details (supports HTML)"
                   rows={10}
                   disabled={isLoading}
-                  {...form.register("content")}
+                  {...form.register('content')}
                 />
                 {form.formState.errors.content && (
                   <p className="text-sm text-red-500 mt-1">
@@ -337,8 +405,38 @@ export default function AddEventPage() {
                   </p>
                 )}
                 <p className="text-sm text-gray-500 mt-1">
-                  You can use HTML tags for formatting (e.g., &lt;p&gt;,
-                  &lt;h2&gt;, &lt;ul&gt;, &lt;li&gt;)
+                  You can use HTML tags for formatting (e.g., &lt;p&gt;, &lt;h2&gt;, &lt;ul&gt;, &lt;li&gt;)
+                </p>
+              </div>
+
+              {/* Publication Settings */}
+              <div>
+                <div className="flex items-center space-x-2 mb-2">
+                  <Switch 
+                    id="published" 
+                    checked={form.watch('published')}
+                    onCheckedChange={(checked) => form.setValue('published', checked)}
+                    disabled={isLoading}
+                  />
+                  <Label htmlFor="published">Publish immediately</Label>
+                </div>
+                <p className="text-sm text-gray-500">
+                  If unchecked, the event will be saved as a draft
+                </p>
+              </div>
+
+              <div>
+                <div className="flex items-center space-x-2 mb-2">
+                  <Switch 
+                    id="featured" 
+                    checked={form.watch('featured')}
+                    onCheckedChange={(checked) => form.setValue('featured', checked)}
+                    disabled={isLoading}
+                  />
+                  <Label htmlFor="featured">Feature on homepage</Label>
+                </div>
+                <p className="text-sm text-gray-500">
+                  Featured events appear in the showcase area
                 </p>
               </div>
             </div>

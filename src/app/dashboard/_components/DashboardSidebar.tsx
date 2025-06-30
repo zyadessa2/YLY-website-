@@ -1,21 +1,22 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
-import { Button } from '@/components/ui/button';
-import { 
-  Home, 
-  Newspaper, 
-  Calendar, 
-  Plus, 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { supabase } from "@/lib/supabase";
+import { Button } from "@/components/ui/button";
+import {
+  Home,
+  Newspaper,
+  Calendar,
+  Plus,
   LogOut,
   Menu,
-  X
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
+  X,
+  MessageSquare,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface NavItem {
   name: string;
@@ -26,38 +27,43 @@ interface NavItem {
 
 const navigation: NavItem[] = [
   {
-    name: 'Dashboard',
-    href: '/dashboard',
+    name: "Dashboard",
+    href: "/dashboard",
     icon: Home,
   },
   {
-    name: 'News Management',
+    name: "News Management",
     icon: Newspaper,
     children: [
       {
-        name: 'All News',
-        href: '/dashboard/news',
+        name: "All News",
+        href: "/dashboard/news",
         icon: Newspaper,
       },
       {
-        name: 'Add News',
-        href: '/dashboard/news/add',
+        name: "Add News",
+        href: "/dashboard/news/add",
         icon: Plus,
+      },
+      {
+        name: "Comments",
+        href: "/dashboard/comments",
+        icon: MessageSquare,
       },
     ],
   },
   {
-    name: 'Events Management',
+    name: "Events Management",
     icon: Calendar,
     children: [
       {
-        name: 'All Events',
-        href: '/dashboard/events',
+        name: "All Events",
+        href: "/dashboard/events",
         icon: Calendar,
       },
       {
-        name: 'Add Event',
-        href: '/dashboard/events/add',
+        name: "Add Event",
+        href: "/dashboard/events/add",
         icon: Plus,
       },
     ],
@@ -66,7 +72,11 @@ const navigation: NavItem[] = [
 
 export default function DashboardSidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [expandedItems, setExpandedItems] = useState<string[]>(['News Management', 'Events Management']);
+  const [expandedItems, setExpandedItems] = useState<string[]>([
+    "News Management",
+    "Events Management",
+    "Database",
+  ]);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -74,20 +84,20 @@ export default function DashboardSidebar() {
     try {
       const { error } = await supabase.auth.signOut();
       if (error) {
-        console.error('Error signing out:', error);
+        console.error("Error signing out:", error);
         return;
       }
-      router.push('/signin');
+      router.push("/signin");
       router.refresh();
     } catch (error) {
-      console.error('Logout error:', error);
+      console.error("Logout error:", error);
     }
   };
 
   const toggleExpanded = (itemName: string) => {
-    setExpandedItems(prev => 
-      prev.includes(itemName) 
-        ? prev.filter(item => item !== itemName)
+    setExpandedItems((prev) =>
+      prev.includes(itemName)
+        ? prev.filter((item) => item !== itemName)
         : [...prev, itemName]
     );
   };
@@ -96,17 +106,19 @@ export default function DashboardSidebar() {
     <>
       {/* Mobile backdrop */}
       {!isCollapsed && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
           onClick={() => setIsCollapsed(true)}
         />
       )}
-      
+
       {/* Sidebar */}
-      <div className={cn(
-        "fixed left-0 top-0 z-50 h-full bg-white border-r border-gray-200 transition-all duration-300",
-        isCollapsed ? "w-16" : "w-64"
-      )}>
+      <div
+        className={cn(
+          "fixed left-0 top-0 z-50 h-full bg-white border-r border-gray-200 transition-all duration-300",
+          isCollapsed ? "w-16" : "w-64"
+        )}
+      >
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
           {!isCollapsed && (
@@ -118,7 +130,11 @@ export default function DashboardSidebar() {
             onClick={() => setIsCollapsed(!isCollapsed)}
             className="lg:hidden"
           >
-            {isCollapsed ? <Menu className="h-4 w-4" /> : <X className="h-4 w-4" />}
+            {isCollapsed ? (
+              <Menu className="h-4 w-4" />
+            ) : (
+              <X className="h-4 w-4" />
+            )}
           </Button>
         </div>
 
@@ -127,7 +143,7 @@ export default function DashboardSidebar() {
           {navigation.map((item) => {
             const isExpanded = expandedItems.includes(item.name);
             const hasChildren = item.children && item.children.length > 0;
-            
+
             if (hasChildren) {
               return (
                 <div key={item.name}>
@@ -161,13 +177,13 @@ export default function DashboardSidebar() {
                       </svg>
                     )}
                   </button>
-                  
+
                   {isExpanded && !isCollapsed && (
                     <div className="ml-8 mt-1 space-y-1">
                       {item.children?.map((child) => (
                         <Link
                           key={child.href}
-                          href={child.href || '#'}
+                          href={child.href || "#"}
                           className={cn(
                             "flex items-center px-3 py-2 text-sm rounded-md transition-colors",
                             pathname === child.href
@@ -183,10 +199,11 @@ export default function DashboardSidebar() {
                   )}
                 </div>
               );
-            }            return (
+            }
+            return (
               <Link
                 key={item.name}
-                href={item.href || '#'}
+                href={item.href || "#"}
                 className={cn(
                   "flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors",
                   pathname === item.href

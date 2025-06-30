@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import * as yup from "yup";
@@ -17,11 +16,16 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { ImageUpload } from "@/components/ui/image-upload";
 import { ArrowLeft, Save, Loader2 } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 import Link from "next/link";
 import React from "react";
-import { NewsService } from "@/lib/database";
+import { CreateNewsData, NewsService } from "@/lib/database";
+import { supabase } from "@/lib/supabase";
+import {
+  ImageUploader,
+  MultiImageUploader,
+} from "@/components/ui/image-uploader";
 
 // Form schema
 const schema = yup
@@ -41,7 +45,14 @@ const schema = yup
       .required("Content is required")
       .min(100, "Content must be at least 100 characters"),
     author: yup.string().required("Author is required"),
-    image_url: yup.string().url("Must be a valid URL").optional().default(""),
+    cover_image: yup
+      .string()
+      .required("Cover image is required")
+      .url("Must be a valid URL"),
+    content_images: yup
+      .array()
+      .of(yup.string().url("Must be a valid URL"))
+      .default([]),
     slug: yup
       .string()
       .required("Slug is required")
@@ -49,7 +60,7 @@ const schema = yup
         /^[a-z0-9-]+$/,
         "Slug must contain only lowercase letters, numbers, and hyphens"
       ),
-    published: yup.boolean().default(true),
+    published: yup.boolean().default(false),
     featured: yup.boolean().default(false),
   })
   .required();
@@ -61,19 +72,49 @@ export default function AddNewsPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [coverImageUrl, setCoverImageUrl] = useState<string>("");
+  const [contentImages, setContentImages] = useState<string[]>([]);
+
+  // Auth check
+  React.useEffect(() => {
+    async function checkAuth() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) {
+        router.push("/signin");
+      }
+    }
+    checkAuth();
+  }, [router]);
   const form = useForm<FormData>({
-    resolver: yupResolver(schema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: yupResolver(schema) as any,
     defaultValues: {
       title: "",
       description: "",
       content: "",
       author: "",
-      image_url: "",
+      cover_image: "",
+      content_images: [],
       slug: "",
-      published: true,
+      published: false,
       featured: false,
     },
   });
+
+  // Set form values when images are uploaded
+  React.useEffect(() => {
+    if (coverImageUrl) {
+      form.setValue("cover_image", coverImageUrl);
+    }
+  }, [coverImageUrl, form]);
+
+  React.useEffect(() => {
+    if (contentImages.length > 0) {
+      form.setValue("content_images", contentImages);
+    }
+  }, [contentImages, form]);
 
   // Auto-generate slug from title
   const watchTitle = form.watch("title");
@@ -93,9 +134,33 @@ export default function AddNewsPage() {
       setIsLoading(true);
       setError(null);
 
-      // Create news using Supabase service
-      await NewsService.createNews({ ...data, image_url: data.image_url || '' });
+      // Get the current user
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) {
+        throw new Error("Authentication required");
+      }
 
+      // Prepare the news data object
+      const newsData: CreateNewsData = {
+        title: data.title,
+        description: data.description,
+        content: data.content,
+        author: data.author,
+        cover_image: data.cover_image,
+        content_images: (data.content_images || []).filter(
+          (url): url is string => typeof url === "string" && url !== undefined
+        ),
+        slug: data.slug,
+        published: data.published,
+        featured: data.featured,
+      };
+
+      // Use the NewsService to create the news item
+      const createdNews = await NewsService.createNews(newsData);
+
+      console.log("News item created:", createdNews);
       setSuccess(true);
 
       // Redirect after success
@@ -183,7 +248,7 @@ export default function AddNewsPage() {
                   <p className="text-sm text-red-500 mt-1">
                     {form.formState.errors.author.message}
                   </p>
-                )}
+                )}{" "}
               </div>
               {/* Slug */}
               <div>
@@ -199,19 +264,33 @@ export default function AddNewsPage() {
                     {form.formState.errors.slug.message}
                   </p>
                 )}
-              </div>{" "}
-              {/* Featured Image */}{" "}
+              </div>
+              {/* Cover Image (Required) */}
               <div className="md:col-span-2">
-                <ImageUpload
-                  label="Featured Image"
+                <ImageUploader
+                  id="cover_image"
+                  label="Cover Image"
+                  description="The main image displayed for this news article (required)"
+                  existingUrl={coverImageUrl}
                   bucket="news"
-                  folder="articles"
-                  onImageUploaded={(url) => form.setValue("image_url", url)}
+                  folder={`articles/${form.watch("slug") || "new"}`}
+                  onUploadComplete={(result) => {
+                    setCoverImageUrl(result.url);
+                    form.setValue("cover_image", result.url);
+                    form.clearErrors("cover_image");
+                  }}
+                  onError={(error) => {
+                    form.setError("cover_image", {
+                      type: "manual",
+                      message: error.message,
+                    });
+                  }}
+                  required
                   disabled={isLoading}
                 />
-                {form.formState.errors.image_url && (
+                {form.formState.errors.cover_image && (
                   <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.image_url.message}
+                    {form.formState.errors.cover_image.message}
                   </p>
                 )}
               </div>
@@ -240,7 +319,7 @@ export default function AddNewsPage() {
                   rows={10}
                   disabled={isLoading}
                   {...form.register("content")}
-                />
+                />{" "}
                 {form.formState.errors.content && (
                   <p className="text-sm text-red-500 mt-1">
                     {form.formState.errors.content.message}
@@ -250,6 +329,69 @@ export default function AddNewsPage() {
                   You can use HTML tags for formatting (e.g., &lt;p&gt;,
                   &lt;h2&gt;, &lt;ul&gt;, &lt;li&gt;)
                 </p>
+              </div>{" "}
+              {/* Content Images (Optional) */}
+              <div className="md:col-span-2">
+                <MultiImageUploader
+                  id="content_images"
+                  label="Content Images"
+                  description="Add additional images for your article content (optional)"
+                  existingUrls={contentImages}
+                  bucket="news"
+                  folder={`articles/${form.watch("slug") || "new"}/content`}
+                  onUploadComplete={(urls) => {
+                    setContentImages(urls);
+                    form.setValue("content_images", urls);
+                  }}
+                  disabled={isLoading}
+                  className="mt-4"
+                />
+              </div>
+            </div>
+
+            {/* Publication Settings */}
+            <div className="border-t pt-6 mt-6">
+              <h3 className="font-medium text-lg mb-4">Publication Settings</h3>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Label
+                      htmlFor="published"
+                      className="text-base font-medium"
+                    >
+                      Publish Article
+                    </Label>
+                    <p className="text-sm text-gray-500">
+                      When enabled, the article will be visible to the public
+                    </p>
+                  </div>
+                  <Switch
+                    id="published"
+                    checked={form.watch("published")}
+                    onCheckedChange={(checked) =>
+                      form.setValue("published", checked)
+                    }
+                  />
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Label htmlFor="featured" className="text-base font-medium">
+                      Feature Article
+                    </Label>
+                    <p className="text-sm text-gray-500">
+                      When enabled, the article will be displayed in featured
+                      sections
+                    </p>
+                  </div>
+                  <Switch
+                    id="featured"
+                    checked={form.watch("featured")}
+                    onCheckedChange={(checked) =>
+                      form.setValue("featured", checked)
+                    }
+                  />
+                </div>
               </div>
             </div>
 

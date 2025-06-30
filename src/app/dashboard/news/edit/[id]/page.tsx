@@ -17,11 +17,16 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { ImageUpload } from "@/components/ui/image-upload";
 import { ArrowLeft, Save, Loader2 } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 import Link from "next/link";
 import React from "react";
-import { NewsItem, NewsService } from "@/lib/database";
+import { NewsItem, NewsService, UpdateNewsData } from "@/lib/database";
+import { supabase } from "@/lib/supabase";
+import {
+  ImageUploader,
+  MultiImageUploader,
+} from "@/components/ui/image-uploader";
 
 // Form schema
 const schema = yup
@@ -41,7 +46,14 @@ const schema = yup
       .required("Content is required")
       .min(100, "Content must be at least 100 characters"),
     author: yup.string().required("Author is required"),
-    image_url: yup.string().url("Must be a valid URL").nullable().optional(),
+    cover_image: yup
+      .string()
+      .required("Cover image is required")
+      .url("Must be a valid URL"),
+    content_images: yup
+      .array()
+      .of(yup.string().url("Must be a valid URL"))
+      .default([]),
     slug: yup
       .string()
       .required("Slug is required")
@@ -49,7 +61,7 @@ const schema = yup
         /^[a-z0-9-]+$/,
         "Slug must contain only lowercase letters, numbers, and hyphens"
       ),
-    published: yup.boolean().default(true),
+    published: yup.boolean().default(false),
     featured: yup.boolean().default(false),
   })
   .required();
@@ -60,56 +72,106 @@ export default function EditNewsPage() {
   const router = useRouter();
   const params = useParams();
   const [isLoading, setIsLoading] = useState(false);
-  const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [newsItem, setNewsItem] = useState<NewsItem | null>(null);
   const [notFound, setNotFound] = useState(false);
+  const [coverImageUrl, setCoverImageUrl] = useState<string>("");
+  const [contentImages, setContentImages] = useState<string[]>([]);
 
   const form = useForm<FormData>({
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    resolver: yupResolver(schema) as any,
+    resolver: yupResolver(schema),
     defaultValues: {
       title: "",
       description: "",
       content: "",
       author: "",
-      image_url: "",
+      cover_image: "",
+      content_images: [],
       slug: "",
-      published: true,
+      published: false,
       featured: false,
     },
   });
 
-  useEffect(() => {
-    const loadNewsItem = async () => {
-      try {
-        const id = params.id as string;
-        const foundItem = await NewsService.getNewsById(id);
+  // Auth check
+  React.useEffect(() => {
+    async function checkAuth() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) {
+        router.push("/signin");
+      }
+    }
+    checkAuth();
+  }, [router]);
+  // Set form values when images are uploaded
+  React.useEffect(() => {
+    if (coverImageUrl) {
+      form.setValue("cover_image", coverImageUrl);
+    }
+  }, [coverImageUrl, form]);
 
-        setNewsItem(foundItem);
-        // Populate form with existing data
-        form.reset({
-          title: foundItem.title,
-          description: foundItem.description,
-          content: foundItem.content,
-          author: foundItem.author,
-          image_url: foundItem.image_url,
-          slug: foundItem.slug,
-          published: foundItem.published,
-          featured: foundItem.featured,
-        });
+  React.useEffect(() => {
+    if (contentImages.length > 0) {
+      form.setValue("content_images", contentImages);
+    }
+  }, [contentImages, form]);
+
+  useEffect(() => {
+    async function fetchNewsItem() {
+      try {
+        setIsLoading(true);
+        const id = params.id as string;
+
+        // Fetch news item from Supabase
+        const { data, error } = await supabase
+          .from("news")
+          .select("*")
+          .eq("id", id)
+          .single();
+
+        if (error) {
+          console.error("Error fetching news:", error);
+          setNotFound(true);
+          return;
+        }
+
+        if (data) {
+          setNewsItem(data as NewsItem);
+
+          // Set initial image values
+          setCoverImageUrl(data.cover_image || "");
+          setContentImages(data.content_images || []);
+
+          // Populate form with existing data
+          form.reset({
+            title: data.title,
+            description: data.description,
+            content: data.content,
+            author: data.author,
+            cover_image: data.cover_image,
+            content_images: data.content_images || [],
+            slug: data.slug,
+            published: data.published,
+            featured: data.featured,
+          });
+        } else {
+          setNotFound(true);
+        }
       } catch (err) {
-        console.error("Error loading news item:", err);
+        console.error("Error:", err);
         setNotFound(true);
       } finally {
-        setIsInitialLoading(false);
+        setIsLoading(false);
       }
-    };
+    }
 
-    loadNewsItem();
+    if (params.id) {
+      fetchNewsItem();
+    }
   }, [params.id, form]);
-
   async function onSubmit(data: FormData) {
     try {
       setIsLoading(true);
@@ -117,14 +179,33 @@ export default function EditNewsPage() {
 
       if (!newsItem) return;
 
-      // Convert null image_url to undefined to match expected type
-      const updateData = {
-        ...data,
-        image_url: data.image_url || undefined,
+      // Get the current user
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) {
+        throw new Error("Authentication required");
+      }
+
+      // Prepare the news data object
+      const updateData: UpdateNewsData = {
+        title: data.title,
+        description: data.description,
+        content: data.content,
+        author: data.author,
+        cover_image: data.cover_image,
+        content_images: (data.content_images || []).filter(
+          (url): url is string => typeof url === "string" && url !== undefined
+        ),
+        slug: data.slug,
+        published: data.published,
+        featured: data.featured,
       };
 
-      await NewsService.updateNews(newsItem.id, updateData);
+      // Use NewsService to update the news item
+      const updatedNews = await NewsService.updateNews(newsItem.id, updateData);
 
+      console.log("News item updated:", updatedNews);
       setSuccess(true);
 
       // Redirect after success
@@ -139,27 +220,6 @@ export default function EditNewsPage() {
     } finally {
       setIsLoading(false);
     }
-  }
-
-  if (isInitialLoading) {
-    return (
-      <div className="space-y-6">
-        <div className="flex items-center gap-4">
-          <Button variant="outline" size="sm" asChild>
-            <Link href="/dashboard/news">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to News
-            </Link>
-          </Button>
-        </div>
-        <Card>
-          <CardContent className="text-center py-8">
-            <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
-            <p className="text-gray-600">Loading news article...</p>
-          </CardContent>
-        </Card>
-      </div>
-    );
   }
 
   if (notFound) {
@@ -288,21 +348,34 @@ export default function EditNewsPage() {
                   </p>
                 )}
               </div>{" "}
-              {/* Featured Image */}
+              {/* Image URL */}
               <div className="md:col-span-2">
-                <ImageUpload
-                  label="Featured Image"
+                <ImageUploader
+                  id="cover_image"
+                  label="Cover Image"
+                  description="The main image displayed for this news article (required)"
+                  existingUrl={coverImageUrl}
                   bucket="news"
-                  folder="articles"
-                  currentImageUrl={form.watch("image_url") || undefined}
-                  onImageUploaded={(url) => form.setValue("image_url", url)}
-                  onImageRemoved={() => form.setValue("image_url", "")}
-                  disabled={isLoading}
+                  folder={`articles/${
+                    form.watch("slug") || newsItem?.slug || "edit"
+                  }`}
+                  onUploadComplete={(result) => {
+                    setCoverImageUrl(result.url);
+                    form.setValue("cover_image", result.url);
+                    form.clearErrors("cover_image");
+                  }}
+                  onError={(error) => {
+                    form.setError("cover_image", {
+                      type: "manual",
+                      message: error.message,
+                    });
+                  }}
                   required
+                  disabled={isLoading}
                 />
-                {form.formState.errors.image_url && (
+                {form.formState.errors.cover_image && (
                   <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.image_url.message}
+                    {form.formState.errors.cover_image.message}
                   </p>
                 )}
               </div>
@@ -341,6 +414,71 @@ export default function EditNewsPage() {
                   You can use HTML tags for formatting (e.g., &lt;p&gt;,
                   &lt;h2&gt;, &lt;ul&gt;, &lt;li&gt;)
                 </p>
+              </div>
+              {/* Content Images */}
+              <div className="md:col-span-2">
+                <MultiImageUploader
+                  id="content_images"
+                  label="Content Images"
+                  description="Add additional images for your article content (optional)"
+                  existingUrls={contentImages}
+                  bucket="news"
+                  folder={`articles/${
+                    form.watch("slug") || newsItem?.slug || "edit"
+                  }/content`}
+                  onUploadComplete={(urls) => {
+                    setContentImages(urls);
+                    form.setValue("content_images", urls);
+                  }}
+                  disabled={isLoading}
+                  className="mt-4"
+                />
+              </div>
+            </div>
+
+            {/* Publication Settings */}
+            <div className="md:col-span-2 border-t pt-6 mt-6">
+              <h3 className="font-medium text-lg mb-4">Publication Settings</h3>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Label
+                      htmlFor="published"
+                      className="text-base font-medium"
+                    >
+                      Publish Article
+                    </Label>
+                    <p className="text-sm text-gray-500">
+                      When enabled, the article will be visible to the public
+                    </p>
+                  </div>
+                  <Switch
+                    id="published"
+                    checked={form.watch("published")}
+                    onCheckedChange={(checked) =>
+                      form.setValue("published", checked)
+                    }
+                  />
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Label htmlFor="featured" className="text-base font-medium">
+                      Feature Article
+                    </Label>
+                    <p className="text-sm text-gray-500">
+                      When enabled, the article will be displayed in featured
+                      sections
+                    </p>
+                  </div>
+                  <Switch
+                    id="featured"
+                    checked={form.watch("featured")}
+                    onCheckedChange={(checked) =>
+                      form.setValue("featured", checked)
+                    }
+                  />
+                </div>
               </div>
             </div>
 

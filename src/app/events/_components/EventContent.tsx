@@ -8,22 +8,17 @@ interface EventContentProps {
   content: string;
   images?: string[];
   registrationLink?: string;
+  title?: string;
 }
 
 export const EventContent = ({
   content,
   images,
   registrationLink,
+  title,
 }: EventContentProps) => {
   return (
     <section className="relative mx-auto max-w-4xl px-4 py-16">
-      {/* Main Content */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="prose prose-lg mx-auto max-w-none dark:prose-invert"
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
 
       {/* Image Gallery */}
       {images && images.length > 0 && (
@@ -43,7 +38,7 @@ export const EventContent = ({
             >
               <Image
                 src={image}
-                alt="Event image"
+                alt={title || 'Event image'}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -52,6 +47,14 @@ export const EventContent = ({
           ))}
         </motion.div>
       )}
+
+      {/* Main Content */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="prose prose-lg mx-auto max-w-none dark:prose-invert"
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
 
       {/* Registration Button */}
       {registrationLink && (

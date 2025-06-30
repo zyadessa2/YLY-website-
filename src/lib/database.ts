@@ -6,7 +6,8 @@ export interface NewsItem {
   description: string;
   content: string;
   author: string;
-  image_url: string;
+  cover_image: string;
+  content_images?: string[];
   slug: string;
   published: boolean;
   featured: boolean;
@@ -25,7 +26,8 @@ export interface EventItem {
   location: string;
   event_date: string;
   event_time?: string;
-  logo_url: string;
+  cover_image: string;
+  content_images?: string[];
   slug: string;
   registration_link?: string;
   max_participants?: number;
@@ -61,6 +63,25 @@ export type CreateEventData = Omit<
 >;
 
 export type UpdateEventData = Partial<CreateEventData>;
+
+export interface NewsComment {
+  id: string;
+  news_id: string;
+  author_name: string;
+  author_email: string;
+  content: string;
+  approved: boolean;
+  created_at: string;
+}
+
+export type CreateNewsCommentData = Omit<
+  NewsComment,
+  "id" | "created_at" | "approved"
+>;
+
+export type UpdateNewsCommentData = Partial<CreateNewsCommentData> & {
+  approved?: boolean;
+};
 
 // News Services
 export class NewsService {
@@ -107,35 +128,20 @@ export class NewsService {
     if (error) throw error;
     return data as NewsItem;
   }
-
   static async createNews(newsData: CreateNewsData) {
-    const { data: user } = await supabase.auth.getUser();
-
     const { data, error } = await supabase
       .from("news")
-      .insert([
-        {
-          ...newsData,
-          created_by: user.user?.id,
-          updated_by: user.user?.id,
-        },
-      ])
+      .insert([newsData])
       .select()
       .single();
 
     if (error) throw error;
     return data as NewsItem;
   }
-
   static async updateNews(id: string, newsData: UpdateNewsData) {
-    const { data: user } = await supabase.auth.getUser();
-
     const { data, error } = await supabase
       .from("news")
-      .update({
-        ...newsData,
-        updated_by: user.user?.id,
-      })
+      .update(newsData)
       .eq("id", id)
       .select()
       .single();
@@ -231,35 +237,20 @@ export class EventsService {
     if (error) throw error;
     return data as EventItem;
   }
-
   static async createEvent(eventData: CreateEventData) {
-    const { data: user } = await supabase.auth.getUser();
-
     const { data, error } = await supabase
       .from("events")
-      .insert([
-        {
-          ...eventData,
-          created_by: user.user?.id,
-          updated_by: user.user?.id,
-        },
-      ])
+      .insert([eventData])
       .select()
       .single();
 
     if (error) throw error;
     return data as EventItem;
   }
-
   static async updateEvent(id: string, eventData: UpdateEventData) {
-    const { data: user } = await supabase.auth.getUser();
-
     const { data, error } = await supabase
       .from("events")
-      .update({
-        ...eventData,
-        updated_by: user.user?.id,
-      })
+      .update(eventData)
       .eq("id", id)
       .select()
       .single();
@@ -314,6 +305,67 @@ export class EventsService {
 
     if (error) throw error;
     return data as EventItem[];
+  }
+}
+
+// Comments Services
+export class CommentsService {
+  static async getCommentsByNewsId(newsId: string) {
+    const { data, error } = await supabase
+      .from("news_comments")
+      .select("*")
+      .eq("news_id", newsId)
+      .eq("approved", true)
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+    return data as NewsComment[];
+  }
+
+  static async getAllCommentsForAdmin() {
+    const { data, error } = await supabase
+      .from("news_comments")
+      .select("*, news!inner(title)")
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+    return data;
+  }
+
+  static async createComment(commentData: CreateNewsCommentData) {
+    const { data, error } = await supabase
+      .from("news_comments")
+      .insert([commentData])
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data as NewsComment;
+  }
+
+  static async updateComment(id: string, commentData: UpdateNewsCommentData) {
+    const { data, error } = await supabase
+      .from("news_comments")
+      .update(commentData)
+      .eq("id", id)
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data as NewsComment;
+  }
+
+  static async approveComment(id: string) {
+    return this.updateComment(id, { approved: true });
+  }
+
+  static async rejectComment(id: string) {
+    const { error } = await supabase
+      .from("news_comments")
+      .delete()
+      .eq("id", id);
+
+    if (error) throw error;
   }
 }
 

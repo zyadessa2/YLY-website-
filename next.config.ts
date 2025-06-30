@@ -4,12 +4,6 @@ import createNextIntlPlugin from "next-intl/plugin";
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  typescript: {
-    // !! WARN !!
-    // This will disable type checking during build!
-    // Only use this as a last resort
-    ignoreBuildErrors: true,
-  },
   experimental: {
     scrollRestoration: true,
   },

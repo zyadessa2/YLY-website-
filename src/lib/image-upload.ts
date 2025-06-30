@@ -45,8 +45,9 @@ export class ImageUploadService {
       const filePath = `${folderPath}${fileName}`;
 
       // Upload file to Supabase Storage
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { data, error } = await supabase.storage
+      console.log(`Uploading ${filePath} to ${bucket} bucket...`);
+
+      const { error } = await supabase.storage
         .from(bucket)
         .upload(filePath, file, {
           cacheControl: "3600",
@@ -54,6 +55,7 @@ export class ImageUploadService {
         });
 
       if (error) {
+        console.error("Storage upload error details:", error);
         throw new Error(`Upload failed: ${error.message}`);
       }
 
@@ -68,6 +70,20 @@ export class ImageUploadService {
       };
     } catch (error) {
       console.error("Image upload error:", error);
+      // Add more detailed error information
+      if (error instanceof Error) {
+        console.error("Error stack:", error.stack);
+
+        // If it's a Supabase error with details
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const anyError = error as any;
+        if (anyError.statusCode) {
+          console.error("Status code:", anyError.statusCode);
+        }
+        if (anyError.details) {
+          console.error("Error details:", anyError.details);
+        }
+      }
       throw error;
     }
   }

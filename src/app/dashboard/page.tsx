@@ -11,12 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  Newspaper,
-  Calendar,
-  TrendingUp,
-  Eye,
-} from "lucide-react";
+import { Newspaper, Calendar, TrendingUp, Eye } from "lucide-react";
 import Link from "next/link";
 
 interface DashboardStats {
@@ -41,7 +36,6 @@ export default function DashboardPage() {
   >([]);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<{ email?: string } | null>(null);
-
   useEffect(() => {
     const loadDashboardData = async () => {
       try {
@@ -56,18 +50,32 @@ export default function DashboardPage() {
           return;
         }
 
-        // Load dashboard stats and recent content
-        const [stats, recentNewsData, recentEventsData] = await Promise.all([
-          DashboardService.getStats(),
-          DashboardService.getRecentNews(),
-          DashboardService.getRecentEvents(),
-        ]);
+        // Load dashboard stats and recent content with individual try/catch blocks
+        // to prevent one failure from stopping the others
+        try {
+          const statsData = await DashboardService.getStats();
+          setStats(statsData);
+        } catch (statsError) {
+          console.error("Error loading stats:", statsError);
+          // Keep default stats values
+        }
 
-        setStats(stats);
-        setRecentNews(recentNewsData || []);
-        setRecentEvents(recentEventsData || []);
+        try {
+          const recentNewsData = await DashboardService.getRecentNews();
+          setRecentNews(recentNewsData || []);
+        } catch (newsError) {
+          console.error("Error loading recent news:", newsError);
+        }
+
+        try {
+          const recentEventsData = await DashboardService.getRecentEvents();
+          setRecentEvents(recentEventsData || []);
+        } catch (eventsError) {
+          console.error("Error loading recent events:", eventsError);
+        }
       } catch (error) {
-        console.error("Error loading dashboard data:", error);
+        console.error("Error loading user:", error);
+        window.location.href = "/signin";
       } finally {
         setIsLoading(false);
       }
