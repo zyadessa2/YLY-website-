@@ -8,9 +8,9 @@ import { SocialShare } from "../_components/SocialShare";
 import { notFound } from "next/navigation";
 
 interface NewsPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 // Dynamic metadata for SEO
