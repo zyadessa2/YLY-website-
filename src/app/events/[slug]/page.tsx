@@ -11,7 +11,7 @@ type EventParams = {
 };
 
 type Props = {
-  params: EventParams;
+  params: Promise<EventParams>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
