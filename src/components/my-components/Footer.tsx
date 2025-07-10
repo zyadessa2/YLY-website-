@@ -161,8 +161,8 @@ const Footer = () => {
         >
           <p className="text-center text-sm text-muted-foreground">
             Copyright © {new Date().getFullYear()} YOUTH LEADING YOUTH |
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent ml-1">
-              Powered by YLY TEAM
+            <span className="bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent ml-1">
+              Made With ❤️ by <a className=" text-cyan-700" href="https://www.linkedin.com/in/ziad-essa/">Ziad</a>
             </span>
           </p>
         </motion.div>
