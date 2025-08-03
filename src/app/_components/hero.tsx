@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
-import FloatingCta from "@/components/my-components/FloatingCta";
+// import FloatingCta from "@/components/my-components/FloatingCta";
 
 
 const Hero = () => {
@@ -102,7 +102,7 @@ const Hero = () => {
           />
         </svg>
       </div>
-      <FloatingCta />
+      {/* <FloatingCta /> */}
     </section>
   );
 };

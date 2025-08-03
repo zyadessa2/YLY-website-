@@ -15,6 +15,7 @@ type GovernorateProps = {
   y?: string;
 };
 
+
 const Governorate = ({ name }: GovernorateProps) => {
   return (
     <motion.div

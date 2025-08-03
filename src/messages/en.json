@@ -315,5 +315,84 @@
       "successMessage": "Registration Successful! Welcome to YLY!",
       "submitAnother": "Submit another registration"
     }
+  },
+  "governorate": {
+    "metadata": {
+      "title": "YLY Across Egypt - Youth Leading Youth | All 27 Governorates",
+      "description": "Discover how Youth Leading Youth (YLY) empowers communities across all 27 Egyptian governorates. Join 10,000+ volunteers making a difference through the Ministry of Youth and Sports."
+    },
+    "hero": {
+      "title": "YLY Across Egypt",
+      "subtitle": "Youth Leading Youth in all 27 governorates, empowering communities through the Ministry of Youth and Sports",
+      "stats": {
+        "governorates": "27 Governorates",
+        "volunteers": "10,000+ Volunteers",
+        "events": "200+ Events"
+      }
+    },
+    "stats": {
+      "governorates": {
+        "number": "27",
+        "label": "Governorates",
+        "description": "YLY active in all regions"
+      },
+      "volunteers": {
+        "number": "10,000+",
+        "label": "Volunteers",
+        "description": "Active YLY members"
+      },
+      "events": {
+        "number": "200+",
+        "label": "Events",
+        "description": "Organized annually"
+      },
+      "applicants": {
+        "number": "52,000+",
+        "label": "Applicants",
+        "description": "Youth wanting to join"
+      }
+    },
+    "mapSection": {
+      "title": "YLY in Egypt's Governorates",
+      "subtitle": "Discover how YLY empowers youth and serves communities across all 27 governorates in Egypt",
+      "searchPlaceholder": "Search governorates...",
+      "noResults": "No governorates found matching your search."
+    },
+    "features": {
+      "title": "YLY's Impact Across Egypt",
+      "subtitle": "Through our 7 specialized committees - HR, Social Media, PR, Operations, R&D, Media, and Training - YLY empowers youth across all 27 governorates to become leaders and change-makers in their communities.",
+      "items": {
+        "youthEmpowerment": {
+          "title": "Youth Empowerment",
+          "description": "Training programs and skill development workshops for young people across all 27 governorates through our specialized committees."
+        },
+        "leadershipDevelopment": {
+          "title": "Leadership Development",
+          "description": "Building tomorrow's leaders through structured leadership programs, mentoring, and hands-on experience in governance."
+        },
+        "communityService": {
+          "title": "Community Service",
+          "description": "Organizing community projects, environmental initiatives, and social impact programs in partnership with local governorates."
+        },
+        "eventOrganization": {
+          "title": "Event Organization",
+          "description": "Coordinating and managing Ministry events, sports activities, and cultural programs across Egypt's regions."
+        },
+        "digitalInnovation": {
+          "title": "Digital Innovation",
+          "description": "Leveraging social media, technology, and digital platforms to connect youth and amplify YLY's reach nationwide."
+        },
+        "laborMarketPreparation": {
+          "title": "Labor Market Preparation",
+          "description": "Equipping youth with professional skills, training, and opportunities to succeed in the modern workforce."
+        }
+      },
+      "cta": {
+        "title": "Join YLY Today!",
+        "description": "Become part of the largest youth movement in Egypt. Explore opportunities in your governorate and start making a difference in your community through YLY.",
+        "exploreButton": "Explore Your Governorate",
+        "joinButton": "Join YLY"
+      }
+    }
   }
 }
