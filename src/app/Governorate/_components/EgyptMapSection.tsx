@@ -30,7 +30,7 @@ const Governorate = ({
       transition={{ duration: 0.5 }}
       whileHover={{ y: -5 }}
     >
-      <Link href={`/governorate/${name.toLowerCase().replace(/\s+/g, "-")}`}>
+      <Link href={`/Governorate/${name.toLowerCase().replace(/\s+/g, "-")}`}>
         <Card className="group relative overflow-hidden hover:shadow-xl transition-all duration-500 bg-gradient-to-br from-background via-background to-primary/5 dark:from-background dark:via-background dark:to-primary/10 border-primary/10 hover:border-primary/30 h-full">
           <div className="absolute inset-0 bg-grid-primary/5 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
           <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -97,7 +97,7 @@ const governoratesData = [
     population: "5.6M",
     area: "1,124 km²",
     description:
-      "Located in the Nile Delta, known for its agricultural activities and proximity to Cairo.",
+      "YLY Delta chapter bridging urban and rural youth development between Cairo and agricultural communities.",
   },
   {
     name: "Sharqia",
@@ -105,7 +105,7 @@ const governoratesData = [
     population: "7.2M",
     area: "4,911 km²",
     description:
-      "Agricultural governorate in the eastern Nile Delta, famous for its rice and cotton production.",
+      "YLY's agricultural hub in the eastern Delta, training youth in farming technology and rural innovation.",
   },
   {
     name: "Dakahlia",
@@ -113,7 +113,7 @@ const governoratesData = [
     population: "6.5M",
     area: "3,459 km²",
     description:
-      "One of the most densely populated governorates, located in the heart of the Nile Delta.",
+      "YLY's heart of the Delta, empowering youth in Egypt's most densely populated agricultural region.",
   },
   {
     name: "Beheira",
@@ -121,7 +121,7 @@ const governoratesData = [
     population: "6.2M",
     area: "9,826 km²",
     description:
-      "Western Delta governorate known for its agricultural production and Lake Mariout.",
+      "YLY's western Delta chapter promoting sustainable agriculture and Lake Mariout environmental programs.",
   },
   {
     name: "Minya",
@@ -129,7 +129,7 @@ const governoratesData = [
     population: "5.5M",
     area: "32,279 km²",
     description:
-      "Upper Egypt governorate known for its archaeological sites and agricultural activities.",
+      "YLY's Upper Egypt cultural center, combining archaeological heritage with modern youth development programs.",
   },
   {
     name: "Gharbia",
@@ -137,7 +137,7 @@ const governoratesData = [
     population: "4.9M",
     area: "1,948 km²",
     description:
-      "Delta governorate famous for its textile industry and cotton production.",
+      "YLY's Delta industrial hub, training youth in textile manufacturing and entrepreneurship programs.",
   },
   {
     name: "Sohag",
@@ -145,7 +145,7 @@ const governoratesData = [
     population: "5.0M",
     area: "11,218 km²",
     description:
-      "Upper Egypt governorate rich in archaeological sites and Coptic Christian heritage.",
+      "YLY's Upper Egypt heritage chapter, promoting Coptic culture and archaeological tourism among youth.",
   },
   {
     name: "Assiut",
@@ -153,7 +153,7 @@ const governoratesData = [
     population: "4.4M",
     area: "25,926 km²",
     description:
-      "Upper Egypt governorate known for its university and agricultural production.",
+      "YLY's Upper Egypt educational center, partnering with universities for technical and agricultural training.",
   },
   {
     name: "Beni Suef",
@@ -161,7 +161,7 @@ const governoratesData = [
     population: "3.5M",
     area: "10,954 km²",
     description:
-      "Located between Cairo and Upper Egypt, known for its cement industry.",
+      "YLY's bridge between regions, training youth in cement industry and sustainable development practices.",
   },
   {
     name: "Kafr El Sheikh",
@@ -169,23 +169,23 @@ const governoratesData = [
     population: "3.4M",
     area: "3,748 km²",
     description:
-      "Northern Delta governorate known for its rice production and fish farming.",
+      "YLY's northern Delta chapter, focusing on rice production, aquaculture, and environmental sustainability.",
   },
   {
-    name: "Faiyum",
+    name: "Fayoum",
     arabicName: "الفيوم",
     population: "3.7M",
     area: "6,068 km²",
     description:
-      "Oasis governorate southwest of Cairo, famous for Lake Qarun and ancient sites.",
+      "YLY's oasis chapter, promoting eco-tourism, sustainable agriculture, and Lake Qarun conservation programs.",
   },
   {
-    name: "Menofia",
+    name: "Monufia",
     arabicName: "المنوفية",
     population: "4.2M",
     area: "2,499 km²",
     description:
-      "Delta governorate known for its agricultural production and educational institutions.",
+      "YLY's Delta educational hub, integrating agricultural training with institutional partnerships for youth development.",
   },
   {
     name: "Suez",
@@ -193,7 +193,7 @@ const governoratesData = [
     population: "0.7M",
     area: "9,002 km²",
     description:
-      "Strategic port city at the southern entrance of the Suez Canal.",
+      "YLY's strategic canal chapter, training youth in maritime logistics and international trade operations.",
   },
   {
     name: "Ismailia",
@@ -201,7 +201,7 @@ const governoratesData = [
     population: "1.3M",
     area: "5,067 km²",
     description:
-      "Canal governorate on the Suez Canal, known for its beautiful gardens and lakes.",
+      "YLY's canal governorate promoting international cooperation, cultural exchange, and trade development programs.",
   },
   {
     name: "Port Said",
@@ -209,7 +209,7 @@ const governoratesData = [
     population: "0.7M",
     area: "1,351 km²",
     description:
-      "Northern entrance of the Suez Canal, important for maritime trade.",
+      "YLY's Mediterranean port chapter, developing maritime skills and free zone business opportunities for youth.",
   },
   {
     name: "Damietta",
@@ -217,7 +217,7 @@ const governoratesData = [
     population: "1.5M",
     area: "910 km²",
     description:
-      "Coastal governorate famous for its furniture industry and Nile Delta location.",
+      "YLY's furniture industry hub, training youth in woodworking crafts and coastal environmental protection.",
   },
   {
     name: "North Sinai",
@@ -225,7 +225,7 @@ const governoratesData = [
     population: "0.4M",
     area: "27,574 km²",
     description:
-      "Peninsula governorate with strategic importance and Bedouin culture.",
+      "YLY's Sinai chapter, integrating Bedouin youth into development programs and border community initiatives.",
   },
   {
     name: "South Sinai",
@@ -233,7 +233,7 @@ const governoratesData = [
     population: "0.2M",
     area: "33,140 km²",
     description:
-      "Tourist destination famous for Sharm El Sheikh and Mount Sinai.",
+      "YLY's tourism and conservation chapter, training youth in hospitality, diving, and mountain eco-tourism.",
   },
   {
     name: "Red Sea",
@@ -241,14 +241,15 @@ const governoratesData = [
     population: "0.4M",
     area: "119,099 km²",
     description:
-      "Coastal governorate known for diving, coral reefs, and tourism.",
+      "YLY's marine conservation chapter, developing diving tourism and coral reef protection programs for youth.",
   },
   {
     name: "Luxor",
     arabicName: "الأقصر",
     population: "1.3M",
     area: "2,960 km²",
-    description: "Open-air museum with ancient Egyptian temples and tombs.",
+    description:
+      "YLY's world heritage chapter, combining archaeological preservation with tourism training for youth development.",
   },
   {
     name: "Qena",
@@ -256,7 +257,7 @@ const governoratesData = [
     population: "3.2M",
     area: "9,331 km²",
     description:
-      "Upper Egypt governorate known for its archaeological sites and sugar industry.",
+      "YLY's Upper Egypt heritage hub, connecting ancient Egyptian culture with modern sugar industry training.",
   },
   {
     name: "Aswan",
@@ -264,7 +265,7 @@ const governoratesData = [
     population: "1.5M",
     area: "62,726 km²",
     description:
-      "Southern border governorate famous for the High Dam and Nubian culture.",
+      "YLY's southern gateway, promoting Nubian culture, renewable energy projects, and High Dam engineering programs.",
   },
   {
     name: "New Valley",
@@ -272,7 +273,7 @@ const governoratesData = [
     population: "0.2M",
     area: "376,505 km²",
     description:
-      "Largest governorate by area, known for its oases and desert landscapes.",
+      "YLY's desert innovation chapter, developing oasis agriculture and sustainable desert community programs.",
   },
   {
     name: "Matrouh",
@@ -280,7 +281,7 @@ const governoratesData = [
     population: "0.5M",
     area: "166,563 km²",
     description:
-      "Mediterranean coastal governorate known for its beautiful beaches and WWII history.",
+      "YLY's western frontier, integrating Bedouin communities and developing Mediterranean coastal tourism programs.",
   },
 ];
 

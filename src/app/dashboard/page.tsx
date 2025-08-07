@@ -113,6 +113,20 @@ export default function DashboardPage() {
       icon: Eye,
       color: "bg-orange-500",
     },
+    {
+      title: "Governorate",
+      description: "Manage existing Governorate",
+      href: "/dashboard/governorates",
+      icon: Eye,
+      color: "bg-purple-500",
+    },
+    {
+      title: "Add Governorate",
+      description: "Manage existing Governorate",
+      href: "/dashboard/governorates/add",
+      icon: Eye,
+      color: "bg-orange-500",
+    },
   ];
 
   const statCards = [

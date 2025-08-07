@@ -8,7 +8,8 @@
     "about": "About",
     "events": "Events",
     "news": "News",
-    "contact": "Contact Us"
+    "contact": "Contact Us",
+    "Governorate": "Governorate"
   },
   "home": {
     "hero": {
@@ -392,6 +393,22 @@
         "description": "Become part of the largest youth movement in Egypt. Explore opportunities in your governorate and start making a difference in your community through YLY.",
         "exploreButton": "Explore Your Governorate",
         "joinButton": "Join YLY"
+      },
+      "comingSoon": {
+        "news": {
+          "title": "News Coming Soon",
+          "subtitle": "Latest Updates from {governorate}",
+          "description": "Stay tuned for the latest news, achievements, and initiatives from our YLY team in {governorate}. We're working hard to bring you exciting updates!",
+          "notifyButton": "Notify Me",
+          "learnMore": "Learn More About YLY"
+        },
+        "events": {
+          "title": "Events Coming Soon",
+          "subtitle": "Upcoming Activities in {governorate}",
+          "description": "Amazing workshops, training sessions, and community events are being planned for {governorate}. Be the first to know when they're available!",
+          "notifyButton": "Get Notified",
+          "contactUs": "Contact Our Team"
+        }
       }
     }
   }

@@ -110,12 +110,12 @@ const About = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent z-10" />
             <Image
-              src="/images/about.png"
+              src="/images/gallery/g4.jpg"
               alt="youth leading youth (yly) about image"
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
               priority
-              sizes="(max-width: 728px) 100vw, (max-width: 1100px) 50vw, 33vw"
+              sizes="(max-width: 628px) 100vw, (max-width: 900px) 50vw, 33vw"
             />
           </motion.div>
         </div>

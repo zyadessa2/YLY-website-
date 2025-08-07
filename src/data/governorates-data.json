@@ -1,0 +1,3080 @@
+{
+  "cairo": {
+    "name": "Cairo",
+    "arabic_name": "القاهرة",
+    "slug": "cairo",
+    "description": "Egypt's capital and largest city, known for its rich history and Islamic architecture. Home to thousands of years of civilization and the heart of the Arab world.",
+    "arabic_description": "عاصمة مصر وأكبر مدنها، تشتهر بتاريخها العريق والعمارة الإسلامية. موطن آلاف السنين من الحضارة وقلب العالم العربي.",
+    "population": "10.2M",
+    "area": "606 km²",
+    "capital": "Cairo",
+    "arabic_capital": "القاهرة",
+    "cover_image": "/images/governorates/cairo-cover.jpg",
+    "featured_image": "/images/governorates/cairo-featured.jpg",
+    "coordinates": {
+      "lat": 30.0444,
+      "lng": 31.2357
+    },
+    "established_date": "969-07-06",
+    "yly_stats": {
+      "members_count": 8,
+      "events_count": 28,
+      "news_count": 35,
+      "programs_count": 12
+    },
+    "key_attractions": [
+      "Pyramids of Giza",
+      "Khan el-Khalili Bazaar",
+      "Islamic Cairo",
+      "Coptic Cairo",
+      "Al-Azhar Mosque",
+      "Citadel of Saladin"
+    ],
+    "universities": [
+      "Cairo University",
+      "Al-Azhar University",
+      "American University in Cairo",
+      "Ain Shams University"
+    ],
+    "districts": [
+      "Zamalek",
+      "Maadi",
+      "Heliopolis",
+      "Nasr City",
+      "Downtown Cairo",
+      "Islamic Cairo"
+    ],
+    "members": [
+      {
+        "id": "cairo-1",
+        "name": "Amr Khaled",
+        "arabic_name": "Amr Khaled",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/cairo/amr-khaled.webp",
+        "bio": "Amr Khaled oversees digital marketing and social media strategy for YLY.",
+        "email": "amr@yly-cairo.org",
+        "phone": "+20 102 344 4428",
+        "location": "Cairo",
+        "is_active": true,
+        "join_date": "2023-11-08"
+      },
+      {
+        "id": "cairo-2",
+        "name": "Basmala Mohamed",
+        "arabic_name": "Basmala Mohamed",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/cairo/basmala-mohamed.webp",
+        "bio": "Basmala Mohamed manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "basmala@yly-cairo.org",
+        "phone": "+20 106 742 3808",
+        "location": "Cairo",
+        "is_active": true,
+        "join_date": "2023-05-14"
+      },
+      {
+        "id": "cairo-3",
+        "name": "Janna Yasser PR",
+        "arabic_name": "Janna Yasser PR",
+        "position": "Vice Head",
+        "profile_image": "/images/governorate-board-webp/cairo/janna-yasser-pr.webp",
+        "bio": "Janna Yasser PR provides support and assistance in leadership roles and program coordination.",
+        "email": "janna@yly-cairo.org",
+        "phone": "+20 111 658 8611",
+        "location": "Cairo",
+        "is_active": true,
+        "join_date": "2023-05-17"
+      },
+      {
+        "id": "cairo-4",
+        "name": "Malak Walid vice",
+        "arabic_name": "Malak Walid vice",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/cairo/malak-walid-vice.webp",
+        "bio": "Malak Walid vice is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "malak@yly-cairo.org",
+        "phone": "+20 101 371 3733",
+        "location": "Cairo",
+        "is_active": true,
+        "join_date": "2023-12-07"
+      },
+      {
+        "id": "cairo-5",
+        "name": "Mariam Saied",
+        "arabic_name": "مريم",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/cairo/mariam-saied.webp",
+        "bio": "Mariam Saied manages public relations and community outreach efforts.",
+        "email": "mariam@yly-cairo.org",
+        "phone": "+20 110 119 1409",
+        "location": "Cairo",
+        "is_active": true,
+        "join_date": "2023-08-07"
+      },
+      {
+        "id": "cairo-6",
+        "name": "Menna Hussein",
+        "arabic_name": "Menna Hussein",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/cairo/menna-hussein.webp",
+        "bio": "Menna Hussein is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "menna@yly-cairo.org",
+        "phone": "+20 110 153 6262",
+        "location": "Cairo",
+        "is_active": true,
+        "join_date": "2023-05-24"
+      },
+      {
+        "id": "cairo-7",
+        "name": "Youssef Ebrahem",
+        "arabic_name": "يوسف",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/cairo/youssef-ebrahem.webp",
+        "bio": "Youssef Ebrahem leads human resources initiatives and member development programs.",
+        "email": "youssef@yly-cairo.org",
+        "phone": "+20 110 537 4646",
+        "location": "Cairo",
+        "is_active": true,
+        "join_date": "2023-05-13"
+      },
+      {
+        "id": "cairo-8",
+        "name": "Ziad Tarek OR",
+        "arabic_name": "Ziad Tarek OR",
+        "position": "Vice Head",
+        "profile_image": "/images/governorate-board-webp/cairo/ziad-tarek-or.webp",
+        "bio": "Ziad Tarek OR provides support and assistance in leadership roles and program coordination.",
+        "email": "ziad@yly-cairo.org",
+        "phone": "+20 109 473 2622",
+        "location": "Cairo",
+        "is_active": true,
+        "join_date": "2023-01-03"
+      }
+    ]
+  },
+  "giza": {
+    "name": "Giza",
+    "arabic_name": "الجيزة",
+    "slug": "giza",
+    "description": "Home to the Great Pyramids and the Sphinx, one of the world's most famous tourist destinations. Gateway to ancient Egyptian civilization.",
+    "arabic_description": "موطن الأهرامات العظيمة وأبو الهول، واحدة من أشهر الوجهات السياحية في العالم. بوابة الحضارة المصرية القديمة.",
+    "population": "9.2M",
+    "area": "13,184 km²",
+    "capital": "Giza",
+    "arabic_capital": "الجيزة",
+    "cover_image": "/images/governorates/giza-cover.jpg",
+    "featured_image": "/images/governorates/giza-featured.jpg",
+    "coordinates": {
+      "lat": 30.0131,
+      "lng": 31.2089
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 6,
+      "events_count": 22,
+      "news_count": 28,
+      "programs_count": 10
+    },
+    "key_attractions": [
+      "Great Pyramid of Giza",
+      "Sphinx",
+      "Pyramid of Khafre",
+      "Pyramid of Menkaure",
+      "Solar Boat Museum",
+      "Memphis"
+    ],
+    "universities": [
+      "Cairo University (Giza Campus)",
+      "October 6 University",
+      "Sphinx University"
+    ],
+    "districts": [
+      "6th of October City",
+      "Sheikh Zayed City",
+      "Al Haram",
+      "Faisal",
+      "Dokki",
+      "Agouza"
+    ],
+    "members": [
+      {
+        "id": "giza-1",
+        "name": "Kenzy Amr",
+        "arabic_name": "Kenzy Amr",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/giza/kenzy-amr.webp",
+        "bio": "Kenzy Amr manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "kenzy@yly-giza.org",
+        "phone": "+20 100 394 5908",
+        "location": "Giza",
+        "is_active": true,
+        "join_date": "2023-04-05"
+      },
+      {
+        "id": "giza-2",
+        "name": "Malak Ashraf Vice",
+        "arabic_name": "Malak Ashraf Vice",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/giza/malak-ashraf-vice.webp",
+        "bio": "Malak Ashraf Vice manages public relations and community outreach efforts.",
+        "email": "malak@yly-giza.org",
+        "phone": "+20 106 335 8435",
+        "location": "Giza",
+        "is_active": true,
+        "join_date": "2023-02-06"
+      },
+      {
+        "id": "giza-3",
+        "name": "Maya Ahmed",
+        "arabic_name": "Maya Ahmed",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/giza/maya-ahmed.webp",
+        "bio": "Maya Ahmed manages public relations and community outreach efforts.",
+        "email": "maya@yly-giza.org",
+        "phone": "+20 101 866 9697",
+        "location": "Giza",
+        "is_active": true,
+        "join_date": "2023-08-04"
+      },
+      {
+        "id": "giza-4",
+        "name": "Menna Hamza",
+        "arabic_name": "Menna Hamza",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/giza/menna-hamza.webp",
+        "bio": "Menna Hamza leads human resources initiatives and member development programs.",
+        "email": "menna@yly-giza.org",
+        "phone": "+20 110 526 0227",
+        "location": "Giza",
+        "is_active": true,
+        "join_date": "2023-02-13"
+      },
+      {
+        "id": "giza-5",
+        "name": "Nagam Elbhiry",
+        "arabic_name": "Nagam Elbhiry",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/giza/nagam-elbhiry.webp",
+        "bio": "Nagam Elbhiry is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "nagam@yly-giza.org",
+        "phone": "+20 111 521 3813",
+        "location": "Giza",
+        "is_active": true,
+        "join_date": "2023-02-05"
+      },
+      {
+        "id": "giza-6",
+        "name": "Sara Mohsen",
+        "arabic_name": "سارة",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/giza/sara-mohsen.webp",
+        "bio": "Sara Mohsen oversees digital marketing and social media strategy for YLY.",
+        "email": "sara@yly-giza.org",
+        "phone": "+20 100 428 5222",
+        "location": "Giza",
+        "is_active": true,
+        "join_date": "2023-07-26"
+      }
+    ]
+  },
+  "alexandria": {
+    "name": "Alexandria",
+    "arabic_name": "الإسكندرية",
+    "slug": "alexandria",
+    "description": "Egypt's second-largest city and main port, known as the Pearl of the Mediterranean. Ancient seat of learning and modern maritime hub.",
+    "arabic_description": "ثاني أكبر مدن مصر وميناؤها الرئيسي، تُعرف بعروس البحر المتوسط. مقر التعلم القديم والمركز البحري الحديث.",
+    "population": "5.4M",
+    "area": "2,679 km²",
+    "capital": "Alexandria",
+    "arabic_capital": "الإسكندرية",
+    "cover_image": "/images/governorates/alexandria-cover.jpg",
+    "featured_image": "/images/governorates/alexandria-featured.jpg",
+    "coordinates": {
+      "lat": 31.2001,
+      "lng": 29.9187
+    },
+    "established_date": "331-BC",
+    "yly_stats": {
+      "members_count": 5,
+      "events_count": 31,
+      "news_count": 39,
+      "programs_count": 14
+    },
+    "key_attractions": [
+      "Bibliotheca Alexandrina",
+      "Qaitbay Citadel",
+      "Pompey's Pillar",
+      "Alexandria National Museum",
+      "Montaza Palace",
+      "Stanley Bridge"
+    ],
+    "universities": [
+      "Alexandria University",
+      "Arab Academy for Science, Technology and Maritime Transport",
+      "Pharos University"
+    ],
+    "districts": [
+      "Montaza",
+      "Al Raml",
+      "Sidi Gaber",
+      "Smouha",
+      "Al Agamy",
+      "Borg El Arab"
+    ],
+    "members": [
+      {
+        "id": "alexandria-1",
+        "name": "Anan Hosni Shaaban Hassan Vice",
+        "arabic_name": "Anan Hosni Shaaban Hassan Vice",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/alexandria/anan-hosni-shaaban-hassan-vice.webp",
+        "bio": "Anan Hosni Shaaban Hassan Vice oversees digital marketing and social media strategy for YLY.",
+        "email": "anan@yly-alexandria.org",
+        "phone": "+20 101 719 9157",
+        "location": "Alexandria",
+        "is_active": true,
+        "join_date": "2023-07-31"
+      },
+      {
+        "id": "alexandria-2",
+        "name": "Duna Ahmad Mohamed Rajab",
+        "arabic_name": "Duna Ahmad Mohamed Rajab",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/alexandria/duna-ahmad-mohamed-rajab.webp",
+        "bio": "Duna Ahmad Mohamed Rajab manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "duna@yly-alexandria.org",
+        "phone": "+20 110 334 1548",
+        "location": "Alexandria",
+        "is_active": true,
+        "join_date": "2023-04-16"
+      },
+      {
+        "id": "alexandria-3",
+        "name": "Mostafa Mahmoud Elfar",
+        "arabic_name": "Mostafa Mahmoud Elfar",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/alexandria/mostafa-mahmoud-elfar.webp",
+        "bio": "Mostafa Mahmoud Elfar leads human resources initiatives and member development programs.",
+        "email": "mostafa@yly-alexandria.org",
+        "phone": "+20 109 587 2961",
+        "location": "Alexandria",
+        "is_active": true,
+        "join_date": "2023-09-26"
+      },
+      {
+        "id": "alexandria-4",
+        "name": "Mostafa mohamed ali ahmed",
+        "arabic_name": "Mostafa mohamed ali ahmed",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/alexandria/mostafa-mohamed-ali-ahmed.webp",
+        "bio": "Mostafa mohamed ali ahmed oversees digital marketing and social media strategy for YLY.",
+        "email": "mostafa@yly-alexandria.org",
+        "phone": "+20 106 661 9647",
+        "location": "Alexandria",
+        "is_active": true,
+        "join_date": "2023-12-22"
+      },
+      {
+        "id": "alexandria-5",
+        "name": "Samuel zaher awad zaher PR Public Relation",
+        "arabic_name": "Samuel zaher awad zaher PR Public Relation",
+        "position": "Member",
+        "profile_image": "/images/governorate-board-webp/alexandria/samuel-zaher-awad-zaher-pr-public-relation.webp",
+        "bio": "Samuel zaher awad zaher PR Public Relation is an active member contributing to YLY's mission and community programs.",
+        "email": "samuel@yly-alexandria.org",
+        "phone": "+20 110 140 4554",
+        "location": "Alexandria",
+        "is_active": true,
+        "join_date": "2023-07-17"
+      }
+    ]
+  },
+  "qalyubia": {
+    "name": "Qalyubia",
+    "arabic_name": "القليوبية",
+    "slug": "qalyubia",
+    "description": "Located in the Nile Delta, known for its agricultural activities and proximity to Cairo. Rich agricultural lands and thriving communities.",
+    "arabic_description": "تقع في دلتا النيل، تشتهر بأنشطتها الزراعية وقربها من القاهرة. أراضي زراعية غنية ومجتمعات مزدهرة.",
+    "population": "5.6M",
+    "area": "1,124 km²",
+    "capital": "Benha",
+    "arabic_capital": "بنها",
+    "cover_image": "/images/governorates/qalyubia-cover.jpg",
+    "featured_image": "/images/governorates/qalyubia-featured.jpg",
+    "coordinates": {
+      "lat": 30.4648,
+      "lng": 31.1839
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 5,
+      "events_count": 18,
+      "news_count": 22,
+      "programs_count": 8
+    },
+    "key_attractions": [
+      "Benha Museum",
+      "Qanater Al-Khairiya",
+      "Agricultural Research Centers",
+      "Nile Barrages"
+    ],
+    "universities": [
+      "Benha University",
+      "Shoubra Faculty of Engineering"
+    ],
+    "districts": [
+      "Benha",
+      "Shebin El Qanater",
+      "Qaha",
+      "Khanka",
+      "Toukh",
+      "Kafr Shukr"
+    ],
+    "members": [
+      {
+        "id": "qalyubia-1",
+        "name": "Eman Gamal VHSM",
+        "arabic_name": "Eman Gamal VHSM",
+        "position": "Member",
+        "profile_image": "/images/governorate-board-webp/qalyubia/eman-gamal-vhsm.webp",
+        "bio": "Eman Gamal VHSM is an active member contributing to YLY's mission and community programs.",
+        "email": "eman@yly-qalyubia.org",
+        "phone": "+20 101 349 8009",
+        "location": "Benha",
+        "is_active": true,
+        "join_date": "2023-09-20"
+      },
+      {
+        "id": "qalyubia-2",
+        "name": "Hams Sameh",
+        "arabic_name": "Hams Sameh",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/qalyubia/hams-sameh.webp",
+        "bio": "Hams Sameh is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "hams@yly-qalyubia.org",
+        "phone": "+20 101 958 8353",
+        "location": "Benha",
+        "is_active": true,
+        "join_date": "2023-09-07"
+      },
+      {
+        "id": "qalyubia-3",
+        "name": "Mohamed Waleed head",
+        "arabic_name": "محمد",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/qalyubia/mohamed-waleed-head.webp",
+        "bio": "Mohamed Waleed head oversees digital marketing and social media strategy for YLY.",
+        "email": "mohamed@yly-qalyubia.org",
+        "phone": "+20 106 661 2844",
+        "location": "Benha",
+        "is_active": true,
+        "join_date": "2023-11-22"
+      },
+      {
+        "id": "qalyubia-4",
+        "name": "rama mamdouh",
+        "arabic_name": "rama mamdouh",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/qalyubia/rama-mamdouh.webp",
+        "bio": "rama mamdouh manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "rama@yly-qalyubia.org",
+        "phone": "+20 109 604 6542",
+        "location": "Benha",
+        "is_active": true,
+        "join_date": "2023-02-05"
+      },
+      {
+        "id": "qalyubia-5",
+        "name": "Shahd Hussein",
+        "arabic_name": "Shahd Hussein",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/qalyubia/shahd-hussein.webp",
+        "bio": "Shahd Hussein leads human resources initiatives and member development programs.",
+        "email": "shahd@yly-qalyubia.org",
+        "phone": "+20 102 796 5478",
+        "location": "Benha",
+        "is_active": true,
+        "join_date": "2023-11-26"
+      }
+    ]
+  },
+  "sharqia": {
+    "name": "Sharqia",
+    "arabic_name": "الشرقية",
+    "slug": "sharqia",
+    "description": "Agricultural governorate in the eastern Nile Delta, famous for its rice and cotton production. Fertile lands and traditional Egyptian culture.",
+    "arabic_description": "محافظة زراعية في شرق دلتا النيل، تشتهر بإنتاج الأرز والقطن. أراضي خصبة وثقافة مصرية تقليدية.",
+    "population": "7.2M",
+    "area": "4,911 km²",
+    "capital": "Zagazig",
+    "arabic_capital": "الزقازيق",
+    "cover_image": "/images/governorates/sharqia-cover.jpg",
+    "featured_image": "/images/governorates/sharqia-featured.jpg",
+    "coordinates": {
+      "lat": 30.5877,
+      "lng": 31.5022
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 6,
+      "events_count": 24,
+      "news_count": 29,
+      "programs_count": 11
+    },
+    "key_attractions": [
+      "Tell Basta Archaeological Site",
+      "Zagazig University",
+      "Agricultural Museums",
+      "Traditional Markets"
+    ],
+    "universities": [
+      "Zagazig University",
+      "Tenth of Ramadan University"
+    ],
+    "districts": [
+      "Zagazig",
+      "10th of Ramadan City",
+      "Bilbeis",
+      "Mashtool El Souk",
+      "Qantara Sharq",
+      "Abu Kabeer"
+    ],
+    "members": [
+      {
+        "id": "sharqia-1",
+        "name": "Esraa mohamed (teamleader)",
+        "arabic_name": "Esraa mohamed (teamleader)",
+        "position": "Member",
+        "profile_image": "/images/governorate-board-webp/sharqia/esraa-mohamed-teamleader.webp",
+        "bio": "Esraa mohamed (teamleader) is an active member contributing to YLY's mission and community programs.",
+        "email": "esraa@yly-sharqia.org",
+        "phone": "+20 109 804 0514",
+        "location": "Zagazig",
+        "is_active": true,
+        "join_date": "2023-03-27"
+      },
+      {
+        "id": "sharqia-2",
+        "name": "(Abdallah Anter Head)",
+        "arabic_name": "(Abdallah Anter Head)",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/sharqia/abdallah-anter-head.webp",
+        "bio": "(Abdallah Anter Head) oversees digital marketing and social media strategy for YLY.",
+        "email": "(abdallah@yly-sharqia.org",
+        "phone": "+20 101 632 9637",
+        "location": "Zagazig",
+        "is_active": true,
+        "join_date": "2023-12-21"
+      },
+      {
+        "id": "sharqia-3",
+        "name": "(Esraa Mohamed )",
+        "arabic_name": "(Esraa Mohamed )",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/sharqia/esraa-mohamed-.webp",
+        "bio": "(Esraa Mohamed ) is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "(esraa@yly-sharqia.org",
+        "phone": "+20 101 571 8693",
+        "location": "Zagazig",
+        "is_active": true,
+        "join_date": "2023-04-27"
+      },
+      {
+        "id": "sharqia-4",
+        "name": "Ibrahim Naser Head",
+        "arabic_name": "إبراهيم",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/sharqia/ibrahim-naser-head.webp",
+        "bio": "Ibrahim Naser Head manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "ibrahim@yly-sharqia.org",
+        "phone": "+20 106 992 1523",
+        "location": "Zagazig",
+        "is_active": true,
+        "join_date": "2023-03-08"
+      },
+      {
+        "id": "sharqia-5",
+        "name": "Mahmoud Abdalla Head",
+        "arabic_name": "محمود",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/sharqia/mahmoud-abdalla-head.webp",
+        "bio": "Mahmoud Abdalla Head manages public relations and community outreach efforts.",
+        "email": "mahmoud@yly-sharqia.org",
+        "phone": "+20 106 161 2274",
+        "location": "Zagazig",
+        "is_active": true,
+        "join_date": "2023-08-17"
+      },
+      {
+        "id": "sharqia-6",
+        "name": "Ziad Ahmed Head",
+        "arabic_name": "Ziad Ahmed Head",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/sharqia/ziad-ahmed-head.webp",
+        "bio": "Ziad Ahmed Head leads human resources initiatives and member development programs.",
+        "email": "ziad@yly-sharqia.org",
+        "phone": "+20 102 255 5536",
+        "location": "Zagazig",
+        "is_active": true,
+        "join_date": "2023-08-21"
+      }
+    ]
+  },
+  "dakahlia": {
+    "name": "Dakahlia",
+    "arabic_name": "الدقهلية",
+    "slug": "dakahlia",
+    "description": "Heart of the Nile Delta, known for its agricultural wealth and traditional Egyptian lifestyle. Rich cultural heritage and fertile farmlands.",
+    "arabic_description": "قلب دلتا النيل، تشتهر بثروتها الزراعية ونمط الحياة المصري التقليدي. تراث ثقافي غني وأراضي زراعية خصبة.",
+    "population": "6.8M",
+    "area": "3,459 km²",
+    "capital": "Mansoura",
+    "arabic_capital": "المنصورة",
+    "cover_image": "/images/governorates/dakahlia-cover.jpg",
+    "featured_image": "/images/governorates/dakahlia-featured.jpg",
+    "coordinates": {
+      "lat": 31.0409,
+      "lng": 31.3785
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 7,
+      "events_count": 21,
+      "news_count": 26,
+      "programs_count": 9
+    },
+    "key_attractions": [
+      "Mansoura University",
+      "Damietta Branch of the Nile",
+      "Traditional Handicrafts Centers",
+      "Agricultural Heritage Sites"
+    ],
+    "universities": [
+      "Mansoura University",
+      "Delta University for Science and Technology"
+    ],
+    "districts": [
+      "Mansoura",
+      "Talkha",
+      "Dekernes",
+      "Aga",
+      "Minyat El Nasr",
+      "Sherbin"
+    ],
+    "members": [
+      {
+        "id": "dakahlia-1",
+        "name": "Ahmad ElSaygh",
+        "arabic_name": "Ahmad ElSaygh",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/damietta/ahmad-elsaygh.webp",
+        "bio": "Ahmad ElSaygh manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "ahmad@yly-dakahlia.org",
+        "phone": "+20 100 783 5172",
+        "location": "Mansoura",
+        "is_active": true,
+        "join_date": "2023-07-05"
+      },
+      {
+        "id": "dakahlia-2",
+        "name": "Merna Emad Vice",
+        "arabic_name": "Merna Emad Vice",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/damietta/merna-emad-vice.webp",
+        "bio": "Merna Emad Vice is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "merna@yly-dakahlia.org",
+        "phone": "+20 109 918 7543",
+        "location": "Mansoura",
+        "is_active": true,
+        "join_date": "2023-03-01"
+      },
+      {
+        "id": "dakahlia-3",
+        "name": "Mohamed Kamel Head",
+        "arabic_name": "محمد",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/damietta/mohamed-kamel-head.webp",
+        "bio": "Mohamed Kamel Head leads human resources initiatives and member development programs.",
+        "email": "mohamed@yly-dakahlia.org",
+        "phone": "+20 111 798 9776",
+        "location": "Mansoura",
+        "is_active": true,
+        "join_date": "2023-09-19"
+      },
+      {
+        "id": "dakahlia-4",
+        "name": "Mohammed El sawaf",
+        "arabic_name": "محمد",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/damietta/mohammed-el-sawaf.webp",
+        "bio": "Mohammed El sawaf is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "mohammed@yly-dakahlia.org",
+        "phone": "+20 102 332 8764",
+        "location": "Mansoura",
+        "is_active": true,
+        "join_date": "2023-10-24"
+      },
+      {
+        "id": "dakahlia-5",
+        "name": "Rihana Omar Head Operating Room",
+        "arabic_name": "Rihana Omar Head Operating Room",
+        "position": "Member",
+        "profile_image": "/images/governorate-board-webp/damietta/rihana-omar-head-operating-room.webp",
+        "bio": "Rihana Omar Head Operating Room is an active member contributing to YLY's mission and community programs.",
+        "email": "rihana@yly-dakahlia.org",
+        "phone": "+20 102 717 4830",
+        "location": "Mansoura",
+        "is_active": true,
+        "join_date": "2023-11-05"
+      },
+      {
+        "id": "dakahlia-6",
+        "name": "Seif Hossam Head",
+        "arabic_name": "Seif Hossam Head",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/damietta/seif-hossam-head.webp",
+        "bio": "Seif Hossam Head oversees digital marketing and social media strategy for YLY.",
+        "email": "seif@yly-dakahlia.org",
+        "phone": "+20 110 469 7595",
+        "location": "Mansoura",
+        "is_active": true,
+        "join_date": "2023-02-07"
+      },
+      {
+        "id": "dakahlia-7",
+        "name": "Sohila Abdelbaky Public Relation Head",
+        "arabic_name": "Sohila Abdelbaky Public Relation Head",
+        "position": "Member",
+        "profile_image": "/images/governorate-board-webp/damietta/sohila-abdelbaky-public-relation-head.webp",
+        "bio": "Sohila Abdelbaky Public Relation Head is an active member contributing to YLY's mission and community programs.",
+        "email": "sohila@yly-dakahlia.org",
+        "phone": "+20 111 427 9970",
+        "location": "Mansoura",
+        "is_active": true,
+        "join_date": "2023-12-26"
+      }
+    ]
+  },
+  "beheira": {
+    "name": "Beheira",
+    "arabic_name": "البحيرة",
+    "slug": "beheira",
+    "description": "Northwestern governorate known for its agricultural production and Lake Mariout. Gateway between Alexandria and the western desert.",
+    "arabic_description": "محافظة شمال غربية تشتهر بإنتاجها الزراعي وبحيرة مريوط. بوابة بين الإسكندرية والصحراء الغربية.",
+    "population": "6.1M",
+    "area": "9,826 km²",
+    "capital": "Damanhour",
+    "arabic_capital": "دمنهور",
+    "cover_image": "/images/governorates/beheira-cover.jpg",
+    "featured_image": "/images/governorates/beheira-featured.jpg",
+    "coordinates": {
+      "lat": 31.0341,
+      "lng": 30.4691
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 7,
+      "events_count": 19,
+      "news_count": 23,
+      "programs_count": 8
+    },
+    "key_attractions": [
+      "Lake Mariout",
+      "Damanhour Museum",
+      "Agricultural Centers",
+      "Traditional Villages"
+    ],
+    "universities": [
+      "Damanhour University",
+      "Agricultural Research Centers"
+    ],
+    "districts": [
+      "Damanhour",
+      "Kafr El Dawwar",
+      "Rashid",
+      "Edko",
+      "Abu Hummus",
+      "Hosh Issa"
+    ],
+    "members": [
+      {
+        "id": "beheira-1",
+        "name": "Donia Abo El Nour",
+        "arabic_name": "دنيا",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/behiera/donia-abo-el-nour.webp",
+        "bio": "Donia Abo El Nour manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "donia@yly-beheira.org",
+        "phone": "+20 106 880 3940",
+        "location": "Damanhour",
+        "is_active": true,
+        "join_date": "2023-01-25"
+      },
+      {
+        "id": "beheira-2",
+        "name": "Ahmed Al Malah",
+        "arabic_name": "أحمد",
+        "position": "Vice Head",
+        "profile_image": "/images/governorate-board-webp/behiera/ahmed-al-malah.webp",
+        "bio": "Ahmed Al Malah provides support and assistance in leadership roles and program coordination.",
+        "email": "ahmed@yly-beheira.org",
+        "phone": "+20 102 900 1267",
+        "location": "Damanhour",
+        "is_active": true,
+        "join_date": "2023-03-01"
+      },
+      {
+        "id": "beheira-3",
+        "name": "Ethar Omar PR",
+        "arabic_name": "Ethar Omar PR",
+        "position": "Vice Head",
+        "profile_image": "/images/governorate-board-webp/behiera/ethar-omar-pr.webp",
+        "bio": "Ethar Omar PR provides support and assistance in leadership roles and program coordination.",
+        "email": "ethar@yly-beheira.org",
+        "phone": "+20 106 803 9047",
+        "location": "Damanhour",
+        "is_active": true,
+        "join_date": "2023-06-02"
+      },
+      {
+        "id": "beheira-4",
+        "name": "Mahmoud Eltayfy",
+        "arabic_name": "محمود",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/behiera/mahmoud-eltayfy.webp",
+        "bio": "Mahmoud Eltayfy is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "mahmoud@yly-beheira.org",
+        "phone": "+20 106 504 6439",
+        "location": "Damanhour",
+        "is_active": true,
+        "join_date": "2023-02-07"
+      },
+      {
+        "id": "beheira-5",
+        "name": "Mohamed El Gendy",
+        "arabic_name": "محمد",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/behiera/mohamed-el-gendy.webp",
+        "bio": "Mohamed El Gendy leads human resources initiatives and member development programs.",
+        "email": "mohamed@yly-beheira.org",
+        "phone": "+20 109 786 5758",
+        "location": "Damanhour",
+        "is_active": true,
+        "join_date": "2023-10-06"
+      },
+      {
+        "id": "beheira-6",
+        "name": "Mohamed khobeiz",
+        "arabic_name": "محمد",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/behiera/mohamed-khobeiz.webp",
+        "bio": "Mohamed khobeiz manages public relations and community outreach efforts.",
+        "email": "mohamed@yly-beheira.org",
+        "phone": "+20 106 341 6792",
+        "location": "Damanhour",
+        "is_active": true,
+        "join_date": "2023-08-12"
+      },
+      {
+        "id": "beheira-7",
+        "name": "Shaimaa Esmail SM He2",
+        "arabic_name": "Shaimaa Esmail SM He2",
+        "position": "Member",
+        "profile_image": "/images/governorate-board-webp/behiera/shaimaa-esmail-sm-he2.webp",
+        "bio": "Shaimaa Esmail SM He2 is an active member contributing to YLY's mission and community programs.",
+        "email": "shaimaa@yly-beheira.org",
+        "phone": "+20 106 846 8078",
+        "location": "Damanhour",
+        "is_active": true,
+        "join_date": "2023-08-31"
+      }
+    ]
+  },
+  "kafr_el_sheikh": {
+    "name": "Kafr El Sheikh",
+    "arabic_name": "كفر الشيخ",
+    "slug": "kafr-el-sheikh",
+    "description": "Northern Delta governorate famous for its fish farms and rice production. Coastal region with rich marine resources.",
+    "arabic_description": "محافظة شمال الدلتا الشهيرة بمزارع الأسماك وإنتاج الأرز. منطقة ساحلية بموارد بحرية غنية.",
+    "population": "3.4M",
+    "area": "3,748 km²",
+    "capital": "Kafr El Sheikh",
+    "arabic_capital": "كفر الشيخ",
+    "cover_image": "/images/governorates/kafr-el-sheikh-cover.jpg",
+    "featured_image": "/images/governorates/kafr-el-sheikh-featured.jpg",
+    "coordinates": {
+      "lat": 31.1107,
+      "lng": 30.9388
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 5,
+      "events_count": 16,
+      "news_count": 20,
+      "programs_count": 7
+    },
+    "key_attractions": [
+      "Burullus Lake",
+      "Fish Farms",
+      "Rice Fields",
+      "Coastal Areas"
+    ],
+    "universities": [
+      "Kafr El Sheikh University"
+    ],
+    "districts": [
+      "Kafr El Sheikh",
+      "Desouk",
+      "Fuwwah",
+      "Qilin",
+      "Sidi Salem",
+      "Metoubes"
+    ],
+    "members": [
+      {
+        "id": "kafr_el_sheikh-1",
+        "name": "Asmaa Refaat",
+        "arabic_name": "Asmaa Refaat",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/kafr-el-sheikh/asmaa-refaat.webp",
+        "bio": "Asmaa Refaat manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "asmaa@yly-kafr-el_sheikh.org",
+        "phone": "+20 109 485 5537",
+        "location": "Kafr El Sheikh",
+        "is_active": true,
+        "join_date": "2023-01-14"
+      },
+      {
+        "id": "kafr_el_sheikh-2",
+        "name": "Habiba Ebrahim.",
+        "arabic_name": "Habiba Ebrahim.",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/kafr-el-sheikh/habiba-ebrahim..webp",
+        "bio": "Habiba Ebrahim. leads human resources initiatives and member development programs.",
+        "email": "habiba@yly-kafr-el_sheikh.org",
+        "phone": "+20 109 141 2205",
+        "location": "Kafr El Sheikh",
+        "is_active": true,
+        "join_date": "2023-10-03"
+      },
+      {
+        "id": "kafr_el_sheikh-3",
+        "name": "Hady Yasser",
+        "arabic_name": "Hady Yasser",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/kafr-el-sheikh/hady-yasser.webp",
+        "bio": "Hady Yasser manages public relations and community outreach efforts.",
+        "email": "hady@yly-kafr-el_sheikh.org",
+        "phone": "+20 101 847 7275",
+        "location": "Kafr El Sheikh",
+        "is_active": true,
+        "join_date": "2023-10-27"
+      },
+      {
+        "id": "kafr_el_sheikh-4",
+        "name": "Mohand Ezzat",
+        "arabic_name": "Mohand Ezzat",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/kafr-el-sheikh/mohand-ezzat.webp",
+        "bio": "Mohand Ezzat is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "mohand@yly-kafr-el_sheikh.org",
+        "phone": "+20 102 258 9921",
+        "location": "Kafr El Sheikh",
+        "is_active": true,
+        "join_date": "2023-07-15"
+      },
+      {
+        "id": "kafr_el_sheikh-5",
+        "name": "Rahma khaled",
+        "arabic_name": "رحمة",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/kafr-el-sheikh/rahma-khaled.webp",
+        "bio": "Rahma khaled oversees digital marketing and social media strategy for YLY.",
+        "email": "rahma@yly-kafr-el_sheikh.org",
+        "phone": "+20 111 839 2098",
+        "location": "Kafr El Sheikh",
+        "is_active": true,
+        "join_date": "2023-10-04"
+      }
+    ]
+  },
+  "gharbia": {
+    "name": "Gharbia",
+    "arabic_name": "الغربية",
+    "slug": "gharbia",
+    "description": "Central Delta governorate known for its textile industry and cotton production. Industrial and agricultural hub of the region.",
+    "arabic_description": "محافظة وسط الدلتا المعروفة بصناعة النسيج وإنتاج القطن. مركز صناعي وزراعي في المنطقة.",
+    "population": "5.0M",
+    "area": "1,948 km²",
+    "capital": "Tanta",
+    "arabic_capital": "طنطا",
+    "cover_image": "/images/governorates/gharbia-cover.jpg",
+    "featured_image": "/images/governorates/gharbia-featured.jpg",
+    "coordinates": {
+      "lat": 30.7865,
+      "lng": 31.0004
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 10,
+      "events_count": 20,
+      "news_count": 25,
+      "programs_count": 9
+    },
+    "key_attractions": [
+      "Ahmad Al-Badawi Mosque",
+      "Tanta University",
+      "Cotton Museums",
+      "Textile Factories"
+    ],
+    "universities": [
+      "Tanta University"
+    ],
+    "districts": [
+      "Tanta",
+      "Mahalla El Kubra",
+      "Kafr El Zayat",
+      "Samanoud",
+      "Zefta",
+      "Santa"
+    ],
+    "members": [
+      {
+        "id": "gharbia-1",
+        "name": "Ahd Sakr Head",
+        "arabic_name": "Ahd Sakr Head",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/gharbia/ahd-sakr-head.webp",
+        "bio": "Ahd Sakr Head manages public relations and community outreach efforts.",
+        "email": "ahd@yly-gharbia.org",
+        "phone": "+20 102 185 6797",
+        "location": "Tanta",
+        "is_active": true,
+        "join_date": "2023-10-09"
+      },
+      {
+        "id": "gharbia-2",
+        "name": "Akram Donia",
+        "arabic_name": "Akram Donia",
+        "position": "Vice Head",
+        "profile_image": "/images/governorate-board-webp/gharbia/akram-donia.webp",
+        "bio": "Akram Donia provides support and assistance in leadership roles and program coordination.",
+        "email": "akram@yly-gharbia.org",
+        "phone": "+20 111 640 1636",
+        "location": "Tanta",
+        "is_active": true,
+        "join_date": "2023-06-20"
+      },
+      {
+        "id": "gharbia-3",
+        "name": "Gala Elesawy",
+        "arabic_name": "Gala Elesawy",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/gharbia/gala-elesawy.webp",
+        "bio": "Gala Elesawy is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "gala@yly-gharbia.org",
+        "phone": "+20 110 110 8500",
+        "location": "Tanta",
+        "is_active": true,
+        "join_date": "2023-02-14"
+      },
+      {
+        "id": "gharbia-4",
+        "name": "Haisel Mousa",
+        "arabic_name": "Haisel Mousa",
+        "position": "Vice Head",
+        "profile_image": "/images/governorate-board-webp/gharbia/haisel-mousa.webp",
+        "bio": "Haisel Mousa provides support and assistance in leadership roles and program coordination.",
+        "email": "haisel@yly-gharbia.org",
+        "phone": "+20 106 907 2620",
+        "location": "Tanta",
+        "is_active": true,
+        "join_date": "2023-06-19"
+      },
+      {
+        "id": "gharbia-5",
+        "name": "Menna Elhefnawy Head",
+        "arabic_name": "Menna Elhefnawy Head",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/gharbia/menna-elhefnawy-head.webp",
+        "bio": "Menna Elhefnawy Head manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "menna@yly-gharbia.org",
+        "phone": "+20 102 788 5225",
+        "location": "Tanta",
+        "is_active": true,
+        "join_date": "2023-10-21"
+      },
+      {
+        "id": "gharbia-6",
+        "name": "Omnia Ashraf Vice",
+        "arabic_name": "Omnia Ashraf Vice",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/gharbia/omnia-ashraf-vice.webp",
+        "bio": "Omnia Ashraf Vice is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "omnia@yly-gharbia.org",
+        "phone": "+20 101 137 5661",
+        "location": "Tanta",
+        "is_active": true,
+        "join_date": "2023-09-18"
+      },
+      {
+        "id": "gharbia-7",
+        "name": "Ramez Waleed Head",
+        "arabic_name": "Ramez Waleed Head",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/gharbia/ramez-waleed-head.webp",
+        "bio": "Ramez Waleed Head oversees digital marketing and social media strategy for YLY.",
+        "email": "ramez@yly-gharbia.org",
+        "phone": "+20 102 359 9299",
+        "location": "Tanta",
+        "is_active": true,
+        "join_date": "2023-11-01"
+      },
+      {
+        "id": "gharbia-8",
+        "name": "Rana Nazeer Head",
+        "arabic_name": "رنا",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/gharbia/rana-nazeer-head.webp",
+        "bio": "Rana Nazeer Head leads human resources initiatives and member development programs.",
+        "email": "rana@yly-gharbia.org",
+        "phone": "+20 102 627 7921",
+        "location": "Tanta",
+        "is_active": true,
+        "join_date": "2023-06-21"
+      },
+      {
+        "id": "gharbia-9",
+        "name": "Rodina Walaa",
+        "arabic_name": "Rodina Walaa",
+        "position": "Vice Head",
+        "profile_image": "/images/governorate-board-webp/gharbia/rodina-walaa.webp",
+        "bio": "Rodina Walaa provides support and assistance in leadership roles and program coordination.",
+        "email": "rodina@yly-gharbia.org",
+        "phone": "+20 106 966 7933",
+        "location": "Tanta",
+        "is_active": true,
+        "join_date": "2023-03-15"
+      },
+      {
+        "id": "gharbia-10",
+        "name": "Shahd Askar",
+        "arabic_name": "Shahd Askar",
+        "position": "Vice Head",
+        "profile_image": "/images/governorate-board-webp/gharbia/shahd-askar.webp",
+        "bio": "Shahd Askar provides support and assistance in leadership roles and program coordination.",
+        "email": "shahd@yly-gharbia.org",
+        "phone": "+20 106 721 8967",
+        "location": "Tanta",
+        "is_active": true,
+        "join_date": "2023-04-30"
+      }
+    ]
+  },
+  "menoufia": {
+    "name": "Menoufia",
+    "arabic_name": "المنوفية",
+    "slug": "menoufia",
+    "description": "Central Delta governorate known for its agricultural heritage and traditional crafts. Peaceful rural landscape with rich history.",
+    "arabic_description": "محافظة وسط الدلتا المعروفة بتراثها الزراعي والحرف التقليدية. منظر ريفي هادئ بتاريخ غني.",
+    "population": "4.2M",
+    "area": "2,499 km²",
+    "capital": "Shebin El Kom",
+    "arabic_capital": "شبين الكوم",
+    "cover_image": "/images/governorates/menoufia-cover.jpg",
+    "featured_image": "/images/governorates/menoufia-featured.jpg",
+    "coordinates": {
+      "lat": 30.5594,
+      "lng": 31.0118
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 5,
+      "events_count": 17,
+      "news_count": 21,
+      "programs_count": 8
+    },
+    "key_attractions": [
+      "Agricultural Heritage Centers",
+      "Traditional Crafts Villages",
+      "Sadat Academy",
+      "Rural Tourism Sites"
+    ],
+    "universities": [
+      "Menoufia University",
+      "Sadat Academy for Management Sciences"
+    ],
+    "districts": [
+      "Shebin El Kom",
+      "Menouf",
+      "Ashmoun",
+      "Al Bagour",
+      "Quesna",
+      "Sadat City"
+    ],
+    "members": [
+      {
+        "id": "menoufia-1",
+        "name": "ABDEL RAHMAN ESSAM HEAD",
+        "arabic_name": "ABDEL RAHMAN ESSAM HEAD",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/monufia/abdel-rahman-essam-head.webp",
+        "bio": "ABDEL RAHMAN ESSAM HEAD oversees digital marketing and social media strategy for YLY.",
+        "email": "abdel@yly-menoufia.org",
+        "phone": "+20 110 219 8360",
+        "location": "Shebin El Kom",
+        "is_active": true,
+        "join_date": "2023-02-04"
+      },
+      {
+        "id": "menoufia-2",
+        "name": "IBRAHIM GAMAL HEAD",
+        "arabic_name": "IBRAHIM GAMAL HEAD",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/monufia/ibrahim-gamal-head.webp",
+        "bio": "IBRAHIM GAMAL HEAD leads human resources initiatives and member development programs.",
+        "email": "ibrahim@yly-menoufia.org",
+        "phone": "+20 111 297 8014",
+        "location": "Shebin El Kom",
+        "is_active": true,
+        "join_date": "2023-01-13"
+      },
+      {
+        "id": "menoufia-3",
+        "name": "KAREEM MOHAMED HEAD",
+        "arabic_name": "KAREEM MOHAMED HEAD",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/monufia/kareem-mohamed-head.webp",
+        "bio": "KAREEM MOHAMED HEAD manages public relations and community outreach efforts.",
+        "email": "kareem@yly-menoufia.org",
+        "phone": "+20 112 865 4151",
+        "location": "Shebin El Kom",
+        "is_active": true,
+        "join_date": "2023-08-24"
+      },
+      {
+        "id": "menoufia-4",
+        "name": "Rawnaa atef",
+        "arabic_name": "Rawnaa atef",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/monufia/rawnaa-atef.webp",
+        "bio": "Rawnaa atef is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "rawnaa@yly-menoufia.org",
+        "phone": "+20 106 609 6857",
+        "location": "Shebin El Kom",
+        "is_active": true,
+        "join_date": "2023-02-14"
+      },
+      {
+        "id": "menoufia-5",
+        "name": "SHAZA SHBAIK HEAD",
+        "arabic_name": "SHAZA SHBAIK HEAD",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/monufia/shaza-shbaik-head.webp",
+        "bio": "SHAZA SHBAIK HEAD manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "shaza@yly-menoufia.org",
+        "phone": "+20 106 385 8317",
+        "location": "Shebin El Kom",
+        "is_active": true,
+        "join_date": "2023-10-24"
+      }
+    ]
+  },
+  "ismailia": {
+    "name": "Ismailia",
+    "arabic_name": "الإسماعيلية",
+    "slug": "ismailia",
+    "description": "Strategic location on the Suez Canal, known for its beautiful gardens and European architecture. Gateway between Asia and Africa.",
+    "arabic_description": "موقع استراتيجي على قناة السويس، تشتهر بحدائقها الجميلة والعمارة الأوروبية. بوابة بين آسيا وأفريقيا.",
+    "population": "1.4M",
+    "area": "5,067 km²",
+    "capital": "Ismailia",
+    "arabic_capital": "الإسماعيلية",
+    "cover_image": "/images/governorates/ismailia-cover.jpg",
+    "featured_image": "/images/governorates/ismailia-featured.jpg",
+    "coordinates": {
+      "lat": 30.5965,
+      "lng": 32.2715
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 5,
+      "events_count": 14,
+      "news_count": 17,
+      "programs_count": 6
+    },
+    "key_attractions": [
+      "Suez Canal",
+      "De Lesseps House",
+      "Ismailia Museum",
+      "Lake Timsah",
+      "Fayed Military Museum"
+    ],
+    "universities": [
+      "Suez Canal University"
+    ],
+    "districts": [
+      "Ismailia",
+      "El Qantara East",
+      "El Qantara West",
+      "Fayed",
+      "Abu Suweira",
+      "Qassassin"
+    ],
+    "members": [
+      {
+        "id": "ismailia-1",
+        "name": "AbdelRahman Hamdy",
+        "arabic_name": "AbdelRahman Hamdy",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/ismailia/abdelrahman-hamdy.webp",
+        "bio": "AbdelRahman Hamdy manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "abdelrahman@yly-ismailia.org",
+        "phone": "+20 110 875 6212",
+        "location": "Ismailia",
+        "is_active": true,
+        "join_date": "2023-01-22"
+      },
+      {
+        "id": "ismailia-2",
+        "name": "Ahmed Magdy",
+        "arabic_name": "أحمد",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/ismailia/ahmed-magdy.webp",
+        "bio": "Ahmed Magdy is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "ahmed@yly-ismailia.org",
+        "phone": "+20 101 114 1186",
+        "location": "Ismailia",
+        "is_active": true,
+        "join_date": "2023-03-14"
+      },
+      {
+        "id": "ismailia-3",
+        "name": "Ammar Mohamed",
+        "arabic_name": "Ammar Mohamed",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/ismailia/ammar-mohamed.webp",
+        "bio": "Ammar Mohamed leads human resources initiatives and member development programs.",
+        "email": "ammar@yly-ismailia.org",
+        "phone": "+20 110 300 8321",
+        "location": "Ismailia",
+        "is_active": true,
+        "join_date": "2023-02-26"
+      },
+      {
+        "id": "ismailia-4",
+        "name": "Kinzy Wael",
+        "arabic_name": "Kinzy Wael",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/ismailia/kinzy-wael.webp",
+        "bio": "Kinzy Wael manages public relations and community outreach efforts.",
+        "email": "kinzy@yly-ismailia.org",
+        "phone": "+20 100 681 4756",
+        "location": "Ismailia",
+        "is_active": true,
+        "join_date": "2023-10-17"
+      },
+      {
+        "id": "ismailia-5",
+        "name": "Rowaida Elsayed",
+        "arabic_name": "Rowaida Elsayed",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/ismailia/rowaida-elsayed.webp",
+        "bio": "Rowaida Elsayed oversees digital marketing and social media strategy for YLY.",
+        "email": "rowaida@yly-ismailia.org",
+        "phone": "+20 101 508 5520",
+        "location": "Ismailia",
+        "is_active": true,
+        "join_date": "2023-10-13"
+      }
+    ]
+  },
+  "port_said": {
+    "name": "Port Said",
+    "arabic_name": "بورسعيد",
+    "slug": "port-said",
+    "description": "Major port city at the northern entrance of the Suez Canal. Important commercial hub with duty-free shopping and maritime activities.",
+    "arabic_description": "مدينة ميناء رئيسية عند المدخل الشمالي لقناة السويس. مركز تجاري مهم مع التسوق المعفى من الرسوم والأنشطة البحرية.",
+    "population": "750K",
+    "area": "1,345 km²",
+    "capital": "Port Said",
+    "arabic_capital": "بورسعيد",
+    "cover_image": "/images/governorates/port-said-cover.jpg",
+    "featured_image": "/images/governorates/port-said-featured.jpg",
+    "coordinates": {
+      "lat": 31.2653,
+      "lng": 32.3019
+    },
+    "established_date": "1859-04-25",
+    "yly_stats": {
+      "members_count": 3,
+      "events_count": 12,
+      "news_count": 14,
+      "programs_count": 5
+    },
+    "key_attractions": [
+      "Suez Canal Authority Building",
+      "Port Said Lighthouse",
+      "Military Museum",
+      "Duty-Free Shopping Areas",
+      "Ferry Services"
+    ],
+    "universities": [
+      "Port Said University"
+    ],
+    "districts": [
+      "Port Said",
+      "Port Fouad",
+      "East Port Said",
+      "Manzala",
+      "South Port Said"
+    ],
+    "members": [
+      {
+        "id": "port_said-1",
+        "name": "Ahmed Essam",
+        "arabic_name": "أحمد",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/port-said/ahmed-essam.webp",
+        "bio": "Ahmed Essam manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "ahmed@yly-port-said.org",
+        "phone": "+20 111 570 7927",
+        "location": "Port Said",
+        "is_active": true,
+        "join_date": "2023-11-04"
+      },
+      {
+        "id": "port_said-2",
+        "name": "Omar Adel Head",
+        "arabic_name": "عمر",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/port-said/omar-adel-head.webp",
+        "bio": "Omar Adel Head oversees digital marketing and social media strategy for YLY.",
+        "email": "omar@yly-port-said.org",
+        "phone": "+20 112 788 2923",
+        "location": "Port Said",
+        "is_active": true,
+        "join_date": "2023-12-09"
+      },
+      {
+        "id": "port_said-3",
+        "name": "Rewan Omar",
+        "arabic_name": "Rewan Omar",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/port-said/rewan-omar.webp",
+        "bio": "Rewan Omar manages public relations and community outreach efforts.",
+        "email": "rewan@yly-port-said.org",
+        "phone": "+20 112 879 7815",
+        "location": "Port Said",
+        "is_active": true,
+        "join_date": "2023-06-14"
+      }
+    ]
+  },
+  "suez": {
+    "name": "Suez",
+    "arabic_name": "السويس",
+    "slug": "suez",
+    "description": "Southern entrance to the Suez Canal, important industrial and oil refining center. Strategic location connecting the Red Sea to the Mediterranean.",
+    "arabic_description": "المدخل الجنوبي لقناة السويس، مركز صناعي ومكرر نفط مهم. موقع استراتيجي يربط البحر الأحمر بالبحر المتوسط.",
+    "population": "750K",
+    "area": "9,002 km²",
+    "capital": "Suez",
+    "arabic_capital": "السويس",
+    "cover_image": "/images/governorates/suez-cover.jpg",
+    "featured_image": "/images/governorates/suez-featured.jpg",
+    "coordinates": {
+      "lat": 29.9668,
+      "lng": 32.5498
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 6,
+      "events_count": 13,
+      "news_count": 15,
+      "programs_count": 5
+    },
+    "key_attractions": [
+      "Suez Canal",
+      "Oil Refineries",
+      "Ahmed Hamdi Tunnel",
+      "Attaka Mountain",
+      "Industrial Complexes"
+    ],
+    "universities": [
+      "Suez University"
+    ],
+    "districts": [
+      "Suez",
+      "Attaka",
+      "Arbaeen",
+      "Faisal",
+      "Ganayen"
+    ],
+    "members": [
+      {
+        "id": "suez-1",
+        "name": "Asmaa Hemdan Vise",
+        "arabic_name": "Asmaa Hemdan Vise",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/suez/asmaa-hemdan-vise.webp",
+        "bio": "Asmaa Hemdan Vise manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "asmaa@yly-suez.org",
+        "phone": "+20 109 611 5406",
+        "location": "Suez",
+        "is_active": true,
+        "join_date": "2023-12-16"
+      },
+      {
+        "id": "suez-2",
+        "name": "Esraa Reda",
+        "arabic_name": "Esraa Reda",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/suez/esraa-reda.webp",
+        "bio": "Esraa Reda leads human resources initiatives and member development programs.",
+        "email": "esraa@yly-suez.org",
+        "phone": "+20 110 392 4839",
+        "location": "Suez",
+        "is_active": true,
+        "join_date": "2023-05-06"
+      },
+      {
+        "id": "suez-3",
+        "name": "Hazem Gamal",
+        "arabic_name": "Hazem Gamal",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/suez/hazem-gamal.webp",
+        "bio": "Hazem Gamal manages public relations and community outreach efforts.",
+        "email": "hazem@yly-suez.org",
+        "phone": "+20 102 715 1703",
+        "location": "Suez",
+        "is_active": true,
+        "join_date": "2023-12-08"
+      },
+      {
+        "id": "suez-4",
+        "name": "Malak Elahmedy",
+        "arabic_name": "Malak Elahmedy",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/suez/malak-elahmedy.webp",
+        "bio": "Malak Elahmedy manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "malak@yly-suez.org",
+        "phone": "+20 101 549 5575",
+        "location": "Suez",
+        "is_active": true,
+        "join_date": "2023-11-24"
+      },
+      {
+        "id": "suez-5",
+        "name": "Rofida Ahmed Head",
+        "arabic_name": "Rofida Ahmed Head",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/suez/rofida-ahmed-head.webp",
+        "bio": "Rofida Ahmed Head oversees digital marketing and social media strategy for YLY.",
+        "email": "rofida@yly-suez.org",
+        "phone": "+20 111 567 5449",
+        "location": "Suez",
+        "is_active": true,
+        "join_date": "2023-02-09"
+      },
+      {
+        "id": "suez-6",
+        "name": "Shahd Magdy",
+        "arabic_name": "Shahd Magdy",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/suez/shahd-magdy.webp",
+        "bio": "Shahd Magdy is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "shahd@yly-suez.org",
+        "phone": "+20 100 914 3642",
+        "location": "Suez",
+        "is_active": true,
+        "join_date": "2023-08-01"
+      }
+    ]
+  },
+  "north_sinai": {
+    "name": "North Sinai",
+    "arabic_name": "شمال سيناء",
+    "slug": "north-sinai",
+    "description": "Strategic peninsula location with beautiful beaches and archaeological sites. Bridge between Africa and Asia with unique desert landscape.",
+    "arabic_description": "موقع شبه جزيرة استراتيجي مع شواطئ جميلة ومواقع أثرية. جسر بين أفريقيا وآسيا مع منظر صحراوي فريد.",
+    "population": "450K",
+    "area": "27,574 km²",
+    "capital": "Arish",
+    "arabic_capital": "العريش",
+    "cover_image": "/images/governorates/north-sinai-cover.jpg",
+    "featured_image": "/images/governorates/north-sinai-featured.jpg",
+    "coordinates": {
+      "lat": 31.1313,
+      "lng": 33.7974
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 12,
+      "events_count": 9,
+      "news_count": 11,
+      "programs_count": 4
+    },
+    "key_attractions": [
+      "Arish Beach",
+      "Archaeological Sites",
+      "Bedouin Culture Centers",
+      "Desert Landscapes",
+      "Traditional Markets"
+    ],
+    "universities": [
+      "Arish University"
+    ],
+    "districts": [
+      "Arish",
+      "Sheikh Zuweid",
+      "Rafah",
+      "Bir al-Abd",
+      "Hasana"
+    ],
+    "members": [
+      {
+        "id": "north_sinai-1",
+        "name": "Hossam El-Din",
+        "arabic_name": "حسام الدين",
+        "position": "Media Team",
+        "profile_image": "/images/Board/nada elseady.jpg",
+        "bio": "Digital marketing specialist focused on youth engagement strategies.",
+        "email": "hossam@yly.org",
+        "phone": "+20 101 837 6277",
+        "location": "Arish",
+        "is_active": true,
+        "join_date": "2023-06-28"
+      },
+      {
+        "id": "north_sinai-2",
+        "name": "Hossam El-Din",
+        "arabic_name": "خديجة محمد",
+        "position": "Leader",
+        "profile_image": "/images/Board/ahmed hosny.jpg",
+        "bio": "Passionate community leader dedicated to youth development and social change.",
+        "email": "hossam@yly.org",
+        "phone": "+20 109 248 3205",
+        "location": "Arish",
+        "is_active": true,
+        "join_date": "2023-06-20"
+      },
+      {
+        "id": "north_sinai-3",
+        "name": "Ibrahim Abdullah",
+        "arabic_name": "نور الهدى",
+        "position": "Volunteer",
+        "profile_image": "/images/Board/shehab2-2.jpg",
+        "bio": "Enthusiastic volunteer contributing to youth empowerment initiatives.",
+        "email": "ibrahim@yly.org",
+        "phone": "+20 104 435 3315",
+        "location": "Arish",
+        "is_active": true,
+        "join_date": "2023-05-13"
+      }
+    ]
+  },
+  "south_sinai": {
+    "name": "South Sinai",
+    "arabic_name": "جنوب سيناء",
+    "slug": "south-sinai",
+    "description": "Famous for Mount Sinai, Sharm El Sheikh, and world-class diving sites. Premier tourist destination with biblical significance.",
+    "arabic_description": "مشهورة بجبل سيناء وشرم الشيخ ومواقع الغوص ذات المستوى العالمي. وجهة سياحية أولى ذات أهمية دينية.",
+    "population": "175K",
+    "area": "31,272 km²",
+    "capital": "Tor",
+    "arabic_capital": "الطور",
+    "cover_image": "/images/governorates/south-sinai-cover.jpg",
+    "featured_image": "/images/governorates/south-sinai-featured.jpg",
+    "coordinates": {
+      "lat": 28.242,
+      "lng": 33.6161
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 5,
+      "events_count": 11,
+      "news_count": 13,
+      "programs_count": 4
+    },
+    "key_attractions": [
+      "Mount Sinai",
+      "Saint Catherine's Monastery",
+      "Sharm El Sheikh",
+      "Dahab",
+      "Ras Mohammed National Park",
+      "Coral Reefs"
+    ],
+    "universities": [
+      "Sinai University"
+    ],
+    "districts": [
+      "Tor",
+      "Sharm El Sheikh",
+      "Dahab",
+      "Nuweiba",
+      "Saint Catherine",
+      "Ras Sudr"
+    ],
+    "members": [
+      {
+        "id": "south_sinai-1",
+        "name": "Adham Walied",
+        "arabic_name": "Adham Walied",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/south-sinai/adham-walied.webp",
+        "bio": "Adham Walied leads human resources initiatives and member development programs.",
+        "email": "adham@yly-south-sinai.org",
+        "phone": "+20 100 965 6239",
+        "location": "Tor",
+        "is_active": true,
+        "join_date": "2023-08-24"
+      },
+      {
+        "id": "south_sinai-2",
+        "name": "Bassant Abdelall",
+        "arabic_name": "Bassant Abdelall",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/south-sinai/bassant-abdelall.webp",
+        "bio": "Bassant Abdelall oversees digital marketing and social media strategy for YLY.",
+        "email": "bassant@yly-south-sinai.org",
+        "phone": "+20 112 412 9270",
+        "location": "Tor",
+        "is_active": true,
+        "join_date": "2023-01-16"
+      },
+      {
+        "id": "south_sinai-3",
+        "name": "Ibrahim Saber",
+        "arabic_name": "إبراهيم",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/south-sinai/ibrahim-saber.webp",
+        "bio": "Ibrahim Saber manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "ibrahim@yly-south-sinai.org",
+        "phone": "+20 106 241 1895",
+        "location": "Tor",
+        "is_active": true,
+        "join_date": "2023-10-09"
+      },
+      {
+        "id": "south_sinai-4",
+        "name": "Mariam Hany TeamLeadr",
+        "arabic_name": "مريم",
+        "position": "Member",
+        "profile_image": "/images/governorate-board-webp/south-sinai/mariam-hany-teamleadr.webp",
+        "bio": "Mariam Hany TeamLeadr is an active member contributing to YLY's mission and community programs.",
+        "email": "mariam@yly-south-sinai.org",
+        "phone": "+20 110 431 1138",
+        "location": "Tor",
+        "is_active": true,
+        "join_date": "2023-02-14"
+      },
+      {
+        "id": "south_sinai-5",
+        "name": "Mera Samir",
+        "arabic_name": "Mera Samir",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/south-sinai/mera-samir.webp",
+        "bio": "Mera Samir manages public relations and community outreach efforts.",
+        "email": "mera@yly-south-sinai.org",
+        "phone": "+20 100 639 4826",
+        "location": "Tor",
+        "is_active": true,
+        "join_date": "2023-05-23"
+      }
+    ]
+  },
+  "red_sea": {
+    "name": "Red Sea",
+    "arabic_name": "البحر الأحمر",
+    "slug": "red-sea",
+    "description": "Coastal governorate famous for its pristine beaches, coral reefs, and diving spots. Major tourist destination along the Red Sea coast.",
+    "arabic_description": "محافظة ساحلية مشهورة بشواطئها البكر والشعاب المرجانية ومواقع الغوص. وجهة سياحية رئيسية على ساحل البحر الأحمر.",
+    "population": "400K",
+    "area": "120,000 km²",
+    "capital": "Hurghada",
+    "arabic_capital": "الغردقة",
+    "cover_image": "/images/governorates/red-sea-cover.jpg",
+    "featured_image": "/images/governorates/red-sea-featured.jpg",
+    "coordinates": {
+      "lat": 27.2574,
+      "lng": 33.8129
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 4,
+      "events_count": 15,
+      "news_count": 18,
+      "programs_count": 6
+    },
+    "key_attractions": [
+      "Hurghada Resorts",
+      "Marsa Alam",
+      "Coral Reefs",
+      "Diving Centers",
+      "Desert Safari",
+      "Monasteries"
+    ],
+    "universities": [
+      "Red Sea University"
+    ],
+    "districts": [
+      "Hurghada",
+      "El Qoseir",
+      "Marsa Alam",
+      "Berenice",
+      "Ras Gharib",
+      "Safaga"
+    ],
+    "members": [
+      {
+        "id": "red_sea-1",
+        "name": "Alaa Azam",
+        "arabic_name": "Alaa Azam",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/red-sea/alaa-azam.webp",
+        "bio": "Alaa Azam oversees digital marketing and social media strategy for YLY.",
+        "email": "alaa@yly-red-sea.org",
+        "phone": "+20 101 911 4223",
+        "location": "Hurghada",
+        "is_active": true,
+        "join_date": "2023-09-12"
+      },
+      {
+        "id": "red_sea-2",
+        "name": "Mariam Al Saied",
+        "arabic_name": "مريم",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/red-sea/mariam-al-saied.webp",
+        "bio": "Mariam Al Saied manages public relations and community outreach efforts.",
+        "email": "mariam@yly-red-sea.org",
+        "phone": "+20 101 458 6750",
+        "location": "Hurghada",
+        "is_active": true,
+        "join_date": "2023-10-19"
+      },
+      {
+        "id": "red_sea-3",
+        "name": "Mariam Nazer",
+        "arabic_name": "مريم",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/red-sea/mariam-nazer.webp",
+        "bio": "Mariam Nazer manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "mariam@yly-red-sea.org",
+        "phone": "+20 109 290 0102",
+        "location": "Hurghada",
+        "is_active": true,
+        "join_date": "2023-02-04"
+      },
+      {
+        "id": "red_sea-4",
+        "name": "Menna Mohamed",
+        "arabic_name": "Menna Mohamed",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/red-sea/menna-mohamed.webp",
+        "bio": "Menna Mohamed leads human resources initiatives and member development programs.",
+        "email": "menna@yly-red-sea.org",
+        "phone": "+20 109 310 6114",
+        "location": "Hurghada",
+        "is_active": true,
+        "join_date": "2023-12-19"
+      }
+    ]
+  },
+  "beni_suef": {
+    "name": "Beni Suef",
+    "arabic_name": "بني سويف",
+    "slug": "beni-suef",
+    "description": "Upper Egypt governorate known for its agricultural activities and historical sites. Gateway to southern Egypt with rich pharaonic heritage.",
+    "arabic_description": "محافظة صعيد مصر المعروفة بأنشطتها الزراعية والمواقع التاريخية. بوابة جنوب مصر بتراث فرعوني غني.",
+    "population": "3.2M",
+    "area": "10,954 km²",
+    "capital": "Beni Suef",
+    "arabic_capital": "بني سويف",
+    "cover_image": "/images/governorates/beni-suef-cover.jpg",
+    "featured_image": "/images/governorates/beni-suef-featured.jpg",
+    "coordinates": {
+      "lat": 29.0661,
+      "lng": 31.0994
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 6,
+      "events_count": 16,
+      "news_count": 19,
+      "programs_count": 7
+    },
+    "key_attractions": [
+      "Pyramid of Meidum",
+      "Agricultural Research Centers",
+      "Traditional Handicrafts",
+      "Nile River Views"
+    ],
+    "universities": [
+      "Beni Suef University"
+    ],
+    "districts": [
+      "Beni Suef",
+      "El Wasta",
+      "Naser",
+      "Ihnasya",
+      "ببا",
+      "Somosta"
+    ],
+    "members": [
+      {
+        "id": "beni_suef-1",
+        "name": "Basmala Mohamed",
+        "arabic_name": "Basmala Mohamed",
+        "position": "Vice Head",
+        "profile_image": "/images/governorate-board-webp/beni-suef/basmala-mohamed.webp",
+        "bio": "Basmala Mohamed provides support and assistance in leadership roles and program coordination.",
+        "email": "basmala@yly-beni-suef.org",
+        "phone": "+20 100 691 3637",
+        "location": "Beni Suef",
+        "is_active": true,
+        "join_date": "2023-01-19"
+      },
+      {
+        "id": "beni_suef-2",
+        "name": "Marvin Farag Kamal.",
+        "arabic_name": "Marvin Farag Kamal.",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/beni-suef/marvin-farag-kamal..webp",
+        "bio": "Marvin Farag Kamal. manages public relations and community outreach efforts.",
+        "email": "marvin@yly-beni-suef.org",
+        "phone": "+20 106 429 9699",
+        "location": "Beni Suef",
+        "is_active": true,
+        "join_date": "2023-05-05"
+      },
+      {
+        "id": "beni_suef-3",
+        "name": "Mazen Hany Head",
+        "arabic_name": "Mazen Hany Head",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/beni-suef/mazen-hany-head.webp",
+        "bio": "Mazen Hany Head oversees digital marketing and social media strategy for YLY.",
+        "email": "mazen@yly-beni-suef.org",
+        "phone": "+20 111 840 7278",
+        "location": "Beni Suef",
+        "is_active": true,
+        "join_date": "2023-02-24"
+      },
+      {
+        "id": "beni_suef-4",
+        "name": "Mina Samy",
+        "arabic_name": "Mina Samy",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/beni-suef/mina-samy.webp",
+        "bio": "Mina Samy leads human resources initiatives and member development programs.",
+        "email": "mina@yly-beni-suef.org",
+        "phone": "+20 102 811 2002",
+        "location": "Beni Suef",
+        "is_active": true,
+        "join_date": "2023-04-11"
+      },
+      {
+        "id": "beni_suef-5",
+        "name": "Mohamed Ebraheem Head",
+        "arabic_name": "محمد",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/beni-suef/mohamed-ebraheem-head.webp",
+        "bio": "Mohamed Ebraheem Head manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "mohamed@yly-beni-suef.org",
+        "phone": "+20 109 414 5345",
+        "location": "Beni Suef",
+        "is_active": true,
+        "join_date": "2023-11-26"
+      },
+      {
+        "id": "beni_suef-6",
+        "name": "Youmna Ahmed Fahmey",
+        "arabic_name": "Youmna Ahmed Fahmey",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/beni-suef/youmna-ahmed-fahmey.webp",
+        "bio": "Youmna Ahmed Fahmey is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "youmna@yly-beni-suef.org",
+        "phone": "+20 112 425 3412",
+        "location": "Beni Suef",
+        "is_active": true,
+        "join_date": "2023-05-07"
+      }
+    ]
+  },
+  "fayyum": {
+    "name": "Fayyum",
+    "arabic_name": "الفيوم",
+    "slug": "fayyum",
+    "description": "Oasis governorate famous for Lake Qarun and ancient archaeological sites. Natural depression with unique ecosystem and pharaonic history.",
+    "arabic_description": "محافظة واحة مشهورة ببحيرة قارون والمواقع الأثرية القديمة. منخفض طبيعي بنظام بيئي فريد وتاريخ فرعوني.",
+    "population": "3.6M",
+    "area": "6,068 km²",
+    "capital": "Fayyum",
+    "arabic_capital": "الفيوم",
+    "cover_image": "/images/governorates/fayyum-cover.jpg",
+    "featured_image": "/images/governorates/fayyum-featured.jpg",
+    "coordinates": {
+      "lat": 29.3084,
+      "lng": 30.8428
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 6,
+      "events_count": 17,
+      "news_count": 20,
+      "programs_count": 7
+    },
+    "key_attractions": [
+      "Lake Qarun",
+      "Wadi El Rayan",
+      "Hawara Pyramid",
+      "Karanis Archaeological Site",
+      "Pottery Workshops",
+      "Nature Reserves"
+    ],
+    "universities": [
+      "Fayoum University"
+    ],
+    "districts": [
+      "Fayyum",
+      "Tamiya",
+      "Snores",
+      "Itsa",
+      "Youssef El Seddik",
+      "Abshway"
+    ],
+    "members": [
+      {
+        "id": "fayyum-1",
+        "name": "Jehad Ashraf",
+        "arabic_name": "Jehad Ashraf",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/fayoum/jehad-ashraf.webp",
+        "bio": "Jehad Ashraf is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "jehad@yly-fayyum.org",
+        "phone": "+20 106 600 7584",
+        "location": "Fayyum",
+        "is_active": true,
+        "join_date": "2023-01-02"
+      },
+      {
+        "id": "fayyum-2",
+        "name": "John Medhat",
+        "arabic_name": "John Medhat",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/fayoum/john-medhat.webp",
+        "bio": "John Medhat oversees digital marketing and social media strategy for YLY.",
+        "email": "john@yly-fayyum.org",
+        "phone": "+20 109 113 5563",
+        "location": "Fayyum",
+        "is_active": true,
+        "join_date": "2023-01-26"
+      },
+      {
+        "id": "fayyum-3",
+        "name": "Mohamed Ashraf vice",
+        "arabic_name": "محمد",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/fayoum/mohamed-ashraf-vice.webp",
+        "bio": "Mohamed Ashraf vice is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "mohamed@yly-fayyum.org",
+        "phone": "+20 100 363 9533",
+        "location": "Fayyum",
+        "is_active": true,
+        "join_date": "2023-03-19"
+      },
+      {
+        "id": "fayyum-4",
+        "name": "Nada Ashraf",
+        "arabic_name": "ندى",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/fayoum/nada-ashraf.webp",
+        "bio": "Nada Ashraf leads human resources initiatives and member development programs.",
+        "email": "nada@yly-fayyum.org",
+        "phone": "+20 102 744 5654",
+        "location": "Fayyum",
+        "is_active": true,
+        "join_date": "2023-03-20"
+      },
+      {
+        "id": "fayyum-5",
+        "name": "Nada Yasser",
+        "arabic_name": "ندى",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/fayoum/nada-yasser.webp",
+        "bio": "Nada Yasser manages public relations and community outreach efforts.",
+        "email": "nada@yly-fayyum.org",
+        "phone": "+20 111 614 1031",
+        "location": "Fayyum",
+        "is_active": true,
+        "join_date": "2023-03-16"
+      },
+      {
+        "id": "fayyum-6",
+        "name": "Shahd Adel",
+        "arabic_name": "Shahd Adel",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/fayoum/shahd-adel.webp",
+        "bio": "Shahd Adel manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "shahd@yly-fayyum.org",
+        "phone": "+20 102 705 4281",
+        "location": "Fayyum",
+        "is_active": true,
+        "join_date": "2023-03-03"
+      }
+    ]
+  },
+  "minya": {
+    "name": "Minya",
+    "arabic_name": "المنيا",
+    "slug": "minya",
+    "description": "Upper Egypt governorate rich in pharaonic and Coptic monuments. Known as the 'Bride of Upper Egypt' with significant archaeological sites.",
+    "arabic_description": "محافظة صعيد مصر الغنية بالآثار الفرعونية والقبطية. تُعرف بـ'عروس الصعيد' مع مواقع أثرية مهمة.",
+    "population": "5.5M",
+    "area": "32,279 km²",
+    "capital": "Minya",
+    "arabic_capital": "المنيا",
+    "cover_image": "/images/governorates/minya-cover.jpg",
+    "featured_image": "/images/governorates/minya-featured.jpg",
+    "coordinates": {
+      "lat": 28.0871,
+      "lng": 30.7618
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 6,
+      "events_count": 20,
+      "news_count": 24,
+      "programs_count": 8
+    },
+    "key_attractions": [
+      "Beni Hassan Tombs",
+      "Tell El Amarna",
+      "Tuna El Gebel",
+      "Hermopolis",
+      "Coptic Monasteries",
+      "Traditional Crafts"
+    ],
+    "universities": [
+      "Minia University"
+    ],
+    "districts": [
+      "Minya",
+      "Mallawi",
+      "Samalut",
+      "Matai",
+      "Bani Mazar",
+      "Abu Qirqas"
+    ],
+    "members": [
+      {
+        "id": "minya-1",
+        "name": "Shahd taha esmail ashour",
+        "arabic_name": "Shahd taha esmail ashour",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/minya/shahd-taha-esmail-ashour.webp",
+        "bio": "Shahd taha esmail ashour is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "shahd@yly-minya.org",
+        "phone": "+20 101 379 9029",
+        "location": "Minya",
+        "is_active": true,
+        "join_date": "2023-04-07"
+      },
+      {
+        "id": "minya-2",
+        "name": "Ahmed yasser esmail Ahmed",
+        "arabic_name": "أحمد",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/minya/ahmed-yasser-esmail-ahmed.webp",
+        "bio": "Ahmed yasser esmail Ahmed manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "ahmed@yly-minya.org",
+        "phone": "+20 111 636 9508",
+        "location": "Minya",
+        "is_active": true,
+        "join_date": "2023-02-11"
+      },
+      {
+        "id": "minya-3",
+        "name": "Hadeer Emad Roshdy Antr",
+        "arabic_name": "Hadeer Emad Roshdy Antr",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/minya/hadeer-emad-roshdy-antr.webp",
+        "bio": "Hadeer Emad Roshdy Antr oversees digital marketing and social media strategy for YLY.",
+        "email": "hadeer@yly-minya.org",
+        "phone": "+20 110 748 0851",
+        "location": "Minya",
+        "is_active": true,
+        "join_date": "2023-12-16"
+      },
+      {
+        "id": "minya-4",
+        "name": "Mahmoud Ahmed arafa emam",
+        "arabic_name": "محمود",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/minya/mahmoud-ahmed-arafa-emam.webp",
+        "bio": "Mahmoud Ahmed arafa emam manages public relations and community outreach efforts.",
+        "email": "mahmoud@yly-minya.org",
+        "phone": "+20 112 394 9069",
+        "location": "Minya",
+        "is_active": true,
+        "join_date": "2023-12-12"
+      },
+      {
+        "id": "minya-5",
+        "name": "Maryam fathy Ali Hassan",
+        "arabic_name": "مريم",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/minya/maryam-fathy-ali-hassan.webp",
+        "bio": "Maryam fathy Ali Hassan leads human resources initiatives and member development programs.",
+        "email": "maryam@yly-minya.org",
+        "phone": "+20 102 709 0624",
+        "location": "Minya",
+        "is_active": true,
+        "join_date": "2023-05-18"
+      },
+      {
+        "id": "minya-6",
+        "name": "Rana Mahmoud Jad Al karim Vice",
+        "arabic_name": "رنا",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/minya/rana-mahmoud-jad-al-karim-vice.webp",
+        "bio": "Rana Mahmoud Jad Al karim Vice manages public relations and community outreach efforts.",
+        "email": "rana@yly-minya.org",
+        "phone": "+20 100 478 9394",
+        "location": "Minya",
+        "is_active": true,
+        "join_date": "2023-09-25"
+      }
+    ]
+  },
+  "asyut": {
+    "name": "Asyut",
+    "arabic_name": "أسيوط",
+    "slug": "asyut",
+    "description": "Major Upper Egypt governorate and educational center. Known for its university and as a cultural hub of southern Egypt.",
+    "arabic_description": "محافظة صعيد مصر الرئيسية ومركز تعليمي. معروفة بجامعتها وكمركز ثقافي لجنوب مصر.",
+    "population": "4.4M",
+    "area": "25,926 km²",
+    "capital": "Asyut",
+    "arabic_capital": "أسيوط",
+    "cover_image": "/images/governorates/asyut-cover.jpg",
+    "featured_image": "/images/governorates/asyut-featured.jpg",
+    "coordinates": {
+      "lat": 27.1809,
+      "lng": 31.1837
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 3,
+      "events_count": 22,
+      "news_count": 27,
+      "programs_count": 9
+    },
+    "key_attractions": [
+      "Asyut University",
+      "Ancient Tombs",
+      "Coptic Monasteries",
+      "Traditional Bazaars",
+      "Cultural Centers"
+    ],
+    "universities": [
+      "Assiut University",
+      "Al-Azhar University (Assiut Branch)"
+    ],
+    "districts": [
+      "Asyut",
+      "Dayrout",
+      "Qusiya",
+      "Manfalut",
+      "Abnoub",
+      "Al Badari"
+    ],
+    "members": [
+      {
+        "id": "asyut-1",
+        "name": "Mohamed Ahmed",
+        "arabic_name": "محمد",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/assiut/mohamed-ahmed.webp",
+        "bio": "Mohamed Ahmed manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "mohamed@yly-asyut.org",
+        "phone": "+20 101 496 7038",
+        "location": "Asyut",
+        "is_active": true,
+        "join_date": "2023-02-17"
+      },
+      {
+        "id": "asyut-2",
+        "name": "Nada Bakhit",
+        "arabic_name": "ندى",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/assiut/nada-bakhit.webp",
+        "bio": "Nada Bakhit manages public relations and community outreach efforts.",
+        "email": "nada@yly-asyut.org",
+        "phone": "+20 102 421 3325",
+        "location": "Asyut",
+        "is_active": true,
+        "join_date": "2023-07-23"
+      },
+      {
+        "id": "asyut-3",
+        "name": "Youssef Ahmed",
+        "arabic_name": "يوسف",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/assiut/youssef-ahmed.webp",
+        "bio": "Youssef Ahmed is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "youssef@yly-asyut.org",
+        "phone": "+20 112 230 1039",
+        "location": "Asyut",
+        "is_active": true,
+        "join_date": "2023-05-15"
+      }
+    ]
+  },
+  "sohag": {
+    "name": "Sohag",
+    "arabic_name": "سوهاج",
+    "slug": "sohag",
+    "description": "Upper Egypt governorate famous for its ancient temples and archaeological sites. Rich in pharaonic heritage and traditional crafts.",
+    "arabic_description": "محافظة صعيد مصر الشهيرة بمعابدها القديمة والمواقع الأثرية. غنية بالتراث الفرعوني والحرف التقليدية.",
+    "population": "5.0M",
+    "area": "11,218 km²",
+    "capital": "Sohag",
+    "arabic_capital": "سوهاج",
+    "cover_image": "/images/governorates/sohag-cover.jpg",
+    "featured_image": "/images/governorates/sohag-featured.jpg",
+    "coordinates": {
+      "lat": 26.5569,
+      "lng": 31.6948
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 6,
+      "events_count": 19,
+      "news_count": 22,
+      "programs_count": 8
+    },
+    "key_attractions": [
+      "Abydos Temple",
+      "Red Monastery",
+      "White Monastery",
+      "Akhmim Archaeological Site",
+      "Traditional Weaving Centers"
+    ],
+    "universities": [
+      "Sohag University"
+    ],
+    "districts": [
+      "Sohag",
+      "Akhmim",
+      "El Balyana",
+      "El Maragha",
+      "Dar El Salam",
+      "Juhaynah"
+    ],
+    "members": [
+      {
+        "id": "sohag-1",
+        "name": "Ahmed Yousry",
+        "arabic_name": "أحمد",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/sohag/ahmed-yousry.webp",
+        "bio": "Ahmed Yousry manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "ahmed@yly-sohag.org",
+        "phone": "+20 100 191 9327",
+        "location": "Sohag",
+        "is_active": true,
+        "join_date": "2023-06-03"
+      },
+      {
+        "id": "sohag-2",
+        "name": "Basel Yasser",
+        "arabic_name": "Basel Yasser",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/sohag/basel-yasser.webp",
+        "bio": "Basel Yasser leads human resources initiatives and member development programs.",
+        "email": "basel@yly-sohag.org",
+        "phone": "+20 100 372 2961",
+        "location": "Sohag",
+        "is_active": true,
+        "join_date": "2023-11-22"
+      },
+      {
+        "id": "sohag-3",
+        "name": "Habiba Haroon",
+        "arabic_name": "Habiba Haroon",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/sohag/habiba-haroon.webp",
+        "bio": "Habiba Haroon manages public relations and community outreach efforts.",
+        "email": "habiba@yly-sohag.org",
+        "phone": "+20 100 644 3961",
+        "location": "Sohag",
+        "is_active": true,
+        "join_date": "2023-03-31"
+      },
+      {
+        "id": "sohag-4",
+        "name": "Kareem Gamal",
+        "arabic_name": "Kareem Gamal",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/sohag/kareem-gamal.webp",
+        "bio": "Kareem Gamal is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "kareem@yly-sohag.org",
+        "phone": "+20 112 447 9842",
+        "location": "Sohag",
+        "is_active": true,
+        "join_date": "2023-04-23"
+      },
+      {
+        "id": "sohag-5",
+        "name": "Manar Ehab Hassan vice pr",
+        "arabic_name": "Manar Ehab Hassan vice pr",
+        "position": "Member",
+        "profile_image": "/images/governorate-board-webp/sohag/manar-ehab-hassan-vice-pr.webp",
+        "bio": "Manar Ehab Hassan vice pr is an active member contributing to YLY's mission and community programs.",
+        "email": "manar@yly-sohag.org",
+        "phone": "+20 111 288 6506",
+        "location": "Sohag",
+        "is_active": true,
+        "join_date": "2023-02-25"
+      },
+      {
+        "id": "sohag-6",
+        "name": "Nada Mohamed head",
+        "arabic_name": "ندى",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/sohag/nada-mohamed-head.webp",
+        "bio": "Nada Mohamed head oversees digital marketing and social media strategy for YLY.",
+        "email": "nada@yly-sohag.org",
+        "phone": "+20 112 377 0933",
+        "location": "Sohag",
+        "is_active": true,
+        "join_date": "2023-04-14"
+      }
+    ]
+  },
+  "qena": {
+    "name": "Qena",
+    "arabic_name": "قنا",
+    "slug": "qena",
+    "description": "Upper Egypt governorate home to Luxor's ancient temples and the Valley of the Kings. Heart of ancient Egyptian civilization.",
+    "arabic_description": "محافظة صعيد مصر موطن معابد الأقصر القديمة ووادي الملوك. قلب الحضارة المصرية القديمة.",
+    "population": "3.2M",
+    "area": "10,798 km²",
+    "capital": "Qena",
+    "arabic_capital": "قنا",
+    "cover_image": "/images/governorates/qena-cover.jpg",
+    "featured_image": "/images/governorates/qena-featured.jpg",
+    "coordinates": {
+      "lat": 26.1551,
+      "lng": 32.716
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 5,
+      "events_count": 17,
+      "news_count": 20,
+      "programs_count": 7
+    },
+    "key_attractions": [
+      "Dendera Temple",
+      "Luxor Temples",
+      "Valley of the Kings",
+      "Karnak Temple",
+      "Archaeological Museums"
+    ],
+    "universities": [
+      "South Valley University (Qena Branch)"
+    ],
+    "districts": [
+      "Qena",
+      "Dendera",
+      "Qus",
+      "Nag Hammadi",
+      "Farshut",
+      "Abu Tesht"
+    ],
+    "members": [
+      {
+        "id": "qena-1",
+        "name": "Maab Mohamed",
+        "arabic_name": "Maab Mohamed",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/qena/maab-mohamed.webp",
+        "bio": "Maab Mohamed manages public relations and community outreach efforts.",
+        "email": "maab@yly-qena.org",
+        "phone": "+20 100 113 4559",
+        "location": "Qena",
+        "is_active": true,
+        "join_date": "2023-03-22"
+      },
+      {
+        "id": "qena-2",
+        "name": "Mina El Shaib",
+        "arabic_name": "Mina El Shaib",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/qena/mina-el-shaib.webp",
+        "bio": "Mina El Shaib leads human resources initiatives and member development programs.",
+        "email": "mina@yly-qena.org",
+        "phone": "+20 106 964 9153",
+        "location": "Qena",
+        "is_active": true,
+        "join_date": "2023-12-22"
+      },
+      {
+        "id": "qena-3",
+        "name": "Salma Hisham",
+        "arabic_name": "Salma Hisham",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/qena/salma-hisham.webp",
+        "bio": "Salma Hisham manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "salma@yly-qena.org",
+        "phone": "+20 102 450 5623",
+        "location": "Qena",
+        "is_active": true,
+        "join_date": "2023-12-23"
+      },
+      {
+        "id": "qena-4",
+        "name": "Sohila Omar",
+        "arabic_name": "Sohila Omar",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/qena/sohila-omar.webp",
+        "bio": "Sohila Omar oversees digital marketing and social media strategy for YLY.",
+        "email": "sohila@yly-qena.org",
+        "phone": "+20 110 215 9396",
+        "location": "Qena",
+        "is_active": true,
+        "join_date": "2023-07-25"
+      },
+      {
+        "id": "qena-5",
+        "name": "Sosana Lahzy vice",
+        "arabic_name": "Sosana Lahzy vice",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/qena/sosana-lahzy-vice.webp",
+        "bio": "Sosana Lahzy vice manages public relations and community outreach efforts.",
+        "email": "sosana@yly-qena.org",
+        "phone": "+20 109 438 6859",
+        "location": "Qena",
+        "is_active": true,
+        "join_date": "2023-03-05"
+      }
+    ]
+  },
+  "luxor": {
+    "name": "Luxor",
+    "arabic_name": "الأقصر",
+    "slug": "luxor",
+    "description": "World's greatest open-air museum with unparalleled pharaonic monuments. Ancient Thebes and capital of pharaonic Egypt.",
+    "arabic_description": "أعظم متحف مفتوح في العالم مع آثار فرعونية لا مثيل لها. طيبة القديمة وعاصمة مصر الفرعونية.",
+    "population": "1.3M",
+    "area": "2,960 km²",
+    "capital": "Luxor",
+    "arabic_capital": "الأقصر",
+    "cover_image": "/images/governorates/luxor-cover.jpg",
+    "featured_image": "/images/governorates/luxor-featured.jpg",
+    "coordinates": {
+      "lat": 25.6872,
+      "lng": 32.6396
+    },
+    "established_date": "2009-12-07",
+    "yly_stats": {
+      "members_count": 7,
+      "events_count": 15,
+      "news_count": 18,
+      "programs_count": 6
+    },
+    "key_attractions": [
+      "Valley of the Kings",
+      "Karnak Temple Complex",
+      "Luxor Temple",
+      "Valley of the Queens",
+      "Hatshepsut Temple",
+      "Colossi of Memnon"
+    ],
+    "universities": [
+      "South Valley University (Luxor Branch)"
+    ],
+    "districts": [
+      "Luxor",
+      "Esna",
+      "Armant",
+      "El Tod"
+    ],
+    "members": [
+      {
+        "id": "luxor-1",
+        "name": "Rofaida Mohamed",
+        "arabic_name": "Rofaida Mohamed",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/luxor/rofaida-mohamed.webp",
+        "bio": "Rofaida Mohamed is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "rofaida@yly-luxor.org",
+        "phone": "+20 106 658 4614",
+        "location": "Luxor",
+        "is_active": true,
+        "join_date": "2023-02-08"
+      },
+      {
+        "id": "luxor-2",
+        "name": "Ahmed Gaber Government Advisor",
+        "arabic_name": "أحمد",
+        "position": "Member",
+        "profile_image": "/images/governorate-board-webp/luxor/ahmed-gaber-government-advisor.webp",
+        "bio": "Ahmed Gaber Government Advisor is an active member contributing to YLY's mission and community programs.",
+        "email": "ahmed@yly-luxor.org",
+        "phone": "+20 102 243 3923",
+        "location": "Luxor",
+        "is_active": true,
+        "join_date": "2023-07-12"
+      },
+      {
+        "id": "luxor-3",
+        "name": "Basant Magdy",
+        "arabic_name": "Basant Magdy",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/luxor/basant-magdy.webp",
+        "bio": "Basant Magdy leads human resources initiatives and member development programs.",
+        "email": "basant@yly-luxor.org",
+        "phone": "+20 110 447 7335",
+        "location": "Luxor",
+        "is_active": true,
+        "join_date": "2023-05-02"
+      },
+      {
+        "id": "luxor-4",
+        "name": "Islam Ali Head",
+        "arabic_name": "Islam Ali Head",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/luxor/islam-ali-head.webp",
+        "bio": "Islam Ali Head oversees digital marketing and social media strategy for YLY.",
+        "email": "islam@yly-luxor.org",
+        "phone": "+20 101 126 6974",
+        "location": "Luxor",
+        "is_active": true,
+        "join_date": "2023-07-15"
+      },
+      {
+        "id": "luxor-5",
+        "name": "Loay Abdallah",
+        "arabic_name": "Loay Abdallah",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/luxor/loay-abdallah.webp",
+        "bio": "Loay Abdallah manages public relations and community outreach efforts.",
+        "email": "loay@yly-luxor.org",
+        "phone": "+20 112 747 7025",
+        "location": "Luxor",
+        "is_active": true,
+        "join_date": "2023-01-23"
+      },
+      {
+        "id": "luxor-6",
+        "name": "Mareim Mahmoud PR",
+        "arabic_name": "Mareim Mahmoud PR",
+        "position": "Vice Head",
+        "profile_image": "/images/governorate-board-webp/luxor/mareim-mahmoud-pr.webp",
+        "bio": "Mareim Mahmoud PR provides support and assistance in leadership roles and program coordination.",
+        "email": "mareim@yly-luxor.org",
+        "phone": "+20 111 205 9147",
+        "location": "Luxor",
+        "is_active": true,
+        "join_date": "2023-01-25"
+      },
+      {
+        "id": "luxor-7",
+        "name": "Nardien Naroz",
+        "arabic_name": "Nardien Naroz",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/luxor/nardien-naroz.webp",
+        "bio": "Nardien Naroz manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "nardien@yly-luxor.org",
+        "phone": "+20 106 917 9006",
+        "location": "Luxor",
+        "is_active": true,
+        "join_date": "2023-09-20"
+      }
+    ]
+  },
+  "aswan": {
+    "name": "Aswan",
+    "arabic_name": "أسوان",
+    "slug": "aswan",
+    "description": "Southern gateway of Egypt, famous for the High Dam and Nubian culture. Beautiful Nile scenery and unique archaeological sites.",
+    "arabic_description": "البوابة الجنوبية لمصر، مشهورة بالسد العالي والثقافة النوبية. مناظر نيلية جميلة ومواقع أثرية فريدة.",
+    "population": "1.5M",
+    "area": "62,726 km²",
+    "capital": "Aswan",
+    "arabic_capital": "أسوان",
+    "cover_image": "/images/governorates/aswan-cover.jpg",
+    "featured_image": "/images/governorates/aswan-featured.jpg",
+    "coordinates": {
+      "lat": 24.0889,
+      "lng": 32.8998
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 6,
+      "events_count": 13,
+      "news_count": 16,
+      "programs_count": 5
+    },
+    "key_attractions": [
+      "Abu Simbel Temples",
+      "Aswan High Dam",
+      "Philae Temple",
+      "Elephantine Island",
+      "Nubian Villages",
+      "Botanical Garden"
+    ],
+    "universities": [
+      "Aswan University"
+    ],
+    "districts": [
+      "Aswan",
+      "Edfu",
+      "Kom Ombo",
+      "Daraw",
+      "Abu Simbel",
+      "Nasr Al Nuba"
+    ],
+    "members": [
+      {
+        "id": "aswan-1",
+        "name": "Abdelrahman Mohamed",
+        "arabic_name": "Abdelrahman Mohamed",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/aswan/abdelrahman-mohamed.webp",
+        "bio": "Abdelrahman Mohamed manages public relations and community outreach efforts.",
+        "email": "abdelrahman@yly-aswan.org",
+        "phone": "+20 100 429 3161",
+        "location": "Aswan",
+        "is_active": true,
+        "join_date": "2023-09-20"
+      },
+      {
+        "id": "aswan-2",
+        "name": "Amira Gamal",
+        "arabic_name": "أميرة",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/aswan/amira-gamal.webp",
+        "bio": "Amira Gamal is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "amira@yly-aswan.org",
+        "phone": "+20 112 192 1115",
+        "location": "Aswan",
+        "is_active": true,
+        "join_date": "2023-07-09"
+      },
+      {
+        "id": "aswan-3",
+        "name": "Hassan Ashraf Vice",
+        "arabic_name": "حسن",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/aswan/hassan-ashraf-vice.webp",
+        "bio": "Hassan Ashraf Vice is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "hassan@yly-aswan.org",
+        "phone": "+20 112 154 9084",
+        "location": "Aswan",
+        "is_active": true,
+        "join_date": "2023-04-08"
+      },
+      {
+        "id": "aswan-4",
+        "name": "Maroa Youssef PR",
+        "arabic_name": "Maroa Youssef PR",
+        "position": "Vice Head",
+        "profile_image": "/images/governorate-board-webp/aswan/maroa-youssef-pr.webp",
+        "bio": "Maroa Youssef PR provides support and assistance in leadership roles and program coordination.",
+        "email": "maroa@yly-aswan.org",
+        "phone": "+20 106 770 1939",
+        "location": "Aswan",
+        "is_active": true,
+        "join_date": "2023-07-09"
+      },
+      {
+        "id": "aswan-5",
+        "name": "Roaa Mohamed",
+        "arabic_name": "Roaa Mohamed",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/aswan/roaa-mohamed.webp",
+        "bio": "Roaa Mohamed manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "roaa@yly-aswan.org",
+        "phone": "+20 111 443 7911",
+        "location": "Aswan",
+        "is_active": true,
+        "join_date": "2023-08-26"
+      },
+      {
+        "id": "aswan-6",
+        "name": "Yasmen Wael",
+        "arabic_name": "ياسمين",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/aswan/yasmen-wael.webp",
+        "bio": "Yasmen Wael leads human resources initiatives and member development programs.",
+        "email": "yasmen@yly-aswan.org",
+        "phone": "+20 102 288 6077",
+        "location": "Aswan",
+        "is_active": true,
+        "join_date": "2023-01-02"
+      }
+    ]
+  },
+  "new_valley": {
+    "name": "New Valley",
+    "arabic_name": "الوادي الجديد",
+    "slug": "new-valley",
+    "description": "Largest governorate by area, encompassing several oases in the Western Desert. Rich in natural resources and desert tourism.",
+    "arabic_description": "أكبر محافظة من حيث المساحة، تضم عدة واحات في الصحراء الغربية. غنية بالموارد الطبيعية والسياحة الصحراوية.",
+    "population": "240K",
+    "area": "376,505 km²",
+    "capital": "Kharga",
+    "arabic_capital": "الخارجة",
+    "cover_image": "/images/governorates/new-valley-cover.jpg",
+    "featured_image": "/images/governorates/new-valley-featured.jpg",
+    "coordinates": {
+      "lat": 25.4415,
+      "lng": 30.5435
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 5,
+      "events_count": 8,
+      "news_count": 9,
+      "programs_count": 3
+    },
+    "key_attractions": [
+      "Kharga Oasis",
+      "Dakhla Oasis",
+      "Farafra Oasis",
+      "Bahariya Oasis",
+      "White Desert",
+      "Hot Springs"
+    ],
+    "universities": [
+      "South Valley University (New Valley Branch)"
+    ],
+    "districts": [
+      "Kharga",
+      "Dakhla",
+      "Farafra",
+      "Baris",
+      "Balat"
+    ],
+    "members": [
+      {
+        "id": "new_valley-1",
+        "name": "Ahmed Amean Head",
+        "arabic_name": "أحمد",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/new-valley/ahmed-amean-head.webp",
+        "bio": "Ahmed Amean Head leads human resources initiatives and member development programs.",
+        "email": "ahmed@yly-new-valley.org",
+        "phone": "+20 102 720 6931",
+        "location": "Kharga",
+        "is_active": true,
+        "join_date": "2023-08-25"
+      },
+      {
+        "id": "new_valley-2",
+        "name": "Ahmed elweshy Head",
+        "arabic_name": "أحمد",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/new-valley/ahmed-elweshy-head.webp",
+        "bio": "Ahmed elweshy Head manages public relations and community outreach efforts.",
+        "email": "ahmed@yly-new-valley.org",
+        "phone": "+20 101 796 8929",
+        "location": "Kharga",
+        "is_active": true,
+        "join_date": "2023-08-21"
+      },
+      {
+        "id": "new_valley-3",
+        "name": "ali anwer operation Head",
+        "arabic_name": "ali anwer operation Head",
+        "position": "Member",
+        "profile_image": "/images/governorate-board-webp/new-valley/ali-anwer-operation-head.webp",
+        "bio": "ali anwer operation Head is an active member contributing to YLY's mission and community programs.",
+        "email": "ali@yly-new-valley.org",
+        "phone": "+20 111 187 7984",
+        "location": "Kharga",
+        "is_active": true,
+        "join_date": "2023-05-11"
+      },
+      {
+        "id": "new_valley-4",
+        "name": "Amr Mohamed Head",
+        "arabic_name": "Amr Mohamed Head",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/new-valley/amr-mohamed-head.webp",
+        "bio": "Amr Mohamed Head oversees digital marketing and social media strategy for YLY.",
+        "email": "amr@yly-new-valley.org",
+        "phone": "+20 112 302 1220",
+        "location": "Kharga",
+        "is_active": true,
+        "join_date": "2023-11-19"
+      },
+      {
+        "id": "new_valley-5",
+        "name": "Mohamed Amean",
+        "arabic_name": "محمد",
+        "position": "Team Leader",
+        "profile_image": "/images/governorate-board-webp/new-valley/mohamed-amean.webp",
+        "bio": "Mohamed Amean is a dedicated team leader with strong organizational skills and passion for youth development.",
+        "email": "mohamed@yly-new-valley.org",
+        "phone": "+20 109 338 5807",
+        "location": "Kharga",
+        "is_active": true,
+        "join_date": "2023-08-19"
+      }
+    ]
+  },
+  "matrouh": {
+    "name": "Matrouh",
+    "arabic_name": "مطروح",
+    "slug": "matrouh",
+    "description": "Northwestern coastal governorate famous for its pristine Mediterranean beaches and Cleopatra's Beach. Beautiful coastal destination.",
+    "arabic_description": "محافظة ساحلية شمالية غربية مشهورة بشواطئها المتوسطية البكر وشاطئ كليوباترا. وجهة ساحلية جميلة.",
+    "population": "450K",
+    "area": "212,112 km²",
+    "capital": "Marsa Matrouh",
+    "arabic_capital": "مرسى مطروح",
+    "cover_image": "/images/governorates/matrouh-cover.jpg",
+    "featured_image": "/images/governorates/matrouh-featured.jpg",
+    "coordinates": {
+      "lat": 31.3543,
+      "lng": 27.2373
+    },
+    "established_date": "1960-01-01",
+    "yly_stats": {
+      "members_count": 8,
+      "events_count": 10,
+      "news_count": 12,
+      "programs_count": 4
+    },
+    "key_attractions": [
+      "Cleopatra's Beach",
+      "Agiba Beach",
+      "Siwa Oasis",
+      "Alamein War Museum",
+      "Desert Safari",
+      "Bedouin Culture"
+    ],
+    "universities": [
+      "Matrouh University"
+    ],
+    "districts": [
+      "Marsa Matrouh",
+      "El Alamein",
+      "Dabaa",
+      "Al Negila",
+      "Sidi Barrani",
+      "Siwa"
+    ],
+    "members": [
+      {
+        "id": "matrouh-1",
+        "name": "Abdelrahman Mostafa Hr",
+        "arabic_name": "Abdelrahman Mostafa Hr",
+        "position": "Vice Head",
+        "profile_image": "/images/governorate-board-webp/matrouh/abdelrahman-mostafa-hr.webp",
+        "bio": "Abdelrahman Mostafa Hr provides support and assistance in leadership roles and program coordination.",
+        "email": "abdelrahman@yly-matrouh.org",
+        "phone": "+20 112 130 9162",
+        "location": "Marsa Matrouh",
+        "is_active": true,
+        "join_date": "2023-02-13"
+      },
+      {
+        "id": "matrouh-2",
+        "name": "Ahmed Wael",
+        "arabic_name": "أحمد",
+        "position": "Vice Head",
+        "profile_image": "/images/governorate-board-webp/matrouh/ahmed-wael.webp",
+        "bio": "Ahmed Wael provides support and assistance in leadership roles and program coordination.",
+        "email": "ahmed@yly-matrouh.org",
+        "phone": "+20 101 791 7593",
+        "location": "Marsa Matrouh",
+        "is_active": true,
+        "join_date": "2023-07-25"
+      },
+      {
+        "id": "matrouh-3",
+        "name": "Basmala Ahmed",
+        "arabic_name": "Basmala Ahmed",
+        "position": "HR Head",
+        "profile_image": "/images/governorate-board-webp/matrouh/basmala-ahmed.webp",
+        "bio": "Basmala Ahmed leads human resources initiatives and member development programs.",
+        "email": "basmala@yly-matrouh.org",
+        "phone": "+20 111 724 7034",
+        "location": "Marsa Matrouh",
+        "is_active": true,
+        "join_date": "2023-07-21"
+      },
+      {
+        "id": "matrouh-4",
+        "name": "Hana Khalaf",
+        "arabic_name": "Hana Khalaf",
+        "position": "PR Head",
+        "profile_image": "/images/governorate-board-webp/matrouh/hana-khalaf.webp",
+        "bio": "Hana Khalaf manages public relations and community outreach efforts.",
+        "email": "hana@yly-matrouh.org",
+        "phone": "+20 111 988 8689",
+        "location": "Marsa Matrouh",
+        "is_active": true,
+        "join_date": "2023-10-06"
+      },
+      {
+        "id": "matrouh-5",
+        "name": "Mohammed Kazem Or vice had",
+        "arabic_name": "محمد",
+        "position": "Member",
+        "profile_image": "/images/governorate-board-webp/matrouh/mohammed-kazem-or-vice-had.webp",
+        "bio": "Mohammed Kazem Or vice had is an active member contributing to YLY's mission and community programs.",
+        "email": "mohammed@yly-matrouh.org",
+        "phone": "+20 102 613 8526",
+        "location": "Marsa Matrouh",
+        "is_active": true,
+        "join_date": "2023-04-20"
+      },
+      {
+        "id": "matrouh-6",
+        "name": "Omar Gaber team ledar",
+        "arabic_name": "عمر",
+        "position": "Member",
+        "profile_image": "/images/governorate-board-webp/matrouh/omar-gaber-team-ledar.webp",
+        "bio": "Omar Gaber team ledar is an active member contributing to YLY's mission and community programs.",
+        "email": "omar@yly-matrouh.org",
+        "phone": "+20 102 583 9196",
+        "location": "Marsa Matrouh",
+        "is_active": true,
+        "join_date": "2023-12-04"
+      },
+      {
+        "id": "matrouh-7",
+        "name": "Raghad Ahmed head",
+        "arabic_name": "Raghad Ahmed head",
+        "position": "Social Media Head",
+        "profile_image": "/images/governorate-board-webp/matrouh/raghad-ahmed-head.webp",
+        "bio": "Raghad Ahmed head oversees digital marketing and social media strategy for YLY.",
+        "email": "raghad@yly-matrouh.org",
+        "phone": "+20 111 168 4887",
+        "location": "Marsa Matrouh",
+        "is_active": true,
+        "join_date": "2023-09-20"
+      },
+      {
+        "id": "matrouh-8",
+        "name": "Toqa Magdy",
+        "arabic_name": "Toqa Magdy",
+        "position": "Operations Head",
+        "profile_image": "/images/governorate-board-webp/matrouh/toqa-magdy.webp",
+        "bio": "Toqa Magdy manages operational activities and ensures smooth execution of YLY programs.",
+        "email": "toqa@yly-matrouh.org",
+        "phone": "+20 100 176 0251",
+        "location": "Marsa Matrouh",
+        "is_active": true,
+        "join_date": "2023-07-24"
+      }
+    ]
+  }
+}

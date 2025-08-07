@@ -507,51 +507,51 @@ class App {
   ) {
     const defaultItems = [
       {
-        image: `/images/gallery/yly.jpg`,
+        image: `/images/gallery/g1.jpg`,
         text: "",
       },
       {
-        image: `/images/gallery/yly2.jpg`,
+        image: `/images/gallery/g2.jpg`,
         text: "",
       },
       {
-        image: `/images/gallery/yly3.jpg`,
+        image: `/images/gallery/g3.jpg`,
         text: "",
       },
       {
-        image: `/images/gallery/yly4.jpg`,
+        image: `/images/gallery/g4.jpg`,
         text: "",
       },
       {
-        image: `/images/gallery/yly5.jpg`,
+        image: `/images/gallery/g5.jpg`,
         text: "",
       },
       {
-        image: `/images/gallery/yly6.jpg`,
+        image: `/images/gallery/g6.jpg`,
         text: "",
       },
       {
-        image: `/images/gallery/yly7.jpg`,
+        image: `/images/gallery/g7.jpg`,
         text: "",
       },
       {
-        image: `/images/gallery/yly8.jpg`,
+        image: `/images/gallery/g8.jpg`,
         text: "",
       },
       {
-        image: `/images/gallery/yly9.jpg`,
+        image: `/images/gallery/g9.jpg`,
         text: "",
       },
       {
-        image: `/images/gallery/yly10.jpg`,
+        image: `/images/gallery/g10.jpg`,
         text: "",
       },
       {
-        image: `/images/gallery/yly4.jpg`, // Repeated as per user's provided list structure
+        image: `/images/gallery/g4.jpg`, // Repeated as per user's provided list structure
         text: "",
       },
       {
-        image: `/images/gallery/yly5.jpg`, // Repeated as per user's provided list structure
+        image: `/images/gallery/g5.jpg`, // Repeated as per user's provided list structure
         text: "",
       },
     ];

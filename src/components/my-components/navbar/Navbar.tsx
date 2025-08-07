@@ -34,6 +34,10 @@ export function NavbarDemo() {
       name: t("contact"),
       link: "/contactUs",
     },
+    {
+      name: t("Governorate"),
+      link: "/Governorate",
+    },
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

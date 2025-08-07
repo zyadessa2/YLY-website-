@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import { BackgroundAnimation } from "../components/ui/BackgroundAnimation";
 import { NavbarDemo } from "../components/my-components/navbar/Navbar";
@@ -34,8 +33,8 @@ export default async function RootLayout({
 }>) {
   // Default to 'en' if no lang param is provided
   let locale = lang || "en";
-  const cookieStore = await cookies();
-  const localeCookie = cookieStore.get("NEXT_LOCALE");
+  const cookieStore = cookies();
+  const localeCookie = (await cookieStore).get("NEXT_LOCALE");
 
   // Use cookie locale if available, otherwise use the lang param or default
   if (localeCookie?.value) {
@@ -75,20 +74,6 @@ export default async function RootLayout({
             </div>
           </ThemeProviderWrapper>
         </NextIntlClientProvider>
-
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-N5L4K4PQC8"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-N5L4K4PQC8');
-          `}
-        </Script>
       </body>
     </html>
   );

@@ -51,7 +51,7 @@ const boardMembers: BoardMember[] = [
   },
   {
     id: 7,
-    name: "Nada Al-Saidi",
+    name: "Nada Elseady",
     role: "PR Central Head",
     image: "/images/Board/nada elseady.jpg",
   },
