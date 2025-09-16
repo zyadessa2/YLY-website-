@@ -1,0 +1,455 @@
+{
+  "metadata": {
+    "title": "YLY - Youth Leading Youth",
+    "description": "Youth Leading Youth (YLY) - Empowering the next generation of leaders through education, community engagement, and innovative youth development programs."
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "events": "Events",
+    "news": "News",
+    "contact": "Contact Us",
+    "Governorate": "Governorate"
+  },
+  "home": {
+    "hero": {
+      "title": "Youth Leading Youth",
+      "subtitle": "Empowering the Next Generation",
+      "description": "Building tomorrow's leaders today through youth empowerment and community engagement",
+      "button": "Learn More"
+    },
+    "about": {
+      "title": "Who We Are?",
+      "description": "We are the Ministry of Youth and Sports YLY Union (Youth Leading Youth) ✨ A union launched by the Ministry of Youth and Sports since Dr. Ashraf Sobhi assumed the position of Minister of Youth and Sports in 2018 🇪🇬 as an initiative, then in 2025 it was transformed into a union by decree No. 1173 of 2025",
+      "description2": "A national youth union that brings together Egyptian youth from all governorates in various committees (training, media, culture, social media, sports, public relations, marketing, projects and development... and others).",
+      "readMore": "Read More"
+    },
+    "vision": {
+      "title": "Our Goal",
+      "description": "💪 With us, you will find training opportunities, events, activities, initiatives, and an extensive network of relationships that you can use to develop yourself and participate in creating a stronger future for Egyptian youth.",
+      "keyObjectives": "Our Goals:",
+      "objectives": {
+        "participation": "Expanding the base of youth participation",
+        "leadership": "Qualifying young leaders capable of facing the challenges of the era",
+        "sports": "Spreading the culture of sports and voluntary work",
+        "identity": "Strengthening national identity and belonging",
+        "vision2030": "Contributing to achieving Egypt's Vision 2030",
+        "promote": "Promote and organize Ministry's activities effectively",
+        "build": "Build and nurture young leaders",
+        "prepare": "Prepare youth for the modern labor market",
+        "establish": "Establish sports as an integral lifestyle component"
+      },
+      "reach": {
+        "title": "Our Reach:",
+        "description": "Operating across multiple governorates, we engage youth through various specialized committees:",
+        "committees": {
+          "hr": "HR",
+          "sm": "Social Media",
+          "pr": "Public Relations",
+          "or": "Operations",
+          "rd": "R&D",
+          "media": "Media",
+          "training": "Training"
+        }
+      }
+    },
+    "stats": {
+      "title": "Statistics For The Year 2025",
+      "applicants": {
+        "number": "60000",
+        "label": "Applicants to Volunteer"
+      },
+      "events": {
+        "number": "200",
+        "label": "Events"
+      },
+      "volunteers": {
+        "number": "6000",
+        "label": "Volunteers"
+      }
+    },
+    "governments": {
+      "title": "We Are Present In All Governorates",
+      "description": "Explore our presence across Egypt's diverse regions.",
+      "governorates": {
+        "cairo": "Cairo",
+        "giza": "Giza",
+        "alexandria": "Alexandria",
+        "aswan": "Aswan",
+        "luxor": "Luxor",
+        "port-said": "Port Said",
+        "suez": "Suez",
+        "damietta": "Damietta",
+        "dakahlia": "Dakahlia",
+        "sharqia": "Sharqia",
+        "monufia": "Monufia",
+        "kafr-el-sheikh": "Kafr El Sheikh",
+        "beheira": "Beheira",
+        "matrouh": "Matrouh",
+        "north-sinai": "North Sinai",
+        "south-sinai": "South Sinai"
+      }
+    },
+    "board": {
+      "title": "YLY Board",
+      "description": "Meet our dedicated board members who lead YLY's mission",
+      "learnMore": "Learn More About Our Team"
+    },
+    "timeline": {
+      "title": "Objectives of the YLY Volunteers Project",
+      "visions": {
+        "1": {
+          "title": "Vision 1",
+          "description": "Benefiting the largest number of young people from all governorates"
+        },
+        "2": {
+          "title": "Vision 2",
+          "description": "Developing personal and functional skills for young people"
+        },
+        "3": {
+          "title": "Vision 3",
+          "description": "Preparing young people for the labor market"
+        },
+        "4": {
+          "title": "Vision 4",
+          "description": "Participate in organizing all Ministry and directorate events"
+        },
+        "5": {
+          "title": "Vision 5",
+          "description": "Producing young people into society who are able to bear responsibilities"
+        },
+        "6": {
+          "title": "Vision 6",
+          "description": "Serving the community and maintaining its duties"
+        }
+      }
+    }
+  },
+
+  "common": {
+    "readMore": "Read More",
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "submit": "Submit",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "language": {
+    "switchTo": "Switch to {locale}",
+    "english": "English",
+    "arabic": "العربية"
+  },
+  "news": {
+    "hero": {
+      "title": "Latest News & Updates"
+    },
+    "grid": {
+      "title": "Stay with us moment by moment",
+      "noArticles": "No news articles yet",
+      "readMore": "Read More",
+      "showLess": "Show Less"
+    },
+    "detail": {
+      "date": "Published on {date}",
+      "author": "By {author}",
+      "relatedArticles": "Related Articles",
+      "by": "By"
+    },
+    "related": {
+      "title": "Related Articles"
+    },
+    "content": {
+      "imageAlt": "News image {index}"
+    },
+    "newsletter": {
+      "title": "Subscribe to Our Newsletter",
+      "description": "Stay updated with our latest news and updates",
+      "emailPlaceholder": "Enter your email",
+      "subscribe": "Subscribe"
+    },
+    "articles": {
+      "tech-partnership": {
+        "title": "YLY Partners with Global Tech Giants for Youth Employment",
+        "description": "Major technology companies join forces with YLY to create job opportunities and internships for Egyptian youth in the tech sector.",
+        "content": {
+          "intro": "YLY has secured groundbreaking partnerships with several international technology companies to boost employment opportunities for Egyptian youth in the rapidly growing tech sector.",
+          "highlights": {
+            "title": "Partnership Highlights",
+            "items": [
+              "500+ internship positions across various tech companies",
+              "Specialized training programs in software development",
+              "Remote work opportunities with global teams",
+              "Fast-track recruitment for top performers"
+            ]
+          },
+          "training": {
+            "title": "Training Programs",
+            "intro": "Participants will receive comprehensive training in:",
+            "items": [
+              "Full-stack development",
+              "Cloud computing",
+              "Data science",
+              "Project management"
+            ]
+          }
+        }
+      },
+      "environmental": {
+        "title": "YLY Environmental Leadership Program Makes Waves",
+        "description": "Youth-led environmental initiatives show remarkable success in first quarter, with over 50 community projects launched across Egypt.",
+        "content": {
+          "achievements": {
+            "title": "Program Achievements",
+            "items": [
+              "50+ community environmental projects launched",
+              "Over 10,000 trees planted nationwide",
+              "15 waste management initiatives implemented",
+              "20 clean energy awareness campaigns completed"
+            ]
+          },
+          "upcoming": {
+            "title": "Upcoming Initiatives",
+            "intro": "The program is set to expand with new projects focusing on:",
+            "items": [
+              "Renewable energy adoption",
+              "Water conservation",
+              "Sustainable agriculture",
+              "Environmental education"
+            ]
+          }
+        }
+      },
+      "arts-festival": {
+        "title": "YLY Arts and Culture Festival Showcases Young Talent",
+        "description": "Annual festival brings together young artists, musicians, and performers from across Egypt in a celebration of creativity and cultural expression.",
+        "content": {
+          "highlights": {
+            "title": "Festival Highlights",
+            "items": [
+              "Musical performances from emerging artists",
+              "Contemporary art exhibitions",
+              "Theater and dance productions",
+              "Traditional crafts workshops",
+              "Digital art installations"
+            ]
+          },
+          "impact": {
+            "title": "Impact on Young Artists",
+            "intro": "The festival has created numerous opportunities for young artists:",
+            "items": [
+              "Gallery partnerships for emerging visual artists",
+              "Record label interest in musicians",
+              "Theater company collaborations",
+              "International exhibition invitations"
+            ]
+          }
+        }
+      },
+      "womens-sports": {
+        "title": "YLY Launches Revolutionary Women's Sports Initiative",
+        "description": "YLY introduces a groundbreaking initiative to promote women's participation in sports across Egypt, targeting universities and youth centers.",
+        "content": {
+          "intro": "In a landmark move towards gender equality in sports, YLY has launched its highly anticipated Women's Sports Initiative.",
+          "components": {
+            "title": "Key Program Components",
+            "items": [
+              "Partnership with major universities and sports facilities",
+              "Professional training programs led by experienced coaches",
+              "Monthly sports tournaments and competitions",
+              "Mentorship opportunities with established female athletes",
+              "Scholarships for promising young talents"
+            ]
+          },
+          "impact": {
+            "title": "Community Impact",
+            "description": "Beyond individual development, the program aims to create lasting change in how women's sports are perceived and supported in Egypt."
+          }
+        }
+      }
+    }
+  },
+  "registration": {
+    "form": {
+      "title": "YLY Registration Form",
+      "name": {
+        "label": "Full Name"
+      },
+      "age": {
+        "label": "Age"
+      },
+      "college": {
+        "label": "College/University"
+      },
+      "phoneNumber": {
+        "label": "Phone Number"
+      },
+      "anotherPhoneNumber": {
+        "label": "Another Phone Number"
+      },
+      "nationalId": {
+        "label": "National ID"
+      },
+      "email": {
+        "label": "Email Address"
+      },
+      "committee": {
+        "label": "Choose Your Committee",
+        "placeholder": "Select a committee"
+      },
+      "whyChooseCommittee": {
+        "label": "Why did you choose this committee?"
+      },
+      "whereKnowAboutUs": {
+        "label": "How did you hear about us?"
+      },
+      "governorate": {
+        "label": "Governorate",
+        "placeholder": "Select your governorate"
+      },
+      "submitButton": "Register",
+      "submitting": "Registering...",
+      "successMessage": "Registration Successful! Welcome to YLY!",
+      "submitAnother": "Submit another registration"
+    }
+  },
+  "governorate": {
+    "metadata": {
+      "title": "YLY Across Egypt - Youth Leading Youth | All 27 Governorates",
+      "description": "Discover how Youth Leading Youth (YLY) empowers communities across all 27 Egyptian governorates. Join 10,000+ volunteers making a difference through the Ministry of Youth and Sports."
+    },
+    "hero": {
+      "title": "YLY Across Egypt",
+      "subtitle": "Youth Leading Youth in all 27 governorates, empowering communities through the Ministry of Youth and Sports",
+      "stats": {
+        "governorates": "27 Governorates",
+        "volunteers": "10,000+ Volunteers",
+        "events": "200+ Events"
+      }
+    },
+    "stats": {
+      "governorates": {
+        "number": "27",
+        "label": "Governorates",
+        "description": "YLY active in all regions"
+      },
+      "volunteers": {
+        "number": "10,000+",
+        "label": "Volunteers",
+        "description": "Active YLY members"
+      },
+      "events": {
+        "number": "200+",
+        "label": "Events",
+        "description": "Organized annually"
+      },
+      "applicants": {
+        "number": "52,000+",
+        "label": "Applicants",
+        "description": "Youth wanting to join"
+      }
+    },
+    "mapSection": {
+      "title": "YLY in Egypt's Governorates",
+      "subtitle": "Discover how YLY empowers youth and serves communities across all 27 governorates in Egypt",
+      "searchPlaceholder": "Search governorates...",
+      "noResults": "No governorates found matching your search."
+    },
+    "features": {
+      "title": "YLY's Impact Across Egypt",
+      "subtitle": "Through our various specialized committees - YLY empowers youth across all 27 governorates to become leaders and change-makers in their communities.",
+      "items": {
+        "youthEmpowerment": {
+          "title": "Youth Empowerment",
+          "description": "Training programs and skill development workshops for young people across all 27 governorates through our diverse committees."
+        },
+        "leadershipDevelopment": {
+          "title": "Leadership Development",
+          "description": "Building tomorrow's leaders through structured leadership programs, mentoring, and hands-on experience in governance."
+        },
+        "communityService": {
+          "title": "Community Service",
+          "description": "Organizing community projects, environmental initiatives, and social impact programs in partnership with local governorates."
+        },
+        "eventOrganization": {
+          "title": "Event Organization",
+          "description": "Coordinating and managing Ministry events, sports activities, and cultural programs across Egypt's regions."
+        },
+        "digitalInnovation": {
+          "title": "Digital Innovation",
+          "description": "Leveraging social media, technology, and digital platforms to connect youth and amplify YLY's reach nationwide."
+        },
+        "laborMarketPreparation": {
+          "title": "Labor Market Preparation",
+          "description": "Equipping youth with professional skills, training, and opportunities to succeed in the modern workforce."
+        }
+      },
+      "cta": {
+        "title": "Join YLY Today!",
+        "description": "Become part of the largest youth movement in Egypt. Explore opportunities in your governorate and start making a difference in your community through YLY.",
+        "exploreButton": "Explore Your Governorate",
+        "joinButton": "Join YLY"
+      },
+      "comingSoon": {
+        "news": {
+          "title": "News Coming Soon",
+          "subtitle": "Latest Updates from {governorate}",
+          "description": "Stay tuned for the latest news, achievements, and initiatives from our YLY team in {governorate}. We're working hard to bring you exciting updates!",
+          "notifyButton": "Notify Me",
+          "learnMore": "Learn More About YLY"
+        },
+        "events": {
+          "title": "Events Coming Soon",
+          "subtitle": "Upcoming Activities in {governorate}",
+          "description": "Amazing workshops, training sessions, and community events are being planned for {governorate}. Be the first to know when they're available!",
+          "notifyButton": "Get Notified",
+          "contactUs": "Contact Our Team"
+        }
+      }
+    },
+    "detail": {
+      "hero": {
+        "ylyIn": "YLY in",
+        "description": "Explore YLY programs and activities in {governorate} governorate",
+        "stats": {
+          "capital": "Capital: {capital}",
+          "population": "Population: {population}",
+          "area": "Area: {area}"
+        }
+      },
+      "stats": {
+        "title": "YLY Impact in {governorate}",
+        "description": "Our growing community of young leaders is making a real difference across {governorate} governorate.",
+        "upcomingEvents": "Upcoming Events",
+        "newsArticles": "News Articles",  
+        "programs": "Programs",
+        "scheduledActivities": "Scheduled activities",
+        "publishedStories": "Published stories",
+        "activeInitiatives": "Active initiatives",
+        "established": "Est.",
+        "growingCommunity": "Growing Community",
+        "youthFocused": "Youth Focused",
+        "localImpact": "Local Impact"
+      },
+      "members": {
+        "title": "Our Team in {governorate}",
+        "description": "Meet the dedicated young leaders driving positive change through Youth Leading Youth initiatives.",
+        "leader": "Leader",
+        "member": "Member",
+        "coordinator": "Coordinator",
+        "volunteer": "Volunteer"
+      },
+      "navigation": {
+        "backToGovernorates": "Back to Governorates",
+        "shareThisPage": "Share This Page",
+        "downloadInfo": "Download Info"
+      },
+      "contact": {
+        "title": "Contact {governorate} Team",
+        "description": "Have questions or want to join our team? Get in touch with us",
+        "joinTeam": "Join Team",
+        "askQuestion": "Ask Question"
+      }
+    }
+  }
+}

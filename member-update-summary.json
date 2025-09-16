@@ -1,0 +1,288 @@
+{
+  "cairo": {
+    "name": "Cairo",
+    "membersCount": 8,
+    "positions": [
+      "Social Media Head",
+      "Operations Head",
+      "Vice Head",
+      "Team Leader",
+      "PR Head",
+      "HR Head"
+    ]
+  },
+  "giza": {
+    "name": "Giza",
+    "membersCount": 6,
+    "positions": [
+      "Operations Head",
+      "PR Head",
+      "HR Head",
+      "Team Leader",
+      "Social Media Head"
+    ]
+  },
+  "alexandria": {
+    "name": "Alexandria",
+    "membersCount": 5,
+    "positions": [
+      "Social Media Head",
+      "Operations Head",
+      "HR Head",
+      "Member"
+    ]
+  },
+  "qalyubia": {
+    "name": "Qalyubia",
+    "membersCount": 5,
+    "positions": [
+      "Member",
+      "Team Leader",
+      "Social Media Head",
+      "Operations Head",
+      "HR Head"
+    ]
+  },
+  "sharqia": {
+    "name": "Sharqia",
+    "membersCount": 6,
+    "positions": [
+      "Member",
+      "Social Media Head",
+      "Team Leader",
+      "Operations Head",
+      "PR Head",
+      "HR Head"
+    ]
+  },
+  "dakahlia": {
+    "name": "Dakahlia",
+    "membersCount": 7,
+    "positions": [
+      "Operations Head",
+      "Team Leader",
+      "HR Head",
+      "Member",
+      "Social Media Head"
+    ]
+  },
+  "beheira": {
+    "name": "Beheira",
+    "membersCount": 7,
+    "positions": [
+      "Operations Head",
+      "Vice Head",
+      "Team Leader",
+      "HR Head",
+      "PR Head",
+      "Member"
+    ]
+  },
+  "kafr_el_sheikh": {
+    "name": "Kafr El Sheikh",
+    "membersCount": 5,
+    "positions": [
+      "Operations Head",
+      "HR Head",
+      "PR Head",
+      "Team Leader",
+      "Social Media Head"
+    ]
+  },
+  "gharbia": {
+    "name": "Gharbia",
+    "membersCount": 10,
+    "positions": [
+      "PR Head",
+      "Vice Head",
+      "Team Leader",
+      "Operations Head",
+      "Social Media Head",
+      "HR Head"
+    ]
+  },
+  "menoufia": {
+    "name": "Menoufia",
+    "membersCount": 5,
+    "positions": [
+      "Social Media Head",
+      "HR Head",
+      "PR Head",
+      "Team Leader",
+      "Operations Head"
+    ]
+  },
+  "ismailia": {
+    "name": "Ismailia",
+    "membersCount": 5,
+    "positions": [
+      "Operations Head",
+      "Team Leader",
+      "HR Head",
+      "PR Head",
+      "Social Media Head"
+    ]
+  },
+  "port_said": {
+    "name": "Port Said",
+    "membersCount": 3,
+    "positions": [
+      "Operations Head",
+      "Social Media Head",
+      "PR Head"
+    ]
+  },
+  "suez": {
+    "name": "Suez",
+    "membersCount": 6,
+    "positions": [
+      "Operations Head",
+      "HR Head",
+      "PR Head",
+      "Social Media Head",
+      "Team Leader"
+    ]
+  },
+  "north_sinai": {
+    "name": "North Sinai",
+    "membersCount": 3,
+    "positions": [
+      "Media Team",
+      "Leader",
+      "Volunteer"
+    ]
+  },
+  "south_sinai": {
+    "name": "South Sinai",
+    "membersCount": 5,
+    "positions": [
+      "HR Head",
+      "Social Media Head",
+      "Operations Head",
+      "Member",
+      "PR Head"
+    ]
+  },
+  "red_sea": {
+    "name": "Red Sea",
+    "membersCount": 4,
+    "positions": [
+      "Social Media Head",
+      "PR Head",
+      "Operations Head",
+      "HR Head"
+    ]
+  },
+  "beni_suef": {
+    "name": "Beni Suef",
+    "membersCount": 6,
+    "positions": [
+      "Vice Head",
+      "PR Head",
+      "Social Media Head",
+      "HR Head",
+      "Operations Head",
+      "Team Leader"
+    ]
+  },
+  "fayyum": {
+    "name": "Fayyum",
+    "membersCount": 6,
+    "positions": [
+      "Team Leader",
+      "Social Media Head",
+      "HR Head",
+      "PR Head",
+      "Operations Head"
+    ]
+  },
+  "minya": {
+    "name": "Minya",
+    "membersCount": 6,
+    "positions": [
+      "Team Leader",
+      "Operations Head",
+      "Social Media Head",
+      "PR Head",
+      "HR Head"
+    ]
+  },
+  "asyut": {
+    "name": "Asyut",
+    "membersCount": 3,
+    "positions": [
+      "Operations Head",
+      "PR Head",
+      "Team Leader"
+    ]
+  },
+  "sohag": {
+    "name": "Sohag",
+    "membersCount": 6,
+    "positions": [
+      "Operations Head",
+      "HR Head",
+      "PR Head",
+      "Team Leader",
+      "Member",
+      "Social Media Head"
+    ]
+  },
+  "qena": {
+    "name": "Qena",
+    "membersCount": 5,
+    "positions": [
+      "PR Head",
+      "HR Head",
+      "Operations Head",
+      "Social Media Head"
+    ]
+  },
+  "luxor": {
+    "name": "Luxor",
+    "membersCount": 7,
+    "positions": [
+      "Team Leader",
+      "Member",
+      "HR Head",
+      "Social Media Head",
+      "PR Head",
+      "Vice Head",
+      "Operations Head"
+    ]
+  },
+  "aswan": {
+    "name": "Aswan",
+    "membersCount": 6,
+    "positions": [
+      "PR Head",
+      "Team Leader",
+      "Vice Head",
+      "Operations Head",
+      "HR Head"
+    ]
+  },
+  "new_valley": {
+    "name": "New Valley",
+    "membersCount": 5,
+    "positions": [
+      "HR Head",
+      "PR Head",
+      "Member",
+      "Social Media Head",
+      "Team Leader"
+    ]
+  },
+  "matrouh": {
+    "name": "Matrouh",
+    "membersCount": 8,
+    "positions": [
+      "Vice Head",
+      "HR Head",
+      "PR Head",
+      "Member",
+      "Social Media Head",
+      "Operations Head"
+    ]
+  }
+}
