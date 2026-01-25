@@ -526,10 +526,10 @@ class App {
         image: `/images/gallery/g5.jpg`,
         text: "",
       },
-      {
-        image: `/images/gallery/g6.jpg`,
-        text: "",
-      },
+      // {
+      //   image: `/images/gallery/g6.jpg`,
+      //   text: "",
+      // },
       {
         image: `/images/gallery/g7.jpg`,
         text: "",

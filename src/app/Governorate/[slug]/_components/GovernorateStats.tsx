@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+// import { Badge } from "@/components/ui/badge";
 import { Calendar, Newspaper, Trophy } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { GovernorateStatsProps } from "@/types/governorate";
@@ -79,7 +79,7 @@ export function GovernorateStats({
         </div>
 
         {/* Additional Info */}
-        <div className="mt-12 text-center">
+        {/* <div className="mt-12 text-center">
           <div className="flex flex-wrap justify-center gap-3">
             <Badge variant="outline" className="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600">
               {t("established")}{" "}
@@ -95,7 +95,7 @@ export function GovernorateStats({
               {t("localImpact")}
             </Badge>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

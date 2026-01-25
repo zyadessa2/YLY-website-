@@ -32,7 +32,7 @@ const Hero = () => {
             transition={{ duration: 0.8 }}
             className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 text-center"
           >
-           اتحاد وزارة الشباب والرياضة YLY
+           {/* اتحاد وزارة الشباب والرياضة YLY */}
           </motion.h1>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}

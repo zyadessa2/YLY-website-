@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 import { GovernorateHero } from "./_components/GovernorateHero";
 import { EgyptMapSection } from "./_components/EgyptMapSection";
-import { StatsSection } from "./_components/StatsSection";
-import { FeaturesSection } from "./_components/FeaturesSection";
+// import { StatsSection } from "./_components/StatsSection";
+// import { FeaturesSection } from "./_components/FeaturesSection";
 import { GovernorateStructuredData } from "./_components/GovernorateStructuredData";
 
 export const metadata: Metadata = {
@@ -57,7 +57,7 @@ const page = () => {
         <GovernorateHero />
 
         {/* Stats Section */}
-        <StatsSection />
+        {/* <StatsSection /> */}
 
         {/* Egypt Map Section */}
         <section id="map-section">
@@ -65,7 +65,7 @@ const page = () => {
         </section>
 
         {/* Features Section */}
-        <FeaturesSection />
+        {/* <FeaturesSection /> */}
       </main>
     </>
   );

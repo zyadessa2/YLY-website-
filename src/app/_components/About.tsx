@@ -35,10 +35,10 @@ const About = () => {
 
   return (
     <section className="relative py-20 overflow-hidden bg-gradient-to-b from-background via-background/50 to-background">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-16">
         <TitleMotion title={t(`about.title`)} />
 
-        <div className="mt-12 grid lg:grid-cols-2 gap-12 items-center container mx-auto px-4">
+        <div className="mt-12 grid lg:grid-cols-2 gap-12 items-center container mx-auto px-16">
           {/* Text Content */}
           <motion.div
             variants={slideIn}
@@ -110,7 +110,7 @@ const About = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent z-10" />
             <Image
-              src="/images/gallery/g4.jpg"
+              src="/about.jpeg"
               alt="youth leading youth (yly) about image"
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -130,6 +130,7 @@ const About = () => {
         className="h-[600px] relative mt-20"
       >
         <CircularGallery
+         
           bend={3}
           textColor="hsl(var(--primary))"
           borderRadius={0.05}

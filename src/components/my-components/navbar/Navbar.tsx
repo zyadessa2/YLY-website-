@@ -30,10 +30,10 @@ export function NavbarDemo() {
       name: t("events"),
       link: "/events",
     },
-    {
-      name: t("contact"),
-      link: "/contactUs",
-    },
+    // {
+    //   name: t("contact"),
+    //   link: "/contactUs",
+    // },
     {
       name: t("Governorate"),
       link: "/Governorate",

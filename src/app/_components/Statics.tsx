@@ -93,7 +93,7 @@ const Statics = () => {
           />
 
           <StatItem
-            number={6000}
+            number={10000}
             label={t("volunteers.label")}
             delay={0.4}
             icon={

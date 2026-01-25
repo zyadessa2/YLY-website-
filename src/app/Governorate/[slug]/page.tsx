@@ -5,7 +5,7 @@ import { GovernoratePageProps } from "@/types/governorate";
 import { governoratesService } from "@/lib/api/governorates.service";
 import { 
   GovernorateHero,
-  GovernorateMembers,
+  // GovernorateMembers,
   GovernorateNews,
   GovernorateEvents,
   GovernorateStats
@@ -176,12 +176,12 @@ export default async function GovernoratePage({ params }: GovernoratePageProps) 
           eventsCount={apiEventsCount}
         />
 
-        {sampleMembers.length > 0 && (
+        {/* {sampleMembers.length > 0 && (
           <GovernorateMembers
             members={sampleMembers}
             governorateName={governorateData.name}
           />
-        )}
+        )} */}
 
         <GovernorateNews 
           governorateName={governorateData.name} 

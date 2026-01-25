@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
-import { MapPin, Users, Globe } from "lucide-react";
+// import { Badge } from "@/components/ui/badge";
+// import { MapPin, Users, Globe } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { GovernorateHeroProps } from "@/types/governorate";
 
@@ -42,7 +42,7 @@ export function GovernorateHero({ governorate }: GovernorateHeroProps) {
           </p>
 
           {/* Quick Stats */}
-          <div className="flex flex-wrap justify-center gap-4 mt-8">
+          {/* <div className="flex flex-wrap justify-center gap-4 mt-8">
             <Badge variant="secondary" className="px-4 py-2 text-sm bg-white/20 dark:bg-white/10 text-white border-white/30 dark:border-white/20 backdrop-blur-sm">
               <MapPin className="mr-2 h-4 w-4" />
               {t("stats.capital", { capital: governorate.capital })}
@@ -55,7 +55,7 @@ export function GovernorateHero({ governorate }: GovernorateHeroProps) {
               <Globe className="mr-2 h-4 w-4" />
               {t("stats.area", { area: governorate.area })}
             </Badge>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

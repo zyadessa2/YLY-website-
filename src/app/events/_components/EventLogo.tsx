@@ -14,16 +14,16 @@ export const EventLogo = ({ src, alt, href }: EventLogoProps) => {
   return (
     <Link href={href}>
       <motion.div
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="relative aspect-square overflow-hidden rounded-xl bg-white p-4 shadow-lg transition-shadow hover:shadow-xl"
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.92 }}
+        className="relative h-full aspect-square overflow-hidden rounded-lg bg-background border border-border p-2 shadow-md transition-shadow hover:shadow-lg"
       >
         <Image
           src={src}
           alt={alt}
           fill
-          className="object-contain p-4"
-          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+          className="object-contain p-2"
+          sizes="(max-width: 768px) 40vw, (max-width: 1200px) 25vw, 16vw"
         />
       </motion.div>
     </Link>

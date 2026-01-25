@@ -7,34 +7,64 @@ import TitleMotion from "@/components/my-components/TitleMotion";
 export const CentralEvents = () => {
   const events = [
     {
-      src: "/images/eventLogos/5-1n-1-1024x1024.png",
+      src: "/images/centralEvents/five in one s6.png",
       alt: "5 in 1 Event",
       href: "#5-in-1",
     },
     {
-      src: "/images/eventLogos/Girls-Power.png",
-      alt: "Girls Power Event",
-      href: "#girls-power",
+      src: "/images/centralEvents/bazaar-blue-yellow.png",
+      alt: "Bazaar Event",
+      href: "#bazaar",
     },
     {
-      src: "/images/eventLogos/Its-On-1024x1024.png",
-      alt: "Its On Event",
-      href: "#its-on",
+      src: "/images/centralEvents/learn 8 (Learn Kemet).png",
+      alt: "Learn Kemet Event",
+      href: "#learn-kemet",
     },
     {
-      src: "/images/eventLogos/Learn-2-MM.png",
-      alt: "Learn 2 Event",
-      href: "#learn-2",
+      src: "/images/centralEvents/ctrl.png",
+      alt: "CTRL Event",
+      href: "#ctrl",
     },
     {
-      src: "/images/eventLogos/YLY-Competition-1024x1024.png",
-      alt: "YLY Competition",
-      href: "#yly-competition",
+      src: "/images/centralEvents/y n way-01.png",
+      alt: "YNWay Event",
+      href: "#ynway",
     },
     {
-      src: "/images/eventLogos/Zayed-Marathon-Logo-800.png",
-      alt: "Zayed Marathon",
-      href: "#zayed-marathon",
+      src: "/images/centralEvents/YLP Logo.png",
+      alt: "YLP Event",
+      href: "#ylp",
+    },
+    {
+      src: "/images/centralEvents/closing_(2).png",
+      alt: "Closing Event",
+      href: "#closing",
+    },
+    {
+      src: "/images/centralEvents/COLOR YLY Services.png",
+      alt: "YLY Services Event",
+      href: "#yly-services",
+    },
+    {
+      src: "/images/centralEvents/original logo.png",
+      alt: "Original Logo Event",
+      href: "#original-logo",
+    },
+    {
+      src: "/images/centralEvents/tmsk-02.png",
+      alt: "TMSK Event",
+      href: "#tmsk",
+    },
+    {
+      src: "/images/centralEvents/أهل.png",
+      alt: "Ahl Event",
+      href: "#ahl",
+    },
+    {
+      src: "/images/centralEvents/وثق(1).png",
+      alt: "Wathaaq Event",
+      href: "#wathaaq",
     },
   ];
 
@@ -45,7 +75,7 @@ export const CentralEvents = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4"
+        className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
       >
         {events.map((event, index) => (
           <motion.div
@@ -53,6 +83,7 @@ export const CentralEvents = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
+            className="h-32 sm:h-40"
           >
             <EventLogo {...event} />
           </motion.div>
