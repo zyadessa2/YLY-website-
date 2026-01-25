@@ -25,11 +25,14 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  params: { lang },
+  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { lang: string };
+  params: Promise<{ lang?: string }>;
 }>) {
+  // Await params as it's now a Promise in Next.js 16
+  const { lang } = await params;
+  
   // Default to 'en' if no lang param is provided
   let locale = lang || "en";
   const cookieStore = cookies();
