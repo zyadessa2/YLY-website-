@@ -80,25 +80,60 @@ export default function UsersManagementPage() {
           return;
         }
 
-        // Load users and governorates in parallel
-        const [usersResponse, governoratesResponse] = await Promise.all([
-          usersService.getAll({ limit: 100 }),
-          governoratesService.getAllSimple(),
-        ]);
-        
-        // Safely handle the response - data might be in different structure
-        const usersData = Array.isArray(usersResponse?.data) 
-          ? usersResponse.data 
-          : Array.isArray(usersResponse) 
-            ? usersResponse 
-            : [];
-        
-        setUsers(usersData);
-        setFilteredUsers(usersData);
-        setGovernorates(governoratesResponse || []);
-      } catch (err) {
+        // Debug: Log authentication state
+        console.log('Loading users with auth:', {
+          isAuthenticated: authService.isAuthenticated(),
+          isAdmin: authService.isAdmin(),
+          token: localStorage.getItem('accessToken') ? 'exists' : 'missing'
+        });
+
+        // Load users and governorates in parallel with better error handling
+        try {
+          const [usersResponse, governoratesResponse] = await Promise.all([
+            usersService.getAll({ limit: 100 }).catch(err => {
+              console.error('Users API error:', err.response?.data || err.message);
+              throw err;
+            }),
+            governoratesService.getAllSimple().catch(err => {
+              console.warn('Governorates load failed:', err);
+              return [];
+            }),
+          ]);
+          
+          // Safely handle the response - data might be in different structure
+          const usersData = Array.isArray(usersResponse?.data) 
+            ? usersResponse.data 
+            : Array.isArray(usersResponse) 
+              ? usersResponse 
+              : [];
+          
+          console.log('Loaded users:', usersData.length);
+          setUsers(usersData);
+          setFilteredUsers(usersData);
+          setGovernorates(governoratesResponse || []);
+        } catch (apiError: any) {
+          // More detailed error handling
+          if (apiError.response?.status === 500) {
+            setError('Server error. The backend may be experiencing issues. Please try again later.');
+            console.error('Server 500 error:', apiError.response?.data);
+          } else if (apiError.response?.status === 401) {
+            setError('Authentication failed. Please sign in again.');
+            setTimeout(() => {
+              authService.logout();
+              window.location.href = "/signin";
+            }, 2000);
+          } else if (apiError.response?.status === 403) {
+            setError('Access denied. Admin privileges required.');
+          } else {
+            setError(`Failed to load users: ${apiError.message || 'Unknown error'}`);
+          }
+          throw apiError;
+        }
+      } catch (err: any) {
         console.error('Error loading data:', err);
-        setError('Failed to load users data. Please try again later.');
+        if (!error) { // Only set generic error if specific one wasn't set
+          setError('Failed to load users data. Please check your connection and try again.');
+        }
       } finally {
         setIsLoading(false);
       }
@@ -258,11 +293,31 @@ export default function UsersManagementPage() {
   if (error && error.includes('Access denied')) {
     return (
       <div className="flex flex-col items-center justify-center h-64 space-y-4">
-        <ShieldAlert className="h-16 w-16 text-red-500" />
-        <p className="text-red-500 text-lg font-medium">{error}</p>
+        <ShieldAlert className="h-16 w-16 text-destructive" />
+        <p className="text-destructive text-lg font-medium">{error}</p>
         <Button variant="outline" asChild>
           <Link href="/dashboard">Back to Dashboard</Link>
         </Button>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center h-64 space-y-4">
+        <ShieldAlert className="h-16 w-16 text-destructive" />
+        <p className="text-destructive text-lg font-medium">{error}</p>
+        <div className="flex gap-4">
+          <Button 
+            variant="outline" 
+            onClick={() => window.location.reload()}
+          >
+            Retry
+          </Button>
+          <Button variant="outline" asChild>
+            <Link href="/dashboard">Back to Dashboard</Link>
+          </Button>
+        </div>
       </div>
     );
   }
@@ -272,8 +327,8 @@ export default function UsersManagementPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Users Management</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <h1 className="text-3xl font-bold text-foreground">Users Management</h1>
+          <p className="text-muted-foreground mt-1">
             Manage user accounts and permissions
           </p>
         </div>
@@ -294,7 +349,7 @@ export default function UsersManagementPage() {
             </DialogHeader>
             <div className="grid gap-4 py-4">
               {createError && (
-                <div className="text-red-500 text-sm p-2 bg-red-50 dark:bg-red-900/20 rounded">
+                <div className="text-destructive text-sm p-2 bg-destructive/10 rounded">
                   {createError}
                 </div>
               )}
