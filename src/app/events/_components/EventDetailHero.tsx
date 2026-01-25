@@ -1,20 +1,31 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CalendarIcon, MapPinIcon, ClockIcon } from "lucide-react";
+import { CalendarIcon, MapPinIcon, ClockIcon, UsersIcon, BuildingIcon } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 interface EventDetailHeroProps {
   title: string;
   date: string;
+  time?: string;
   location: string;
   image: string;
+  governorate?: string;
+  registrationEnabled?: boolean;
+  currentParticipants?: number;
+  maxParticipants?: number;
 }
 
 export const EventDetailHero = ({
   title,
   date,
+  time,
   location,
   image,
+  governorate,
+  registrationEnabled,
+  currentParticipants,
+  maxParticipants,
 }: EventDetailHeroProps) => {
   // Format the date nicely
   const formatDate = (dateString: string) => {
@@ -82,19 +93,39 @@ export const EventDetailHero = ({
             {title}
           </h1>
           <div className="flex flex-col items-center justify-center space-y-3 text-white">
-            <div className="flex flex-wrap items-center justify-center gap-6 text-white/90">
+            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-white/90">
               <div className="flex items-center gap-2">
                 <CalendarIcon className="h-5 w-5 text-white/80" />
                 <span className="font-medium">{formatDate(date)}</span>
               </div>
               <div className="flex items-center gap-2">
                 <ClockIcon className="h-5 w-5 text-white/80" />
-                <span>{formatTime(date)}</span>
+                <span>{time || formatTime(date)}</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPinIcon className="h-5 w-5 text-white/80" />
                 <span>{location}</span>
               </div>
+              {governorate && (
+                <div className="flex items-center gap-2">
+                  <BuildingIcon className="h-5 w-5 text-white/80" />
+                  <span>{governorate}</span>
+                </div>
+              )}
+            </div>
+            {/* Participants and Registration Badge */}
+            <div className="flex items-center gap-4 mt-2">
+              {maxParticipants && (
+                <div className="flex items-center gap-2 text-white/90">
+                  <UsersIcon className="h-4 w-4" />
+                  <span>{currentParticipants || 0}/{maxParticipants}</span>
+                </div>
+              )}
+              {registrationEnabled !== undefined && (
+                <Badge variant={registrationEnabled ? "default" : "secondary"}>
+                  {registrationEnabled ? "التسجيل مفتوح" : "التسجيل مغلق"}
+                </Badge>
+              )}
             </div>
             <motion.div
               initial={{ opacity: 0, width: 0 }}

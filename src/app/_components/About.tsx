@@ -38,7 +38,7 @@ const About = () => {
       <div className="container mx-auto px-4">
         <TitleMotion title={t(`about.title`)} />
 
-        <div className="mt-12 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="mt-12 grid lg:grid-cols-2 gap-12 items-center container mx-auto px-4">
           {/* Text Content */}
           <motion.div
             variants={slideIn}
@@ -70,7 +70,7 @@ const About = () => {
                 {/* The project is spread across the governorates of the Republic
                 and includes a large number of young people in{" "} */}
                 {t(`about.description2`)}
-                <span className="text-secondary font-medium inline-flex gap-2 flex-wrap">
+                {/* <span className="text-secondary font-medium inline-flex gap-2 flex-wrap">
                   <span>HR</span>
                   <span>•</span>
                   <span>SM</span>
@@ -84,7 +84,7 @@ const About = () => {
                   <span>Media</span>
                   <span>•</span>
                   <span>Training</span>
-                </span>
+                </span> */}
               </motion.p>
             </motion.div>
 

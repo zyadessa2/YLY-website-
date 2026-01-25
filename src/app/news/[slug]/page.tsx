@@ -1,11 +1,12 @@
 import { Metadata } from "next";
-import { NewsService } from "@/lib/database";
+import { newsService } from "@/lib/api";
 import { NewsDetailHero } from "../_components/NewsDetailHero";
 import { NewsContent } from "../_components/NewsContent";
 import { RelatedNews } from "../_components/RelatedNews";
-import { Comments } from "../_components/Comments";
 import { SocialShare } from "../_components/SocialShare";
 import { notFound } from "next/navigation";
+import { processImageUrl } from "@/lib/image-upload";
+import { getDriveImageUrl, isDriveUrl } from "@/lib/utils";
 
 interface NewsPageProps {
   params: Promise<{
@@ -19,15 +20,18 @@ export async function generateMetadata({
 }: NewsPageProps): Promise<Metadata> {
   try {
     const { slug } = await params;
-    const news = await NewsService.getNewsBySlug(slug);
+    const news = await newsService.getBySlug(slug);
+
+    const title = news.arabicTitle || news.title;
+    const description = news.arabicDescription || news.description;
 
     return {
-      title: `${news.title} - YLY Ministry News`,
-      description: news.description,
+      title: `${title} - YLY Ministry News`,
+      description: description,
       openGraph: {
-        title: news.title,
-        description: news.description,
-        images: [news.cover_image || "/images/hero.jpg"],
+        title: title,
+        description: description,
+        images: [processImageUrl(news.coverImage) || "/images/hero.jpg"],
       },
     };
   } catch (error) {
@@ -42,8 +46,9 @@ export async function generateMetadata({
 // Generate static params for better performance (ISR)
 export async function generateStaticParams() {
   try {
-    const allNews = await NewsService.getAllNews();
-    return allNews.slice(0, 10).map((news) => ({
+    const response = await newsService.getAll({ published: true, limit: 10 });
+    const data = Array.isArray(response?.data) ? response.data : [];
+    return data.map((news) => ({
       slug: news.slug,
     }));
   } catch (error) {
@@ -55,23 +60,38 @@ export async function generateStaticParams() {
 export default async function NewsDetailPage({ params }: NewsPageProps) {
   try {
     const { slug } = await params;
-    const news = await NewsService.getNewsBySlug(slug);
+    const news = await newsService.getBySlug(slug);
 
-    // Increment view count
-    try {
-      await NewsService.incrementViewCount(news.id);
-    } catch (error) {
-      console.error("Error incrementing view count:", error);
-    }
+    // Increment view count (fire and forget)
+    newsService.incrementView(news._id).catch(() => {});
+
+    // Get display texts (Arabic preferred)
+    const title = news.arabicTitle || news.title;
+    const description = news.arabicDescription || news.description;
+    const content = news.arabicContent || news.content;
+    const author = news.arabicAuthor || news.author || 'YLY Team';
+    
+    // Handle cover image - could be Drive URL or regular URL
+    const rawCoverImage = news.coverImage || "/images/hero.jpg";
+    const coverImage = isDriveUrl(rawCoverImage) 
+      ? getDriveImageUrl(rawCoverImage) 
+      : (processImageUrl(rawCoverImage) || "/images/hero.jpg");
+    
+    const contentImages = news.contentImages?.map(img => {
+      if (isDriveUrl(img)) return getDriveImageUrl(img);
+      return processImageUrl(img) || img;
+    }) || [];
 
     return (
       <div dir="rtl" className="min-h-screen bg-background">
         {/* Hero Section */}
         <NewsDetailHero
-          title={news.title}
-          date={news.created_at}
-          author={news.author}
-          image={news.cover_image || "/images/hero.jpg"}
+          title={title}
+          date={news.publishedAt || news.createdAt}
+          author={author}
+          image={coverImage}
+          governorate={news.governorateId?.arabicName || news.governorateId?.name}
+          viewCount={news.viewCount}
         />
 
         {/* Main Content */}
@@ -79,18 +99,17 @@ export default async function NewsDetailPage({ params }: NewsPageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* News Content */}
             <div className="lg:col-span-2">
-              <NewsContent content={news.content} images={news.content_images} /> {/* Social Share */}
+              <NewsContent content={content} images={contentImages} />
+              {/* Social Share */}
               <SocialShare
                 url={`${process.env.NEXT_PUBLIC_BASE_URL || ""}/news/${slug}`}
-                title={news.title}
-                description={news.description}
+                title={title}
+                description={description}
               />
-              {/* Comments */}
-              <Comments newsId={news.id} />
-            </div>{" "}
+            </div>
             {/* Sidebar */}
             <div className="lg:col-span-1">
-              <RelatedNews currentNewsId={news.id} />
+              <RelatedNews currentNewsId={news._id} />
             </div>
           </div>
         </div>

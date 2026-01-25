@@ -59,15 +59,15 @@ export interface GovernorateEventsProps {
 }
 
 export interface GovernorateMetadataProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export interface GovernoratePageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export interface GovernorateMembersProps {

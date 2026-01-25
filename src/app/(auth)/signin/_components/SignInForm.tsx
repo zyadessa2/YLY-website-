@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import * as yup from "yup";
 import { useForm, ControllerRenderProps } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { supabase } from "@/lib/supabase";
+import { authService } from "@/lib/api/auth.service";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -63,23 +63,27 @@ export default function SignInForm() {
       setIsLoading(true);
       setError(null);
 
-      const { error: signInError } = await supabase.auth.signInWithPassword({
+      // Login using new auth service
+      await authService.login({
         email: data.email,
         password: data.password,
       });
 
-      if (signInError) {
-        throw new Error(signInError.message);
-      }
-
-      console.log("yesssssssssss");
+      console.log("Login successful");
       // Redirect to dashboard after successful sign-in
       router.push("/dashboard");
       router.refresh(); // Refresh to update auth state in the layout
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : "Failed to sign in";
-      setError(errorMessage);
+      // Handle axios error response
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const axiosError = err as any;
+      if (axiosError?.response?.data?.message) {
+        setError(axiosError.response.data.message);
+      } else {
+        setError(errorMessage);
+      }
       console.error("Sign-in error:", err);
     } finally {
       setIsLoading(false);

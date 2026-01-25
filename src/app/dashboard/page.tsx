@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
-import { DashboardService } from "@/lib/database";
+import { authService, dashboardService, DashboardStats, RecentNewsItem, RecentEventItem } from "@/lib/api";
 import {
   Card,
   CardContent,
@@ -11,64 +10,69 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Newspaper, Calendar, TrendingUp, Eye } from "lucide-react";
+import { Newspaper, Calendar, TrendingUp, Users, Eye, Shield } from "lucide-react";
 import Link from "next/link";
 
-interface DashboardStats {
-  totalNews: number;
-  totalEvents: number;
-  recentNews: number;
-  recentEvents: number;
-}
+// Helper to get text - handles both new API format (separate fields) and legacy format (bilingual object)
+const getText = (item: RecentNewsItem | RecentEventItem): string => {
+  // New API format with separate arabicTitle/title fields
+  if ('arabicTitle' in item && item.arabicTitle) {
+    return item.title || item.arabicTitle;
+  }
+  // Legacy format with bilingual object
+  if (typeof item.title === 'object' && item.title !== null) {
+    const bilingualTitle = item.title as { ar: string; en: string };
+    return bilingualTitle.en || bilingualTitle.ar || '';
+  }
+  // Simple string
+  return String(item.title || '');
+};
 
 export default function DashboardPage() {
   const [stats, setStats] = useState<DashboardStats>({
     totalNews: 0,
     totalEvents: 0,
-    recentNews: 0,
-    recentEvents: 0,
+    publishedNews: 0,
+    publishedEvents: 0,
   });
-  const [recentNews, setRecentNews] = useState<
-    { id: string; title: string; created_at: string; slug: string }[]
-  >([]);
-  const [recentEvents, setRecentEvents] = useState<
-    { id: string; title: string; event_date: string; slug: string }[]
-  >([]);
+  const [recentNews, setRecentNews] = useState<RecentNewsItem[]>([]);
+  const [recentEvents, setRecentEvents] = useState<RecentEventItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState<{ email?: string } | null>(null);
+  const [user, setUser] = useState<{ email?: string; role?: string } | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+
   useEffect(() => {
     const loadDashboardData = async () => {
       try {
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
-        setUser(user);
-
-        // If no user, redirect to signin
-        if (!user) {
+        // Check authentication using auth service
+        const storedUser = authService.getStoredUser();
+        
+        // If no user or not authenticated, redirect to signin
+        if (!storedUser || !authService.isAuthenticated()) {
           window.location.href = "/signin";
           return;
         }
+        
+        setUser({ email: storedUser.email, role: storedUser.role });
+        setIsAdmin(authService.isAdmin());
 
         // Load dashboard stats and recent content with individual try/catch blocks
-        // to prevent one failure from stopping the others
         try {
-          const statsData = await DashboardService.getStats();
+          const statsData = await dashboardService.getStats();
           setStats(statsData);
         } catch (statsError) {
           console.error("Error loading stats:", statsError);
-          // Keep default stats values
         }
 
         try {
-          const recentNewsData = await DashboardService.getRecentNews();
+          const recentNewsData = await dashboardService.getRecentNews();
           setRecentNews(recentNewsData || []);
         } catch (newsError) {
           console.error("Error loading recent news:", newsError);
         }
 
         try {
-          const recentEventsData = await DashboardService.getRecentEvents();
+          const recentEventsData = await dashboardService.getRecentEvents();
           setRecentEvents(recentEventsData || []);
         } catch (eventsError) {
           console.error("Error loading recent events:", eventsError);
@@ -84,81 +88,108 @@ export default function DashboardPage() {
     loadDashboardData();
   }, []);
 
-  const quickActions = [
-    {
-      title: "Add News",
-      description: "Create a new news article",
-      href: "/dashboard/news/add",
-      icon: Newspaper,
-      color: "bg-blue-500",
-    },
-    {
-      title: "Add Event",
-      description: "Create a new event",
-      href: "/dashboard/events/add",
-      icon: Calendar,
-      color: "bg-green-500",
-    },
-    {
-      title: "View News",
-      description: "Manage existing news",
-      href: "/dashboard/news",
-      icon: Eye,
-      color: "bg-purple-500",
-    },
-    {
-      title: "View Events",
-      description: "Manage existing events",
-      href: "/dashboard/events",
-      icon: Eye,
-      color: "bg-orange-500",
-    },
-    {
-      title: "Governorate",
-      description: "Manage existing Governorate",
-      href: "/dashboard/governorates",
-      icon: Eye,
-      color: "bg-purple-500",
-    },
-    {
-      title: "Add Governorate",
-      description: "Manage existing Governorate",
-      href: "/dashboard/governorates/add",
-      icon: Eye,
-      color: "bg-orange-500",
-    },
-  ];
+  // Build quick actions based on user role
+  const getQuickActions = () => {
+    const baseActions = [
+      {
+        title: "Add News",
+        description: "Create a new news article",
+        href: "/dashboard/news/add",
+        icon: Newspaper,
+        color: "bg-blue-500",
+      },
+      {
+        title: "Add Event",
+        description: "Create a new event",
+        href: "/dashboard/events/add",
+        icon: Calendar,
+        color: "bg-green-500",
+      },
+      {
+        title: "View News",
+        description: "Manage existing news",
+        href: "/dashboard/news",
+        icon: Eye,
+        color: "bg-purple-500",
+      },
+      {
+        title: "View Events",
+        description: "Manage existing events",
+        href: "/dashboard/events",
+        icon: Eye,
+        color: "bg-orange-500",
+      },
+    ];
 
-  const statCards = [
-    {
-      title: "Total News",
-      value: stats.totalNews,
-      description: "Published articles",
-      icon: Newspaper,
-      color: "text-blue-600",
-    },
-    {
-      title: "Total Events",
-      value: stats.totalEvents,
-      description: "Scheduled events",
-      icon: Calendar,
-      color: "text-green-600",
-    },
-    {
-      title: "Recent News",
-      value: stats.recentNews,
-      description: "Last 30 days",
-      icon: TrendingUp,
-      color: "text-purple-600",
-    },
-    {
-      title: "Recent Events",
-      value: stats.recentEvents,
-      description: "Last 30 days",
-      icon: TrendingUp,
-      color: "text-orange-600",
-    },
-  ];
+    // Admin-only actions
+    if (isAdmin) {
+      baseActions.push(
+        {
+          title: "Manage Users",
+          description: "User management",
+          href: "/dashboard/users",
+          icon: Users,
+          color: "bg-indigo-500",
+        },
+        {
+          title: "Governorates",
+          description: "Manage governorates",
+          href: "/dashboard/governorates",
+          icon: Shield,
+          color: "bg-teal-500",
+        }
+      );
+    }
+
+    return baseActions;
+  };
+
+  // Build stat cards based on available data and user role
+  const getStatCards = () => {
+    const cards = [
+      {
+        title: "Total News",
+        value: stats.totalNews,
+        description: "All articles",
+        icon: Newspaper,
+        color: "text-blue-600",
+      },
+      {
+        title: "Total Events",
+        value: stats.totalEvents,
+        description: "All events",
+        icon: Calendar,
+        color: "text-green-600",
+      },
+      {
+        title: "Published News",
+        value: stats.publishedNews,
+        description: "Live articles",
+        icon: TrendingUp,
+        color: "text-purple-600",
+      },
+      {
+        title: "Published Events",
+        value: stats.publishedEvents,
+        description: "Live events",
+        icon: TrendingUp,
+        color: "text-orange-600",
+      },
+    ];
+
+    // Add admin-specific stats
+    if (isAdmin && stats.totalUsers !== undefined) {
+      cards.push({
+        title: "Total Users",
+        value: stats.totalUsers,
+        description: `${stats.activeUsers || 0} active`,
+        icon: Users,
+        color: "text-indigo-600",
+      });
+    }
+
+    return cards;
+  };
 
   if (isLoading) {
     return (
@@ -168,41 +199,46 @@ export default function DashboardPage() {
     );
   }
 
+  const quickActions = getQuickActions();
+  const statCards = getStatCards();
+
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>{" "}
-          <p className="text-gray-600 mt-1">
-            Welcome back, {user?.email || "Admin"}! Here&apos;s what&apos;s
-            happening with your content.
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
+          <p className="text-gray-600 dark:text-gray-300 mt-1">
+            Welcome back, {user?.email || "Admin"}! 
+            {isAdmin && <span className="ml-2 text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">Admin</span>}
           </p>
         </div>
       </div>
+      
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {statCards.map((stat) => (
           <Card key={stat.title}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
                 {stat.title}
               </CardTitle>
               <stat.icon className={`h-4 w-4 ${stat.color}`} />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stat.value}</div>
-              <p className="text-xs text-gray-500 mt-1">{stat.description}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{stat.description}</p>
             </CardContent>
           </Card>
         ))}
       </div>
+      
       {/* Quick Actions */}
       <div>
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
           Quick Actions
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {quickActions.map((action) => (
             <Card
               key={action.title}
@@ -222,7 +258,7 @@ export default function DashboardPage() {
             </Card>
           ))}
         </div>
-      </div>{" "}
+      </div>
       {/* Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
@@ -237,17 +273,17 @@ export default function DashboardPage() {
               {recentNews.length > 0 ? (
                 recentNews.map((news) => (
                   <div
-                    key={news.id}
+                    key={news._id}
                     className="flex items-center justify-between py-2"
                   >
                     <div>
-                      <p className="font-medium">{news.title}</p>
+                      <p className="font-medium">{getText(news)}</p>
                       <p className="text-sm text-gray-500">
-                        {new Date(news.created_at).toLocaleDateString()}
+                        {new Date(news.createdAt).toLocaleDateString()}
                       </p>
                     </div>
                     <Button variant="outline" size="sm" asChild>
-                      <Link href={`/dashboard/news/edit/${news.id}`}>Edit</Link>
+                      <Link href={`/dashboard/news/edit/${news._id}`}>Edit</Link>
                     </Button>
                   </div>
                 ))
@@ -270,17 +306,17 @@ export default function DashboardPage() {
               {recentEvents.length > 0 ? (
                 recentEvents.map((event) => (
                   <div
-                    key={event.id}
+                    key={event._id}
                     className="flex items-center justify-between py-2"
                   >
                     <div>
-                      <p className="font-medium">{event.title}</p>
+                      <p className="font-medium">{getText(event)}</p>
                       <p className="text-sm text-gray-500">
-                        {new Date(event.event_date).toLocaleDateString()}
+                        {new Date(event.eventDate).toLocaleDateString()}
                       </p>
                     </div>
                     <Button variant="outline" size="sm" asChild>
-                      <Link href={`/dashboard/events/edit/${event.id}`}>
+                      <Link href={`/dashboard/events/edit/${event._id}`}>
                         Edit
                       </Link>
                     </Button>

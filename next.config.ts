@@ -9,12 +9,12 @@ const nextConfig: NextConfig = {
   },
   // Define supported page extensions
   pageExtensions: ["js", "jsx", "ts", "tsx"],
-  // Configure images for Supabase storage
+  // Configure images for Supabase storage and Google Drive
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "tbnijxfllcwfvhdjppns.supabase.co",
+        hostname: "tbnijxfvhdjppns.supabase.co",
         port: "",
         pathname: "/storage/v1/object/public/**",
       },
@@ -24,6 +24,20 @@ const nextConfig: NextConfig = {
         hostname: "*.supabase.co",
         port: "",
         pathname: "/storage/v1/object/public/**",
+      },
+      // Google Drive images
+      {
+        protocol: "https",
+        hostname: "drive.google.com",
+        port: "",
+        pathname: "/**",
+      },
+      // Google Drive direct link
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        port: "",
+        pathname: "/**",
       },
     ],
   },

@@ -4,33 +4,34 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, User } from "lucide-react";
+import { processImageUrl } from "@/lib/image-upload";
+import { getDriveImageUrl, isDriveUrl } from "@/lib/utils";
 
-import { NewsItem } from "@/lib/database";
+import { NewsItem } from "@/lib/api";
 
-interface NewsCardProps
-  extends Omit<
-    NewsItem,
-    | "content"
-    | "published"
-    | "featured"
-    | "view_count"
-    | "created_by"
-    | "updated_by"
-  > {
+interface NewsCardProps {
+  news: NewsItem;
   index: number;
 }
 
-export const NewsCard = ({
-  title,
-  description,
-  cover_image,
-  created_at,
-  author,
-  slug,
-  index,
-}: NewsCardProps) => {
+export const NewsCard = ({ news, index }: NewsCardProps) => {
+  // Get title - API returns separate fields (title, arabicTitle)
+  const title = news.title || news.arabicTitle || '';
+  const description = news.description || news.arabicDescription || '';
+  
+  // Handle cover image - could be Drive URL or regular URL
+  const rawImage = news.coverImage || "/images/hero.jpg";
+  const isGoogleDriveImage = isDriveUrl(rawImage);
+  const coverImage = isGoogleDriveImage 
+    ? getDriveImageUrl(rawImage) 
+    : (processImageUrl(rawImage) || "/images/hero.jpg");
+  
+  const createdAt = news.createdAt;
+  const author = news.author || 'YLY Team';
+  const slug = news.slug;
+
   // Format date for display
-  const formattedDate = new Date(created_at).toLocaleDateString("en-US", {
+  const formattedDate = new Date(createdAt).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -54,11 +55,12 @@ export const NewsCard = ({
           >
             {" "}
             <Image
-              src={cover_image || "/images/hero.jpg"}
+              src={coverImage}
               alt={title}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              unoptimized={isGoogleDriveImage}
             />
           </motion.div>
         </div>

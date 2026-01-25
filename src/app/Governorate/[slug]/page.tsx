@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import governoratesData from "@/data/governorates-data.json";
 import { GovernoratePageProps } from "@/types/governorate";
+import { governoratesService } from "@/lib/api/governorates.service";
 import { 
   GovernorateHero,
   GovernorateMembers,
@@ -90,12 +91,35 @@ export default async function GovernoratePage({ params }: GovernoratePageProps) 
     // Await params to satisfy Next.js requirements
     const resolvedParams = await params;
 
-    // Get governorate data from JSON file
+    // Get governorate data from JSON file (for local data like members)
     const governorateData =
       governoratesData[resolvedParams.slug as keyof typeof governoratesData];
 
     if (!governorateData) {
       notFound();
+    }
+
+    // Try to get governorate from API to get the MongoDB _id
+    let governorateId: string | undefined;
+    let apiNewsCount = 0;
+    let apiEventsCount = 0;
+
+    try {
+      const apiGovernorate = await governoratesService.getBySlug(resolvedParams.slug);
+      governorateId = apiGovernorate._id;
+      
+      // Also try to get stats for the stats component
+      try {
+        const stats = await governoratesService.getStats(governorateId);
+        apiNewsCount = stats.news?.published || 0;
+        apiEventsCount = stats.events?.published || 0;
+      } catch {
+        // Stats not available, use defaults
+      }
+    } catch {
+      // API not available or governorate not found in API
+      // Continue without API data - components will show "Coming Soon"
+      console.log(`Governorate ${resolvedParams.slug} not found in API, using local data only`);
     }
 
     // Get members from the governorate data
@@ -148,8 +172,8 @@ export default async function GovernoratePage({ params }: GovernoratePageProps) 
 
         <GovernorateStats
           governorate={governorateData}
-          newsCount={0}
-          eventsCount={0}
+          newsCount={apiNewsCount}
+          eventsCount={apiEventsCount}
         />
 
         {sampleMembers.length > 0 && (
@@ -159,9 +183,15 @@ export default async function GovernoratePage({ params }: GovernoratePageProps) 
           />
         )}
 
-        <GovernorateNews governorateName={governorateData.name} />
+        <GovernorateNews 
+          governorateName={governorateData.name} 
+          governorateId={governorateId}
+        />
 
-        <GovernorateEvents governorateName={governorateData.name} />
+        <GovernorateEvents 
+          governorateName={governorateData.name}
+          governorateId={governorateId}
+        />
       </main>
     );
   } catch (error) {

@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { NewsService, EventsService } from "@/lib/database";
+import { newsService, eventsService } from "@/lib/api";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl =
@@ -41,19 +41,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     // Dynamic news routes
-    const allNews = await NewsService.getAllNews();
-    const newsRoutes: MetadataRoute.Sitemap = allNews.map((news) => ({
+    const newsResponse = await newsService.getAll({ published: true, limit: 100 });
+    const newsData = Array.isArray(newsResponse?.data) ? newsResponse.data : [];
+    const newsRoutes: MetadataRoute.Sitemap = newsData.map((news) => ({
       url: `${baseUrl}/news/${news.slug}`,
-      lastModified: new Date(news.updated_at || news.created_at),
+      lastModified: new Date(news.updatedAt || news.createdAt),
       changeFrequency: "weekly" as const,
       priority: 0.7,
     }));
 
     // Dynamic events routes
-    const allEvents = await EventsService.getAllEvents();
-    const eventsRoutes: MetadataRoute.Sitemap = allEvents.map((event) => ({
+    const eventsResponse = await eventsService.getAll({ published: true, limit: 100 });
+    const eventsData = Array.isArray(eventsResponse?.data) ? eventsResponse.data : [];
+    const eventsRoutes: MetadataRoute.Sitemap = eventsData.map((event) => ({
       url: `${baseUrl}/events/${event.slug}`,
-      lastModified: new Date(event.updated_at || event.created_at),
+      lastModified: new Date(event.updatedAt || event.createdAt),
       changeFrequency: "weekly" as const,
       priority: 0.7,
     }));

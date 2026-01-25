@@ -1,14 +1,125 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calendar, Bell, ArrowRight, Users, Sparkles, Zap } from "lucide-react";
+import { Clock, ArrowRight, Calendar, MapPin, Users, Loader2 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import Image from "next/image";
 import { GovernorateEventsProps } from "@/types/governorate";
+import { governoratesService } from "@/lib/api";
+import { formatShortDate } from "@/lib/utils/date-format";
+import { getDriveImageUrl, isDriveUrl } from "@/lib/utils/drive-image";
+import { getEventRegistrationStatus } from "@/lib/utils/event-status";
 
-export function GovernorateEvents({ governorateName }: GovernorateEventsProps) {
+interface EventItemData {
+  _id: string;
+  title: string;
+  arabicTitle: string;
+  slug: string;
+  description: string;
+  arabicDescription: string;
+  coverImage: string;
+  eventDate: string;
+  eventTime?: string;
+  location: string;
+  arabicLocation: string;
+  published: boolean;
+  registrationEnabled?: boolean;
+  currentParticipants?: number;
+  maxParticipants?: number;
+  isUpcoming?: boolean;
+  isRegistrationOpen?: boolean;
+  createdAt: string;
+}
+
+export function GovernorateEvents({ governorateName, governorateId }: GovernorateEventsProps & { governorateId?: string }) {
   const t = useTranslations("governorate.features.comingSoon.events");
+  const [events, setEvents] = useState<EventItemData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      if (!governorateId) {
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        const response = await governoratesService.getEvents(governorateId, {
+          published: true,
+          upcoming: true,
+          limit: 6,
+        });
+        setEvents(response.data);
+      } catch (err) {
+        console.error('Failed to fetch governorate events:', err);
+        setError('فشل في تحميل الفعاليات');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, [governorateId]);
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <section className="py-16 bg-white dark:bg-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-center items-center py-12">
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Show coming soon if no governorateId or no events
+  if (!governorateId || events.length === 0) {
+    return (
+      <section className="py-16 bg-white dark:bg-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 rounded-full mb-6">
+              <Calendar className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
+            </div>
+            <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
+              {t("title")}
+            </h2>
+            <p className="text-lg text-emerald-600 dark:text-emerald-400 font-medium mb-4">
+              {t("subtitle", { governorate: governorateName })}
+            </p>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <Card className="relative overflow-hidden border-0 shadow-xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/50 dark:to-teal-950/50">
+              <CardContent className="p-12 text-center relative">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full mb-8 shadow-lg">
+                  <Clock className="w-10 h-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                  قريباً...
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-lg mx-auto">
+                  نعمل على تنظيم فعاليات وورش عمل رائعة لشباب {governorateName}.
+                </p>
+                <Button variant="ghost" size="lg" asChild>
+                  <Link href="/events">
+                    تصفح جميع الفعاليات
+                    <ArrowRight className="w-5 h-5 mr-2" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-16 bg-white dark:bg-gray-900">
@@ -18,104 +129,85 @@ export function GovernorateEvents({ governorateName }: GovernorateEventsProps) {
             <Calendar className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
           </div>
           <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
-            {t("title")}
+            فعاليات {governorateName}
           </h2>
-          <p className="text-lg text-emerald-600 dark:text-emerald-400 font-medium mb-4">
-            {t("subtitle", { governorate: governorateName })}
-          </p>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            {t("description", { governorate: governorateName })}
+            انضم إلينا في الفعاليات القادمة في محافظة {governorateName}
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          <Card className="relative overflow-hidden border-0 shadow-xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/50 dark:to-teal-950/50">
-            {/* Decorative elements */}
-            <div className="absolute top-0 left-0 w-40 h-40 bg-gradient-to-br from-emerald-200 to-teal-200 dark:from-emerald-800 dark:to-teal-800 rounded-full opacity-20 -translate-y-20 -translate-x-20"></div>
-            <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-cyan-200 to-blue-200 dark:from-cyan-800 dark:to-blue-800 rounded-full opacity-20 translate-y-16 translate-x-16"></div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {events.map((event) => {
+            const status = getEventRegistrationStatus({
+              registrationEnabled: event.registrationEnabled,
+              eventDate: event.eventDate,
+              currentParticipants: event.currentParticipants,
+              maxParticipants: event.maxParticipants,
+              published: event.published,
+            });
 
-            <CardContent className="p-12 text-center relative">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full mb-8 shadow-lg">
-                <Users className="w-10 h-10 text-white" />
-              </div>
-
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                Amazing Events in Planning
-              </h3>
-
-              <div className="flex items-center justify-center gap-2 mb-6">
-                <Zap className="w-5 h-5 text-yellow-500" />
-                <span className="text-lg font-medium text-gray-700 dark:text-gray-200">
-                  Workshops • Training • Community Events
-                </span>
-                <Zap className="w-5 h-5 text-yellow-500" />
-              </div>
-
-              <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-lg mx-auto leading-relaxed">
-                We&rsquo;re organizing leadership workshops, skill development
-                sessions, and community engagement events that will empower
-                youth in {governorateName}.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                <div className="bg-white dark:bg-gray-800/50 rounded-lg p-4 shadow-sm">
-                  <div className="w-8 h-8 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mb-2 mx-auto">
-                    <Users className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            return (
+              <Link href={`/events/${event.slug}`} key={event._id}>
+                <Card className="group h-full overflow-hidden hover:shadow-lg transition-all duration-300">
+                  <div className="relative aspect-video overflow-hidden">
+                    <Image
+                      src={getDriveImageUrl(event.coverImage) || '/images/placeholder-event.jpg'}
+                      alt={event.arabicTitle || event.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      unoptimized={isDriveUrl(event.coverImage)}
+                    />
+                    <div className="absolute top-2 right-2">
+                      <Badge 
+                        variant={status.canRegister ? "default" : "secondary"}
+                        className={status.badgeColor === 'green' ? 'bg-green-500' : 
+                          status.badgeColor === 'orange' ? 'bg-orange-500' : ''}
+                      >
+                        {status.badgeTextAr}
+                      </Badge>
+                    </div>
                   </div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">
-                    Leadership
-                  </p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">
-                    Development
-                  </p>
-                </div>
-                <div className="bg-white dark:bg-gray-800/50 rounded-lg p-4 shadow-sm">
-                  <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-2 mx-auto">
-                    <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">
-                    Skills
-                  </p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">
-                    Training
-                  </p>
-                </div>
-                <div className="bg-white dark:bg-gray-800/50 rounded-lg p-4 shadow-sm">
-                  <div className="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mb-2 mx-auto">
-                    <Calendar className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-                  </div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">
-                    Community
-                  </p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">
-                    Events
-                  </p>
-                </div>
-              </div>
+                  <CardContent className="p-4">
+                    <h3 className="font-bold text-lg mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                      {event.arabicTitle || event.title}
+                    </h3>
+                    <div className="space-y-2 text-sm text-muted-foreground">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4" />
+                        <span>{formatShortDate(event.eventDate, 'ar')}</span>
+                        {event.eventTime && (
+                          <>
+                            <span>•</span>
+                            <span>{event.eventTime}</span>
+                          </>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-4 h-4" />
+                        <span className="line-clamp-1">{event.arabicLocation || event.location}</span>
+                      </div>
+                      {event.maxParticipants && (
+                        <div className="flex items-center gap-2">
+                          <Users className="w-4 h-4" />
+                          <span>{event.currentParticipants || 0}/{event.maxParticipants}</span>
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            );
+          })}
+        </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  <Bell className="w-5 h-5 mr-2" />
-                  {t("notifyButton")}
-                </Button>
-
-                <Button
-                  variant="ghost"
-                  size="lg"
-                  asChild
-                  className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20"
-                >
-                  <Link href="/contactUs">
-                    {t("contactUs")}
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+        <div className="text-center mt-8">
+          <Button variant="outline" size="lg" asChild>
+            <Link href="/events">
+              عرض جميع الفعاليات
+              <ArrowRight className="w-5 h-5 mr-2" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>

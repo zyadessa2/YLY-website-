@@ -21,36 +21,46 @@ import { ArrowLeft, Save, Loader2 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import Link from "next/link";
 import React from "react";
-import { NewsItem, NewsService, UpdateNewsData } from "@/lib/database";
-import { supabase } from "@/lib/supabase";
-import {
-  ImageUploader,
-  MultiImageUploader,
-} from "@/components/ui/image-uploader";
+import { newsService, authService, NewsItem, UpdateNewsData } from "@/lib/api";
 
-// Form schema
+// Form schema for bilingual content
 const schema = yup
   .object({
-    title: yup
+    titleAr: yup
       .string()
-      .required("Title is required")
+      .required("Arabic title is required")
       .min(10, "Title must be at least 10 characters")
       .max(200, "Title must be less than 200 characters"),
-    description: yup
+    titleEn: yup
       .string()
-      .required("Description is required")
+      .required("English title is required")
+      .min(10, "Title must be at least 10 characters")
+      .max(200, "Title must be less than 200 characters"),
+    descriptionAr: yup
+      .string()
+      .required("Arabic description is required")
       .min(20, "Description must be at least 20 characters")
       .max(500, "Description must be less than 500 characters"),
-    content: yup
+    descriptionEn: yup
       .string()
-      .required("Content is required")
+      .required("English description is required")
+      .min(20, "Description must be at least 20 characters")
+      .max(500, "Description must be less than 500 characters"),
+    contentAr: yup
+      .string()
+      .required("Arabic content is required")
       .min(100, "Content must be at least 100 characters"),
-    author: yup.string().required("Author is required"),
-    cover_image: yup
+    contentEn: yup
       .string()
-      .required("Cover image is required")
+      .required("English content is required")
+      .min(100, "Content must be at least 100 characters"),
+    authorAr: yup.string().required("Arabic author name is required"),
+    authorEn: yup.string().required("English author name is required"),
+    coverImage: yup
+      .string()
+      .required("Cover image URL is required")
       .url("Must be a valid URL"),
-    content_images: yup
+    contentImages: yup
       .array()
       .of(yup.string().url("Must be a valid URL"))
       .default([]),
@@ -72,22 +82,25 @@ export default function EditNewsPage() {
   const router = useRouter();
   const params = useParams();
   const [isLoading, setIsLoading] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [newsItem, setNewsItem] = useState<NewsItem | null>(null);
   const [notFound, setNotFound] = useState(false);
-  const [coverImageUrl, setCoverImageUrl] = useState<string>("");
-  const [contentImages, setContentImages] = useState<string[]>([]);
 
   const form = useForm<FormData>({
     resolver: yupResolver(schema),
     defaultValues: {
-      title: "",
-      description: "",
-      content: "",
-      author: "",
-      cover_image: "",
-      content_images: [],
+      titleAr: "",
+      titleEn: "",
+      descriptionAr: "",
+      descriptionEn: "",
+      contentAr: "",
+      contentEn: "",
+      authorAr: "",
+      authorEn: "",
+      coverImage: "",
+      contentImages: [],
       slug: "",
       published: false,
       featured: false,
@@ -96,75 +109,66 @@ export default function EditNewsPage() {
 
   // Auth check
   React.useEffect(() => {
-    async function checkAuth() {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) {
-        router.push("/signin");
-      }
+    if (!authService.isAuthenticated()) {
+      router.push("/signin");
     }
-    checkAuth();
   }, [router]);
-  // Set form values when images are uploaded
-  React.useEffect(() => {
-    if (coverImageUrl) {
-      form.setValue("cover_image", coverImageUrl);
-    }
-  }, [coverImageUrl, form]);
 
-  React.useEffect(() => {
-    if (contentImages.length > 0) {
-      form.setValue("content_images", contentImages);
-    }
-  }, [contentImages, form]);
-
+  // Fetch news item
   useEffect(() => {
     async function fetchNewsItem() {
       try {
-        setIsLoading(true);
+        setIsFetching(true);
         const id = params.id as string;
 
-        // Fetch news item from Supabase
-        const { data, error } = await supabase
-          .from("news")
-          .select("*")
-          .eq("id", id)
-          .single();
-
-        if (error) {
-          console.error("Error fetching news:", error);
-          setNotFound(true);
-          return;
-        }
+        // Fetch news item using new API service
+        const data = await newsService.getById(id);
 
         if (data) {
-          setNewsItem(data as NewsItem);
+          setNewsItem(data);
 
-          // Set initial image values
-          setCoverImageUrl(data.cover_image || "");
-          setContentImages(data.content_images || []);
+          // Helper to get text from new API format (separate fields) or legacy format
+          const getTextFields = (enField: string | undefined, arField: string | undefined, legacyField: string | { ar: string; en: string } | undefined): { ar: string; en: string } => {
+            // New API format with separate fields
+            if (arField !== undefined) {
+              return { en: enField || '', ar: arField || '' };
+            }
+            // Legacy format with bilingual object
+            if (typeof legacyField === 'object' && legacyField !== null) {
+              return { en: legacyField.en || '', ar: legacyField.ar || '' };
+            }
+            // Simple string
+            return { en: String(legacyField || ''), ar: '' };
+          };
 
-          // Populate form with existing data
+          // Populate form with existing data (handling both new and legacy format)
+          const titleText = getTextFields(data.title, data.arabicTitle, data.title);
+          const descText = getTextFields(data.description, data.arabicDescription, data.description);
+          const contentText = getTextFields(data.content, data.arabicContent, data.content);
+          
           form.reset({
-            title: data.title,
-            description: data.description,
-            content: data.content,
-            author: data.author,
-            cover_image: data.cover_image,
-            content_images: data.content_images || [],
-            slug: data.slug,
-            published: data.published,
-            featured: data.featured,
+            titleAr: titleText.ar,
+            titleEn: titleText.en,
+            descriptionAr: descText.ar,
+            descriptionEn: descText.en,
+            contentAr: contentText.ar,
+            contentEn: contentText.en,
+            authorAr: data.arabicAuthor || data.author || '',
+            authorEn: data.author || '',
+            coverImage: data.coverImage || '',
+            contentImages: data.contentImages || [],
+            slug: data.slug || '',
+            published: data.published || false,
+            featured: data.featured || false,
           });
         } else {
           setNotFound(true);
         }
       } catch (err) {
-        console.error("Error:", err);
+        console.error("Error fetching news:", err);
         setNotFound(true);
       } finally {
-        setIsLoading(false);
+        setIsFetching(false);
       }
     }
 
@@ -172,6 +176,7 @@ export default function EditNewsPage() {
       fetchNewsItem();
     }
   }, [params.id, form]);
+
   async function onSubmit(data: FormData) {
     try {
       setIsLoading(true);
@@ -179,31 +184,26 @@ export default function EditNewsPage() {
 
       if (!newsItem) return;
 
-      // Get the current user
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) {
-        throw new Error("Authentication required");
-      }
-
-      // Prepare the news data object
+      // Prepare the update data with new API format (separate fields)
       const updateData: UpdateNewsData = {
-        title: data.title,
-        description: data.description,
-        content: data.content,
-        author: data.author,
-        cover_image: data.cover_image,
-        content_images: (data.content_images || []).filter(
+        title: data.titleEn,
+        arabicTitle: data.titleAr,
+        description: data.descriptionEn,
+        arabicDescription: data.descriptionAr,
+        content: data.contentEn,
+        arabicContent: data.contentAr,
+        author: data.authorEn || data.authorAr,
+        arabicAuthor: data.authorAr || data.authorEn,
+        coverImage: data.coverImage,
+        contentImages: (data.contentImages || []).filter(
           (url): url is string => typeof url === "string" && url !== undefined
         ),
-        slug: data.slug,
         published: data.published,
         featured: data.featured,
       };
 
-      // Use NewsService to update the news item
-      const updatedNews = await NewsService.updateNews(newsItem.id, updateData);
+      // Use newsService to update the news item
+      const updatedNews = await newsService.update(newsItem._id, updateData);
 
       console.log("News item updated:", updatedNews);
       setSuccess(true);
@@ -250,7 +250,7 @@ export default function EditNewsPage() {
     );
   }
 
-  if (!newsItem) {
+  if (isFetching || !newsItem) {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
@@ -283,7 +283,7 @@ export default function EditNewsPage() {
         <CardHeader>
           <CardTitle>News Article Details</CardTitle>
           <CardDescription>
-            Update the information below to modify the news article
+            Update the bilingual information below to modify the news article
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -302,143 +302,216 @@ export default function EditNewsPage() {
           )}
 
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Title */}
-              <div className="md:col-span-2">
-                <Label htmlFor="title">Title *</Label>
-                <Input
-                  id="title"
-                  placeholder="Enter news title"
-                  disabled={isLoading}
-                  {...form.register("title")}
-                />
-                {form.formState.errors.title && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.title.message}
-                  </p>
-                )}
+            {/* English Section */}
+            <div className="border rounded-lg p-4 bg-blue-50/30">
+              <h3 className="font-semibold text-lg mb-4 text-blue-700">🇺🇸 English Content</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* English Title */}
+                <div className="md:col-span-2">
+                  <Label htmlFor="titleEn">Title (English) *</Label>
+                  <Input
+                    id="titleEn"
+                    placeholder="Enter news title in English"
+                    disabled={isLoading}
+                    {...form.register("titleEn")}
+                  />
+                  {form.formState.errors.titleEn && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.titleEn.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* English Author */}
+                <div>
+                  <Label htmlFor="authorEn">Author (English) *</Label>
+                  <Input
+                    id="authorEn"
+                    placeholder="Author name in English"
+                    disabled={isLoading}
+                    {...form.register("authorEn")}
+                  />
+                  {form.formState.errors.authorEn && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.authorEn.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Slug */}
+                <div>
+                  <Label htmlFor="slug">URL Slug *</Label>
+                  <Input
+                    id="slug"
+                    placeholder="url-friendly-slug"
+                    disabled={isLoading}
+                    {...form.register("slug")}
+                  />
+                  {form.formState.errors.slug && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.slug.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* English Description */}
+                <div className="md:col-span-2">
+                  <Label htmlFor="descriptionEn">Description (English) *</Label>
+                  <Textarea
+                    id="descriptionEn"
+                    placeholder="Brief description in English"
+                    rows={3}
+                    disabled={isLoading}
+                    {...form.register("descriptionEn")}
+                  />
+                  {form.formState.errors.descriptionEn && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.descriptionEn.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* English Content */}
+                <div className="md:col-span-2">
+                  <Label htmlFor="contentEn">Content (English) *</Label>
+                  <Textarea
+                    id="contentEn"
+                    placeholder="Full article content in English (supports HTML)"
+                    rows={8}
+                    disabled={isLoading}
+                    {...form.register("contentEn")}
+                  />
+                  {form.formState.errors.contentEn && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.contentEn.message}
+                    </p>
+                  )}
+                </div>
               </div>
-              {/* Author */}
-              <div>
-                <Label htmlFor="author">Author *</Label>
-                <Input
-                  id="author"
-                  placeholder="Author name"
-                  disabled={isLoading}
-                  {...form.register("author")}
-                />
-                {form.formState.errors.author && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.author.message}
-                  </p>
-                )}
+            </div>
+
+            {/* Arabic Section */}
+            <div className="border rounded-lg p-4 bg-green-50/30" dir="rtl">
+              <h3 className="font-semibold text-lg mb-4 text-green-700">🇸🇦 المحتوى العربي</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Arabic Title */}
+                <div className="md:col-span-2">
+                  <Label htmlFor="titleAr">العنوان (عربي) *</Label>
+                  <Input
+                    id="titleAr"
+                    placeholder="أدخل عنوان الخبر بالعربية"
+                    disabled={isLoading}
+                    {...form.register("titleAr")}
+                  />
+                  {form.formState.errors.titleAr && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.titleAr.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Arabic Author */}
+                <div className="md:col-span-2">
+                  <Label htmlFor="authorAr">الكاتب (عربي) *</Label>
+                  <Input
+                    id="authorAr"
+                    placeholder="اسم الكاتب بالعربية"
+                    disabled={isLoading}
+                    {...form.register("authorAr")}
+                  />
+                  {form.formState.errors.authorAr && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.authorAr.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Arabic Description */}
+                <div className="md:col-span-2">
+                  <Label htmlFor="descriptionAr">الوصف (عربي) *</Label>
+                  <Textarea
+                    id="descriptionAr"
+                    placeholder="وصف مختصر بالعربية"
+                    rows={3}
+                    disabled={isLoading}
+                    {...form.register("descriptionAr")}
+                  />
+                  {form.formState.errors.descriptionAr && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.descriptionAr.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Arabic Content */}
+                <div className="md:col-span-2">
+                  <Label htmlFor="contentAr">المحتوى (عربي) *</Label>
+                  <Textarea
+                    id="contentAr"
+                    placeholder="المحتوى الكامل بالعربية (يدعم HTML)"
+                    rows={8}
+                    disabled={isLoading}
+                    {...form.register("contentAr")}
+                  />
+                  {form.formState.errors.contentAr && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.contentAr.message}
+                    </p>
+                  )}
+                </div>
               </div>
-              {/* Slug */}
-              <div>
-                <Label htmlFor="slug">URL Slug *</Label>
-                <Input
-                  id="slug"
-                  placeholder="url-friendly-slug"
-                  disabled={isLoading}
-                  {...form.register("slug")}
-                />
-                {form.formState.errors.slug && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.slug.message}
+            </div>
+
+            {/* Images Section */}
+            <div className="border rounded-lg p-4">
+              <h3 className="font-semibold text-lg mb-4">📷 Images</h3>
+              <div className="space-y-4">
+                {/* Cover Image URL */}
+                <div>
+                  <Label htmlFor="coverImage">Cover Image URL *</Label>
+                  <Input
+                    id="coverImage"
+                    placeholder="https://drive.google.com/... or https://example.com/image.jpg"
+                    disabled={isLoading}
+                    {...form.register("coverImage")}
+                  />
+                  {form.formState.errors.coverImage && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.coverImage.message}
+                    </p>
+                  )}
+                  <p className="text-sm text-gray-500 mt-1">
+                    The main image displayed for this news article. Supports Google Drive links.
                   </p>
-                )}
-              </div>{" "}
-              {/* Image URL */}
-              <div className="md:col-span-2">
-                <ImageUploader
-                  id="cover_image"
-                  label="Cover Image"
-                  description="The main image displayed for this news article (required)"
-                  existingUrl={coverImageUrl}
-                  bucket="news"
-                  folder={`articles/${
-                    form.watch("slug") || newsItem?.slug || "edit"
-                  }`}
-                  onUploadComplete={(result) => {
-                    setCoverImageUrl(result.url);
-                    form.setValue("cover_image", result.url);
-                    form.clearErrors("cover_image");
-                  }}
-                  onError={(error) => {
-                    form.setError("cover_image", {
-                      type: "manual",
-                      message: error.message,
-                    });
-                  }}
-                  required
-                  disabled={isLoading}
-                />
-                {form.formState.errors.cover_image && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.cover_image.message}
+                </div>
+
+                {/* Content Images */}
+                <div>
+                  <Label htmlFor="contentImages">Content Images (comma-separated URLs)</Label>
+                  <Textarea
+                    id="contentImages"
+                    placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg"
+                    rows={3}
+                    disabled={isLoading}
+                    value={(form.watch("contentImages") || []).join(", ")}
+                    onChange={(e) => {
+                      const urls = e.target.value
+                        .split(",")
+                        .map((url) => url.trim())
+                        .filter((url) => url.length > 0);
+                      form.setValue("contentImages", urls);
+                    }}
+                  />
+                  <p className="text-sm text-gray-500 mt-1">
+                    Additional images for the article content (optional)
                   </p>
-                )}
-              </div>
-              {/* Description */}
-              <div className="md:col-span-2">
-                <Label htmlFor="description">Description *</Label>
-                <Textarea
-                  id="description"
-                  placeholder="Brief description of the news article"
-                  rows={3}
-                  disabled={isLoading}
-                  {...form.register("description")}
-                />
-                {form.formState.errors.description && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.description.message}
-                  </p>
-                )}
-              </div>
-              {/* Content */}
-              <div className="md:col-span-2">
-                <Label htmlFor="content">Content *</Label>
-                <Textarea
-                  id="content"
-                  placeholder="Full article content (supports HTML)"
-                  rows={10}
-                  disabled={isLoading}
-                  {...form.register("content")}
-                />
-                {form.formState.errors.content && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.content.message}
-                  </p>
-                )}
-                <p className="text-sm text-gray-500 mt-1">
-                  You can use HTML tags for formatting (e.g., &lt;p&gt;,
-                  &lt;h2&gt;, &lt;ul&gt;, &lt;li&gt;)
-                </p>
-              </div>
-              {/* Content Images */}
-              <div className="md:col-span-2">
-                <MultiImageUploader
-                  id="content_images"
-                  label="Content Images"
-                  description="Add additional images for your article content (optional)"
-                  existingUrls={contentImages}
-                  bucket="news"
-                  folder={`articles/${
-                    form.watch("slug") || newsItem?.slug || "edit"
-                  }/content`}
-                  onUploadComplete={(urls) => {
-                    setContentImages(urls);
-                    form.setValue("content_images", urls);
-                  }}
-                  disabled={isLoading}
-                  className="mt-4"
-                />
+                </div>
               </div>
             </div>
 
             {/* Publication Settings */}
-            <div className="md:col-span-2 border-t pt-6 mt-6">
-              <h3 className="font-medium text-lg mb-4">Publication Settings</h3>
+            <div className="border rounded-lg p-4">
+              <h3 className="font-semibold text-lg mb-4">⚙️ Publication Settings</h3>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
@@ -467,8 +540,7 @@ export default function EditNewsPage() {
                       Feature Article
                     </Label>
                     <p className="text-sm text-gray-500">
-                      When enabled, the article will be displayed in featured
-                      sections
+                      When enabled, the article will be displayed in featured sections
                     </p>
                   </div>
                   <Switch

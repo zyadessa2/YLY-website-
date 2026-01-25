@@ -2,13 +2,25 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { EventsService, EventItem } from "@/lib/database";
+import { eventsService, EventItem } from "@/lib/api";
+import { processImageUrl } from "@/lib/image-upload";
+import { getDriveImageUrl, isDriveUrl } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
 
 interface RelatedEventsProps {
   currentEventId: string;
 }
+
+// Helper functions to get display text and image URL from event item
+const getTitle = (event: EventItem): string => event.title || event.arabicTitle || '';
+const getDescription = (event: EventItem): string => event.description || event.arabicDescription || '';
+const getLocation = (event: EventItem): string => event.location || event.arabicLocation || '';
+const getImage = (event: EventItem): string => {
+  const raw = event.coverImage || "/images/eventLogos/YLY-Competition-1024x1024.png";
+  return getDriveImageUrl(raw) || processImageUrl(raw) || "/images/eventLogos/YLY-Competition-1024x1024.png";
+};
+const isGoogleDrive = (event: EventItem): boolean => isDriveUrl(event.coverImage);
 
 export const RelatedEvents = ({ currentEventId }: RelatedEventsProps) => {
   const [relatedEvents, setRelatedEvents] = useState<EventItem[]>([]);
@@ -17,9 +29,9 @@ export const RelatedEvents = ({ currentEventId }: RelatedEventsProps) => {
   useEffect(() => {
     const fetchRelatedEvents = async () => {
       try {
-        const allEvents = await EventsService.getAllEvents();
-        const filtered = allEvents
-          .filter((event) => event.id !== currentEventId)
+        const response = await eventsService.getAll({ published: true, limit: 10 });
+        const filtered = response.data
+          .filter((event) => event._id !== currentEventId)
           .slice(0, 3); // Show maximum 3 related events
         setRelatedEvents(filtered);
       } catch (error) {
@@ -55,7 +67,7 @@ export const RelatedEvents = ({ currentEventId }: RelatedEventsProps) => {
       <div className="hidden lg:block space-y-4">
         {relatedEvents.map((event, index) => (
           <motion.div
-            key={event.id}
+            key={event._id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
@@ -65,29 +77,27 @@ export const RelatedEvents = ({ currentEventId }: RelatedEventsProps) => {
               {/* Content Left */}
               <div className="flex-1 p-4">
                 <h4 className="font-semibold text-sm mb-2 line-clamp-2 hover:text-primary transition-colors">
-                  {event.title}
+                  {getTitle(event)}
                 </h4>
                 <p className="text-muted-foreground text-xs mb-2 line-clamp-2">
-                  {event.description}
+                  {getDescription(event)}
                 </p>
                 <div className="text-xs text-muted-foreground flex items-center gap-2">
                   <span>
-                    📅 {new Date(event.event_date).toLocaleDateString()}
+                    📅 {new Date(event.eventDate).toLocaleDateString()}
                   </span>
-                  <span>📍 {event.location}</span>
+                  <span>📍 {getLocation(event)}</span>
                 </div>
               </div>
 
               {/* Image Right */}
               <div className="w-24 h-20 relative flex-shrink-0">
                 <Image
-                  src={
-                    event.cover_image ||
-                    "/images/eventLogos/YLY-Competition-1024x1024.png"
-                  }
-                  alt={event.title}
+                  src={getImage(event)}
+                  alt={getTitle(event)}
                   fill
                   className="object-cover"
+                  unoptimized={isGoogleDrive(event)}
                 />
               </div>
             </Link>
@@ -99,7 +109,7 @@ export const RelatedEvents = ({ currentEventId }: RelatedEventsProps) => {
       <div className="lg:hidden grid grid-cols-1 gap-4">
         {relatedEvents.map((event, index) => (
           <motion.div
-            key={event.id}
+            key={event._id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
@@ -109,29 +119,27 @@ export const RelatedEvents = ({ currentEventId }: RelatedEventsProps) => {
               {/* Image Top */}
               <div className="w-full h-32 relative">
                 <Image
-                  src={
-                    event.cover_image ||
-                    "/images/eventLogos/YLY-Competition-1024x1024.png"
-                  }
-                  alt={event.title}
+                  src={getImage(event)}
+                  alt={getTitle(event)}
                   fill
                   className="object-cover"
+                  unoptimized={isGoogleDrive(event)}
                 />
               </div>
 
               {/* Content Bottom */}
               <div className="p-3">
                 <h4 className="font-semibold text-sm mb-2 line-clamp-2 hover:text-primary transition-colors">
-                  {event.title}
+                  {getTitle(event)}
                 </h4>
                 <p className="text-muted-foreground text-xs mb-2 line-clamp-2">
-                  {event.description}
+                  {getDescription(event)}
                 </p>
                 <div className="text-xs text-muted-foreground flex items-center gap-2">
                   <span>
-                    📅 {new Date(event.event_date).toLocaleDateString()}
+                    📅 {new Date(event.eventDate).toLocaleDateString()}
                   </span>
-                  <span>📍 {event.location}</span>
+                  <span>📍 {getLocation(event)}</span>
                 </div>
               </div>
             </Link>

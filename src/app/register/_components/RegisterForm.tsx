@@ -16,7 +16,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Loader2 } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { registrationsService } from "@/lib/api";
 
 // Define the validation schema using Yup - Updated for new structure
 const schema = yup
@@ -139,42 +139,31 @@ export const RegisterForm = () => {
     setIsLoading(true);
 
     try {
-      // Insert directly into Supabase
-      const { data: result, error } = await supabase
-        .from("registrations")
-        .insert([
-          {
-            name: (data.name as string).trim(),
-            age: parseInt(data.age as string),
-            college: (data.college as string).trim(),
-            phone_number: (data.phone_number as string).trim(),
-            another_phone_number: data.another_phone_number
-              ? (data.another_phone_number as string).trim()
-              : null,
-            national_id: (data.national_id as string).trim(),
-            email: (data.email as string).trim().toLowerCase(),
-            committee: (data.committee as string).trim(),
-            why_choose_committee:
-              (data.why_choose_committee as string)?.trim() || "",
-            where_know_about_us:
-              (data.where_know_about_us as string)?.trim() || "",
-            governorate: (data.governorate as string).trim(),
-          },
-        ])
-        .select();
+      // Submit to API
+      const registrationData = {
+        name: (data.name as string).trim(),
+        age: parseInt(data.age as string),
+        college: (data.college as string).trim(),
+        phoneNumber: (data.phone_number as string).trim(),
+        anotherPhoneNumber: data.another_phone_number
+          ? (data.another_phone_number as string).trim()
+          : undefined,
+        nationalId: (data.national_id as string).trim(),
+        email: (data.email as string).trim().toLowerCase(),
+        committee: (data.committee as string).trim(),
+        whyChooseCommittee: (data.why_choose_committee as string)?.trim() || "",
+        whereKnowAboutUs: (data.where_know_about_us as string)?.trim() || "",
+        governorate: (data.governorate as string).trim(),
+      };
 
-      if (error) {
-        console.error("Supabase error:", error);
-        alert(`Registration failed: ${error.message || "Database error"}`);
-      } else {
-        console.log("Registration submitted successfully:", result);
-        setIsSubmitted(true);
-        reset(); // Reset form after successful submission
-        // alert("Registration submitted successfully!");
-      }
+      await registrationsService.create(registrationData);
+      console.log("Registration submitted successfully");
+      setIsSubmitted(true);
+      reset(); // Reset form after successful submission
     } catch (error) {
       console.error("Error submitting registration:", error);
-      alert("Registration failed due to a network error.");
+      const errorMessage = error instanceof Error ? error.message : "Registration failed";
+      alert(`Registration failed: ${errorMessage}`);
     } finally {
       setIsLoading(false);
     }

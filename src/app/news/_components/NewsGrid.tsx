@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { NewsCard } from "./NewsCard";
 import TitleMotion from "@/components/my-components/TitleMotion";
 import { useState, useEffect } from "react";
-import { NewsService, NewsItem } from "@/lib/database";
+import { newsService, NewsItem } from "@/lib/api";
 import { Loader2 } from "lucide-react";
 
 export const NewsGrid = () => {
@@ -23,8 +23,8 @@ export const NewsGrid = () => {
     const fetchNews = async () => {
       try {
         setLoading(true);
-        const data = await NewsService.getAllNews();
-        setNewsData(data);
+        const response = await newsService.getAll({ published: true, limit: 50 });
+        setNewsData(response.data);
       } catch (err) {
         console.error("Error fetching news:", err);
         setError("Failed to load news articles");
@@ -71,7 +71,7 @@ export const NewsGrid = () => {
         {displayedNews.map((news, index) => (
           <NewsCard
             key={news.slug}
-            {...news}
+            news={news}
             index={showAll ? index : index % initialDisplayCount}
           />
         ))}

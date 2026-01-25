@@ -1,13 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CalendarIcon, UserIcon, ClockIcon } from "lucide-react";
+import { CalendarIcon, UserIcon, ClockIcon, MapPinIcon, EyeIcon } from "lucide-react";
 
 interface NewsDetailHeroProps {
   title: string;
   date: string;
   author: string;
   image: string;
+  governorate?: string;
+  viewCount?: number;
 }
 
 export const NewsDetailHero = ({
@@ -15,6 +17,8 @@ export const NewsDetailHero = ({
   date,
   author,
   image,
+  governorate,
+  viewCount,
 }: NewsDetailHeroProps) => {
   // Format the date nicely
   const formatDate = (dateString: string) => {
@@ -82,21 +86,39 @@ export const NewsDetailHero = ({
             {title}
           </h1>
           <div className="flex flex-col items-center justify-center space-y-2 text-white">
-            <div className="flex items-center justify-center gap-6 text-white/90">
+            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-white/90">
               <div className="flex items-center gap-2">
                 <CalendarIcon className="h-4 w-4 text-white/80" />
                 <span className="font-medium">{formatDate(date)}</span>
               </div>
-              <span className="text-white/50">|</span>
+              <span className="hidden md:inline text-white/50">|</span>
               <div className="flex items-center gap-2">
                 <ClockIcon className="h-4 w-4 text-white/80" />
                 <span>{formatTime(date)}</span>
               </div>
-              <span className="text-white/50">|</span>
+              <span className="hidden md:inline text-white/50">|</span>
               <div className="flex items-center gap-2">
                 <UserIcon className="h-4 w-4 text-white/80" />
                 <span>{author}</span>
               </div>
+              {governorate && (
+                <>
+                  <span className="hidden md:inline text-white/50">|</span>
+                  <div className="flex items-center gap-2">
+                    <MapPinIcon className="h-4 w-4 text-white/80" />
+                    <span>{governorate}</span>
+                  </div>
+                </>
+              )}
+              {viewCount !== undefined && viewCount > 0 && (
+                <>
+                  <span className="hidden md:inline text-white/50">|</span>
+                  <div className="flex items-center gap-2">
+                    <EyeIcon className="h-4 w-4 text-white/80" />
+                    <span>{viewCount.toLocaleString()}</span>
+                  </div>
+                </>
+              )}
             </div>
             <motion.div
               initial={{ opacity: 0, width: 0 }}

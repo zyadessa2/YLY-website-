@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { supabase } from "@/lib/supabase";
+import { authService } from "@/lib/api/auth.service";
 import { Button } from "@/components/ui/button";
 import {
   Home,
@@ -15,6 +15,12 @@ import {
   Menu,
   X,
   MessageSquare,
+  Users,
+  MapPin,
+  Settings,
+  UserPlus,
+  Eye,
+  Map,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -68,6 +74,43 @@ const navigation: NavItem[] = [
       },
     ],
   },
+  {
+    name: "Users Management",
+    icon: Users,
+    children: [
+      {
+        name: "All Users",
+        href: "/dashboard/users",
+        icon: Eye,
+      },
+      {
+        name: "Add User",
+        href: "/dashboard/users/add",
+        icon: UserPlus,
+      },
+    ],
+  },
+  {
+    name: "Governorates",
+    icon: MapPin,
+    children: [
+      {
+        name: "All Governorates",
+        href: "/dashboard/governorates",
+        icon: Map,
+      },
+      {
+        name: "Add Governorate",
+        href: "/dashboard/governorates/add",
+        icon: Plus,
+      },
+    ],
+  },
+  {
+    name: "Settings",
+    href: "/dashboard/settings",
+    icon: Settings,
+  },
 ] as const;
 
 export default function DashboardSidebar() {
@@ -75,6 +118,8 @@ export default function DashboardSidebar() {
   const [expandedItems, setExpandedItems] = useState<string[]>([
     "News Management",
     "Events Management",
+    "Users Management",
+    "Governorates",
     "Database",
   ]);
   const pathname = usePathname();
@@ -82,15 +127,14 @@ export default function DashboardSidebar() {
 
   const handleLogout = async () => {
     try {
-      const { error } = await supabase.auth.signOut();
-      if (error) {
-        console.error("Error signing out:", error);
-        return;
-      }
+      await authService.logout();
       router.push("/signin");
       router.refresh();
     } catch (error) {
       console.error("Logout error:", error);
+      // Force logout even on error
+      router.push("/signin");
+      router.refresh();
     }
   };
 

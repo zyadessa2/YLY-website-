@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { NewsCard } from "./NewsCard";
 import { useState } from "react";
-import { NewsItem } from "@/lib/database";
+import { NewsItem } from "@/lib/api";
 
 interface NewsGridClientProps {
   initialData: NewsItem[];
@@ -26,7 +26,7 @@ export const NewsGridClient = ({ initialData }: NewsGridClientProps) => {
         {displayedNews.map((news, index) => (
           <NewsCard
             key={news.slug}
-            {...news}
+            news={news}
             index={showAll ? index : index % initialDisplayCount}
           />
         ))}

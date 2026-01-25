@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
+
 import DashboardSidebar from './_components/DashboardSidebar';
 
 export default function DashboardLayout({
@@ -15,15 +15,13 @@ export default function DashboardLayout({
   const router = useRouter();
 
   useEffect(() => {
-    const checkAuth = async () => {
+    const checkAuth = () => {
       try {
-        const { data: { session }, error } = await supabase.auth.getSession();
-        
-        if (error || !session) {
+        const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
+        if (!token) {
           router.push('/signin');
           return;
         }
-        
         setIsAuthenticated(true);
       } catch (error) {
         console.error('Auth check error:', error);
@@ -32,27 +30,12 @@ export default function DashboardLayout({
         setIsLoading(false);
       }
     };
-
     checkAuth();
-
-    // Listen for auth changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_OUT' || !session) {
-        router.push('/signin');
-        setIsAuthenticated(false);
-      } else if (event === 'SIGNED_IN' && session) {
-        setIsAuthenticated(true);
-      }
-    });
-
-    return () => subscription.unsubscribe();
   }, [router]);
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="fixed inset-0 min-h-screen bg-gray-50 flex items-center justify-center z-50">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
       </div>
     );
@@ -63,10 +46,10 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="flex">
+    <div className="fixed inset-0 min-h-screen bg-gray-50 z-50">
+      <div className="flex h-full">
         <DashboardSidebar />
-        <main className="flex-1 ml-64 p-6">
+        <main className="flex-1 ml-64 p-6 overflow-auto">
           <div className="max-w-7xl mx-auto">
             {children}
           </div>

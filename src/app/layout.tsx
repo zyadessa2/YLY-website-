@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { BackgroundAnimation } from "../components/ui/BackgroundAnimation";
-import { NavbarDemo } from "../components/my-components/navbar/Navbar";
-import Footer from "../components/my-components/Footer";
 import { ThemeProviderWrapper } from "@/components/providers/theme-provider-wrapper";
+import { LayoutWrapper } from "@/components/providers/LayoutWrapper";
 import { NextIntlClientProvider } from "next-intl";
 import { cookies } from "next/headers";
 
@@ -67,9 +66,9 @@ export default async function RootLayout({
             <div id="root-content" className="contents">
               <BackgroundAnimation />
               <div className="relative z-10">
-                <NavbarDemo />
-                {children}
-                <Footer />
+                <LayoutWrapper>
+                  {children}
+                </LayoutWrapper>
               </div>
             </div>
           </ThemeProviderWrapper>

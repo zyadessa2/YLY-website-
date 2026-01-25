@@ -1,4 +1,19 @@
-import { supabase } from "./supabase";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck - This file is deprecated and kept for reference only
+/**
+ * @deprecated This file is deprecated. 
+ * The application has migrated from Supabase to a custom Node.js/Express/MongoDB backend.
+ * Use the API services in /src/lib/api/ instead:
+ * - newsService for news operations
+ * - eventsService for events operations
+ * - governoratesService for governorate operations
+ * - authService for authentication
+ * - usersService for user management
+ * 
+ * This file is kept for reference only and will be removed in a future version.
+ */
+
+// import { supabase } from "./supabase";  // Disabled - Supabase no longer used
 
 // Governorate Interfaces
 export interface Governorate {

@@ -1,29 +1,35 @@
-import { NewsService } from "@/lib/database";
+import { newsService, NewsItem } from "@/lib/api";
 import TitleMotion from "@/components/my-components/TitleMotion";
 import { NewsGridClient } from "./NewsGridClient";
 
 export async function NewsGridServer() {
+  let newsData: NewsItem[] = [];
+  
   try {
-    const newsData = await NewsService.getAllNews();
-
-    return (
-      <section className="relative z-10 mx-auto max-w-7xl px-4 py-16">
-        <TitleMotion title="Stay with us moment by moment" className="mb-12" />
-        <NewsGridClient initialData={newsData} />
-      </section>
-    );
+    const response = await newsService.getAll({ published: true, limit: 50 });
+    newsData = response.data || [];
   } catch (error) {
     console.error("Error fetching news:", error);
-
-    return (
-      <section className="relative z-10 mx-auto max-w-7xl px-4 py-16">
-        <TitleMotion title="Stay with us moment by moment" className="mb-12" />
-        <div className="flex min-h-[400px] items-center justify-center">
-          <p className="text-lg text-red-500">
-            Unable to load news articles at this time. Please try again later.
-          </p>
-        </div>
-      </section>
-    );
+    // Continue with empty data - will show "no news" message
   }
+
+  return (
+    <section className="relative z-10 mx-auto max-w-7xl px-4 py-16">
+      <TitleMotion title="Stay with us moment by moment" className="mb-12" />
+      {newsData.length > 0 ? (
+        <NewsGridClient initialData={newsData} />
+      ) : (
+        <div className="flex min-h-[400px] items-center justify-center">
+          <div className="text-center">
+            <p className="text-lg text-gray-500 mb-2">
+              No news articles available at the moment.
+            </p>
+            <p className="text-sm text-gray-400">
+              Please check back later or ensure the backend server is running.
+            </p>
+          </div>
+        </div>
+      )}
+    </section>
+  );
 }

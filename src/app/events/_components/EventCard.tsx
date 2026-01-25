@@ -10,6 +10,7 @@ interface EventCardProps {
   description: string;
   date: string;
   link: string;
+  unoptimized?: boolean;
 }
 
 export const EventCard = ({
@@ -18,6 +19,7 @@ export const EventCard = ({
   description,
   date,
   link,
+  unoptimized = false,
 }: EventCardProps) => {
   return (
     <motion.article
@@ -39,6 +41,7 @@ export const EventCard = ({
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              unoptimized={unoptimized}
             />
           </motion.div>
         </div>

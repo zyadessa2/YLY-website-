@@ -2,7 +2,9 @@
 
 import { motion } from "framer-motion";
 import { EventCard } from "./EventCard";
-import { EventItem } from "@/lib/database";
+import { EventItem } from "@/lib/api";
+import { processImageUrl } from "@/lib/image-upload";
+import { getDriveImageUrl, isDriveUrl } from "@/lib/utils";
 
 interface EventDetailsClientProps {
   initialData: EventItem[];
@@ -12,18 +14,30 @@ export const EventDetailsClient = ({
   initialData,
 }: EventDetailsClientProps) => {
   // Transform database events to match EventCard props
-  const transformedEvents = initialData.map((event) => ({
-    id: event.id,
-    logo: event.cover_image || "/images/eventLogos/YLY-Competition-1024x1024.png",
-    title: event.title,
-    description: event.description,
-    date: new Date(event.event_date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }),
-    link: `/events/${event.slug}`,
-  }));
+  const transformedEvents = initialData.map((event) => {
+    // Get title - API returns separate fields (title, arabicTitle)
+    const title = event.title || event.arabicTitle || '';
+    const description = event.description || event.arabicDescription || '';
+    
+    // Handle cover image - could be Drive URL or regular URL
+    const rawImage = event.coverImage || "/images/eventLogos/YLY-Competition-1024x1024.png";
+    const isGoogleDrive = isDriveUrl(rawImage);
+    const logo = getDriveImageUrl(rawImage) || processImageUrl(rawImage) || "/images/eventLogos/YLY-Competition-1024x1024.png";
+    
+    return {
+      id: event._id,
+      logo,
+      title,
+      description,
+      date: new Date(event.eventDate).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }),
+      link: `/events/${event.slug}`,
+      unoptimized: isGoogleDrive,
+    };
+  });
 
   return (
     <>

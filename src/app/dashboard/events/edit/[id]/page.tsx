@@ -15,39 +15,54 @@ import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import { Switch } from '@/components/ui/switch';
-import { ImageUploader, MultiImageUploader } from '@/components/ui/image-uploader';
-import { EventsService, EventItem, UpdateEventData } from '@/lib/database';
-import { supabase } from '@/lib/supabase';
+import { eventsService, authService, EventItem, UpdateEventData } from '@/lib/api';
 
-// Form schema
+// Form schema for bilingual content
 const schema = yup.object({
-  title: yup
+  titleAr: yup
     .string()
-    .required('Title is required')
+    .required('Arabic title is required')
     .min(10, 'Title must be at least 10 characters')
     .max(200, 'Title must be less than 200 characters'),
-  description: yup
+  titleEn: yup
     .string()
-    .required('Description is required')
+    .required('English title is required')
+    .min(10, 'Title must be at least 10 characters')
+    .max(200, 'Title must be less than 200 characters'),
+  descriptionAr: yup
+    .string()
+    .required('Arabic description is required')
     .min(20, 'Description must be at least 20 characters')
     .max(500, 'Description must be less than 500 characters'),
-  content: yup
+  descriptionEn: yup
     .string()
-    .required('Content is required')
+    .required('English description is required')
+    .min(20, 'Description must be at least 20 characters')
+    .max(500, 'Description must be less than 500 characters'),
+  contentAr: yup
+    .string()
+    .required('Arabic content is required')
     .min(100, 'Content must be at least 100 characters'),
-  location: yup
+  contentEn: yup
     .string()
-    .required('Location is required'),
-  event_date: yup
+    .required('English content is required')
+    .min(100, 'Content must be at least 100 characters'),
+  locationAr: yup
+    .string()
+    .required('Arabic location is required'),
+  locationEn: yup
+    .string()
+    .required('English location is required'),
+  eventDate: yup
     .string()
     .required('Date is required'),
-  event_time: yup
+  eventTime: yup
     .string()
     .nullable(),
-  cover_image: yup
+  coverImage: yup
     .string()
     .nullable(),
-  content_images: yup
+  contentImages: yup
     .array()
     .of(yup.string())
     .nullable(),
@@ -55,10 +70,10 @@ const schema = yup.object({
     .string()
     .required('Slug is required')
     .matches(/^[a-z0-9-]+$/, 'Slug must contain only lowercase letters, numbers, and hyphens'),
-  registration_link: yup
+  registrationLink: yup
     .string()
     .nullable(),
-  max_participants: yup
+  maxParticipants: yup
     .number()
     .transform((value) => (isNaN(value) ? undefined : value))
     .nullable(),
@@ -76,93 +91,82 @@ export default function EditEventPage() {
   const router = useRouter();
   const params = useParams();
   const [isLoading, setIsLoading] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [eventItem, setEventItem] = useState<EventItem | null>(null);
   const [notFound, setNotFound] = useState(false);
-  const [coverImageUrl, setCoverImageUrl] = useState<string | null>(null);
-  const [contentImages, setContentImages] = useState<string[]>([]);
 
   const form = useForm<FormData>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resolver: yupResolver(schema) as any,
     defaultValues: {
-      title: '',
-      description: '',
-      content: '',
-      location: '',
-      event_date: '',
-      event_time: '',
-      cover_image: null,
-      content_images: [],
+      titleAr: '',
+      titleEn: '',
+      descriptionAr: '',
+      descriptionEn: '',
+      contentAr: '',
+      contentEn: '',
+      locationAr: '',
+      locationEn: '',
+      eventDate: '',
+      eventTime: '',
+      coverImage: null,
+      contentImages: [],
       slug: '',
-      registration_link: '',
-      max_participants: null,
+      registrationLink: '',
+      maxParticipants: null,
       published: false,
       featured: false,
     },
   });
 
-  // Handle cover image upload
-  const handleCoverImageUpload = (result: { url: string; path: string }) => {
-    setCoverImageUrl(result.url);
-    form.setValue('cover_image', result.url);
-    form.clearErrors('cover_image');
-  };
-  
-  // Handle content images upload
-  const handleContentImagesUpload = (urls: string[]) => {
-    setContentImages(urls);
-    form.setValue('content_images', urls);
-  };
-  
-  // Handle image upload errors
-  const handleImageUploadError = (error: Error) => {
-    setError(error.message);
-    form.setError('cover_image', {
-      type: 'manual',
-      message: error.message,
-    });
-  };
-
   // Check authentication
   React.useEffect(() => {
-    async function checkAuth() {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        router.push('/signin');
-      }
+    if (!authService.isAuthenticated()) {
+      router.push('/signin');
     }
-    checkAuth();
   }, [router]);
 
   useEffect(() => {
     async function loadEvent() {
       try {
+        setIsFetching(true);
         // Find the event item by ID
         const id = params.id as string;
-        const event = await EventsService.getEventById(id);
+        const event = await eventsService.getById(id);
         
         if (event) {
           setEventItem(event);
-          setCoverImageUrl(event.cover_image);
-          setContentImages(event.content_images || []);
-          
-          // Populate form with existing data
+
+          // Populate form with existing data (handling both new and legacy format)
+          const titleText = event.arabicTitle ? { ar: event.arabicTitle, en: event.title } : 
+            (typeof event.title === 'object' ? event.title as { ar: string; en: string } : { ar: '', en: String(event.title || '') });
+          const descText = event.arabicDescription ? { ar: event.arabicDescription, en: event.description } :
+            (typeof event.description === 'object' ? event.description as { ar: string; en: string } : { ar: '', en: String(event.description || '') });
+          const contentText = event.arabicContent ? { ar: event.arabicContent, en: event.content } :
+            (typeof event.content === 'object' ? event.content as { ar: string; en: string } : { ar: '', en: String(event.content || '') });
+          const locationText = event.arabicLocation ? { ar: event.arabicLocation, en: event.location } :
+            (typeof event.location === 'object' ? event.location as { ar: string; en: string } : { ar: '', en: String(event.location || '') });
+
           form.reset({
-            title: event.title,
-            description: event.description,
-            content: event.content,
-            location: event.location,
-            event_date: event.event_date,
-            event_time: event.event_time || '',
-            cover_image: event.cover_image,
-            content_images: event.content_images || [],
-            slug: event.slug,
-            registration_link: event.registration_link || '',
-            max_participants: event.max_participants || null,
-            published: event.published,
-            featured: event.featured,
+            titleAr: titleText.ar,
+            titleEn: titleText.en,
+            descriptionAr: descText.ar,
+            descriptionEn: descText.en,
+            contentAr: contentText.ar,
+            contentEn: contentText.en,
+            locationAr: locationText.ar,
+            locationEn: locationText.en,
+            eventDate: event.eventDate || '',
+            eventTime: event.eventTime || '',
+            coverImage: event.coverImage || null,
+            contentImages: event.contentImages || [],
+            slug: event.slug || '',
+            registrationLink: '', // No longer in API
+            maxParticipants: event.maxParticipants || null,
+            published: event.published || false,
+            featured: event.featured || false,
           });
         } else {
           setNotFound(true);
@@ -170,10 +174,14 @@ export default function EditEventPage() {
       } catch (err) {
         console.error('Error loading event:', err);
         setNotFound(true);
+      } finally {
+        setIsFetching(false);
       }
     }
     
-    loadEvent();
+    if (params.id) {
+      loadEvent();
+    }
   }, [params.id, form]);
 
   async function onSubmit(data: FormData) {
@@ -183,24 +191,27 @@ export default function EditEventPage() {
 
       if (!eventItem) return;
 
+      // Use new API format with separate fields
       const eventData: UpdateEventData = {
-        title: data.title,
-        description: data.description,
-        content: data.content,
-        location: data.location,
-        event_date: data.event_date,
-        event_time: data.event_time || undefined,
-        cover_image: data.cover_image || '',
-        content_images: (data.content_images || []).filter((img): img is string => img !== undefined),
-        slug: data.slug,
-        registration_link: data.registration_link || undefined,
-        max_participants: data.max_participants || undefined,
+        title: data.titleEn,
+        arabicTitle: data.titleAr,
+        description: data.descriptionEn,
+        arabicDescription: data.descriptionAr,
+        content: data.contentEn,
+        arabicContent: data.contentAr,
+        location: data.locationEn,
+        arabicLocation: data.locationAr,
+        eventDate: data.eventDate,
+        eventTime: data.eventTime || undefined,
+        coverImage: data.coverImage || '',
+        contentImages: (data.contentImages || []).filter((img): img is string => img !== undefined),
+        maxParticipants: data.maxParticipants || undefined,
         published: data.published,
         featured: data.featured,
       };
 
-      // Update in database using Supabase
-      await EventsService.updateEvent(eventItem.id, eventData);
+      // Update using new API service
+      await eventsService.update(eventItem._id, eventData);
 
       setSuccess(true);
 
@@ -242,7 +253,7 @@ export default function EditEventPage() {
     );
   }
 
-  if (!eventItem) {
+  if (isFetching || !eventItem) {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
@@ -273,7 +284,7 @@ export default function EditEventPage() {
         <CardHeader>
           <CardTitle>Event Details</CardTitle>
           <CardDescription>
-            Update the information below to modify the event
+            Update the bilingual information below to modify the event
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -292,228 +303,298 @@ export default function EditEventPage() {
           )}
 
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Title */}
-              <div className="md:col-span-2">
-                <Label htmlFor="title">Title *</Label>
-                <Input
-                  id="title"
-                  placeholder="Enter event title"
-                  disabled={isLoading}
-                  {...form.register('title')}
-                />
-                {form.formState.errors.title && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.title.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Date and Time */}
-              <div>
-                <Label htmlFor="event_date">Date *</Label>
-                <Input
-                  id="event_date"
-                  type="date"
-                  disabled={isLoading}
-                  {...form.register('event_date')}
-                />
-                {form.formState.errors.event_date && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.event_date.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <Label htmlFor="event_time">Time (optional)</Label>
-                <Input
-                  id="event_time"
-                  type="time"
-                  disabled={isLoading}
-                  {...form.register('event_time')}
-                />
-                {form.formState.errors.event_time && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.event_time.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Location */}
-              <div>
-                <Label htmlFor="location">Location *</Label>
-                <Input
-                  id="location"
-                  placeholder="Event location"
-                  disabled={isLoading}
-                  {...form.register('location')}
-                />
-                {form.formState.errors.location && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.location.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Slug */}
-              <div>
-                <Label htmlFor="slug">URL Slug *</Label>
-                <Input
-                  id="slug"
-                  placeholder="url-friendly-slug"
-                  disabled={isLoading}
-                  {...form.register('slug')}
-                />
-                {form.formState.errors.slug && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.slug.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Registration Link */}
-              <div>
-                <Label htmlFor="registration_link">Registration Link (optional)</Label>
-                <Input
-                  id="registration_link"
-                  type="url"
-                  placeholder="https://example.com/register"
-                  disabled={isLoading}
-                  {...form.register('registration_link')}
-                />
-                {form.formState.errors.registration_link && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.registration_link.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Max Participants */}
-              <div>
-                <Label htmlFor="max_participants">Max Participants (optional)</Label>
-                <Input
-                  id="max_participants"
-                  type="number"
-                  placeholder="100"
-                  disabled={isLoading}
-                  {...form.register('max_participants')}
-                />
-                {form.formState.errors.max_participants && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.max_participants.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Cover Image */}
-              <div className="md:col-span-2">
-                <ImageUploader 
-                  id="cover_image"
-                  label="Cover Image"
-                  description="Upload a high-quality image that represents your event (16:9 aspect ratio recommended)"
-                  existingUrl={coverImageUrl || undefined}
-                  bucket="events"
-                  folder="covers"
-                  onUploadComplete={handleCoverImageUpload}
-                  onError={handleImageUploadError}
-                  disabled={isLoading}
-                  required={true}
-                />
-                {form.formState.errors.cover_image && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.cover_image.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Content Images */}
-              <div className="md:col-span-2">
-                <MultiImageUploader 
-                  id="content_images"
-                  label="Content Images"
-                  description="Upload additional images to include in the event content (up to 10 images)"
-                  existingUrls={contentImages}
-                  bucket="events"
-                  folder="content"
-                  onUploadComplete={handleContentImagesUpload}
-                  onError={handleImageUploadError}
-                  disabled={isLoading}
-                  className="mt-4"
-                />
-                {form.formState.errors.content_images && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.content_images.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Description */}
-              <div className="md:col-span-2">
-                <Label htmlFor="description">Description *</Label>
-                <Textarea
-                  id="description"
-                  placeholder="Brief description of the event"
-                  rows={3}
-                  disabled={isLoading}
-                  {...form.register('description')}
-                />
-                {form.formState.errors.description && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.description.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Content */}
-              <div className="md:col-span-2 mb-5">
-                <Label htmlFor="content">Content *</Label>
-                <Textarea
-                  id="content"
-                  placeholder="Full event details (supports HTML)"
-                  rows={10}
-                  disabled={isLoading}
-                  {...form.register('content')}
-                />
-                {form.formState.errors.content && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {form.formState.errors.content.message}
-                  </p>
-                )}
-                <p className="text-sm text-gray-500 mt-1">
-                  You can use HTML tags for formatting (e.g., &lt;p&gt;, &lt;h2&gt;, &lt;ul&gt;, &lt;li&gt;)
-                </p>
-              </div>
-
-              {/* Publication Settings */}
-              <div>
-                <div className="flex items-center space-x-2 mb-2">
-                  <Switch 
-                    id="published" 
-                    checked={form.watch('published')}
-                    onCheckedChange={(checked) => form.setValue('published', checked)}
+            {/* English Section */}
+            <div className="border rounded-lg p-4 bg-blue-50/30">
+              <h3 className="font-semibold text-lg mb-4 text-blue-700">🇺🇸 English Content</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* English Title */}
+                <div className="md:col-span-2">
+                  <Label htmlFor="titleEn">Title (English) *</Label>
+                  <Input
+                    id="titleEn"
+                    placeholder="Enter event title in English"
                     disabled={isLoading}
+                    {...form.register('titleEn')}
                   />
-                  <Label htmlFor="published">Publish immediately</Label>
+                  {form.formState.errors.titleEn && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.titleEn.message}
+                    </p>
+                  )}
                 </div>
-                <p className="text-sm text-gray-500">
-                  If unchecked, the event will be saved as a draft
-                </p>
-              </div>
 
-              <div>
-                <div className="flex items-center space-x-2 mb-2">
-                  <Switch 
-                    id="featured" 
-                    checked={form.watch('featured')}
-                    onCheckedChange={(checked) => form.setValue('featured', checked)}
+                {/* English Location */}
+                <div>
+                  <Label htmlFor="locationEn">Location (English) *</Label>
+                  <Input
+                    id="locationEn"
+                    placeholder="Event location in English"
                     disabled={isLoading}
+                    {...form.register('locationEn')}
                   />
-                  <Label htmlFor="featured">Feature on homepage</Label>
+                  {form.formState.errors.locationEn && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.locationEn.message}
+                    </p>
+                  )}
                 </div>
-                <p className="text-sm text-gray-500">
-                  Featured events appear in the showcase area
-                </p>
+
+                {/* Slug */}
+                <div>
+                  <Label htmlFor="slug">URL Slug *</Label>
+                  <Input
+                    id="slug"
+                    placeholder="url-friendly-slug"
+                    disabled={isLoading}
+                    {...form.register('slug')}
+                  />
+                  {form.formState.errors.slug && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.slug.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* English Description */}
+                <div className="md:col-span-2">
+                  <Label htmlFor="descriptionEn">Description (English) *</Label>
+                  <Textarea
+                    id="descriptionEn"
+                    placeholder="Brief description in English"
+                    rows={3}
+                    disabled={isLoading}
+                    {...form.register('descriptionEn')}
+                  />
+                  {form.formState.errors.descriptionEn && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.descriptionEn.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* English Content */}
+                <div className="md:col-span-2">
+                  <Label htmlFor="contentEn">Content (English) *</Label>
+                  <Textarea
+                    id="contentEn"
+                    placeholder="Full event details in English (supports HTML)"
+                    rows={8}
+                    disabled={isLoading}
+                    {...form.register('contentEn')}
+                  />
+                  {form.formState.errors.contentEn && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.contentEn.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Arabic Section */}
+            <div className="border rounded-lg p-4 bg-green-50/30" dir="rtl">
+              <h3 className="font-semibold text-lg mb-4 text-green-700">🇸🇦 المحتوى العربي</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Arabic Title */}
+                <div className="md:col-span-2">
+                  <Label htmlFor="titleAr">العنوان (عربي) *</Label>
+                  <Input
+                    id="titleAr"
+                    placeholder="أدخل عنوان الفعالية بالعربية"
+                    disabled={isLoading}
+                    {...form.register('titleAr')}
+                  />
+                  {form.formState.errors.titleAr && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.titleAr.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Arabic Location */}
+                <div className="md:col-span-2">
+                  <Label htmlFor="locationAr">المكان (عربي) *</Label>
+                  <Input
+                    id="locationAr"
+                    placeholder="مكان الفعالية بالعربية"
+                    disabled={isLoading}
+                    {...form.register('locationAr')}
+                  />
+                  {form.formState.errors.locationAr && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.locationAr.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Arabic Description */}
+                <div className="md:col-span-2">
+                  <Label htmlFor="descriptionAr">الوصف (عربي) *</Label>
+                  <Textarea
+                    id="descriptionAr"
+                    placeholder="وصف مختصر بالعربية"
+                    rows={3}
+                    disabled={isLoading}
+                    {...form.register('descriptionAr')}
+                  />
+                  {form.formState.errors.descriptionAr && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.descriptionAr.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Arabic Content */}
+                <div className="md:col-span-2">
+                  <Label htmlFor="contentAr">المحتوى (عربي) *</Label>
+                  <Textarea
+                    id="contentAr"
+                    placeholder="تفاصيل الفعالية الكاملة بالعربية (يدعم HTML)"
+                    rows={8}
+                    disabled={isLoading}
+                    {...form.register('contentAr')}
+                  />
+                  {form.formState.errors.contentAr && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.contentAr.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Event Details Section */}
+            <div className="border rounded-lg p-4">
+              <h3 className="font-semibold text-lg mb-4">📅 Event Details</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Date */}
+                <div>
+                  <Label htmlFor="eventDate">Date *</Label>
+                  <Input
+                    id="eventDate"
+                    type="date"
+                    disabled={isLoading}
+                    {...form.register('eventDate')}
+                  />
+                  {form.formState.errors.eventDate && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {form.formState.errors.eventDate.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Time */}
+                <div>
+                  <Label htmlFor="eventTime">Time (optional)</Label>
+                  <Input
+                    id="eventTime"
+                    type="time"
+                    disabled={isLoading}
+                    {...form.register('eventTime')}
+                  />
+                </div>
+
+                {/* Registration Link */}
+                <div>
+                  <Label htmlFor="registrationLink">Registration Link (optional)</Label>
+                  <Input
+                    id="registrationLink"
+                    type="url"
+                    placeholder="https://example.com/register"
+                    disabled={isLoading}
+                    {...form.register('registrationLink')}
+                  />
+                </div>
+
+                {/* Max Participants */}
+                <div>
+                  <Label htmlFor="maxParticipants">Max Participants (optional)</Label>
+                  <Input
+                    id="maxParticipants"
+                    type="number"
+                    placeholder="100"
+                    disabled={isLoading}
+                    {...form.register('maxParticipants')}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Images Section */}
+            <div className="border rounded-lg p-4">
+              <h3 className="font-semibold text-lg mb-4">📷 Images</h3>
+              <div className="space-y-4">
+                {/* Cover Image URL */}
+                <div>
+                  <Label htmlFor="coverImage">Cover Image URL</Label>
+                  <Input
+                    id="coverImage"
+                    placeholder="https://drive.google.com/... or https://example.com/image.jpg"
+                    disabled={isLoading}
+                    {...form.register('coverImage')}
+                  />
+                  <p className="text-sm text-gray-500 mt-1">
+                    The main image displayed for this event. Supports Google Drive links.
+                  </p>
+                </div>
+
+                {/* Content Images */}
+                <div>
+                  <Label htmlFor="contentImages">Content Images (comma-separated URLs)</Label>
+                  <Textarea
+                    id="contentImages"
+                    placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg"
+                    rows={3}
+                    disabled={isLoading}
+                    value={(form.watch('contentImages') || []).join(', ')}
+                    onChange={(e) => {
+                      const urls = e.target.value
+                        .split(',')
+                        .map((url) => url.trim())
+                        .filter((url) => url.length > 0);
+                      form.setValue('contentImages', urls);
+                    }}
+                  />
+                  <p className="text-sm text-gray-500 mt-1">
+                    Additional images for the event content (optional)
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Publication Settings */}
+            <div className="border rounded-lg p-4">
+              <h3 className="font-semibold text-lg mb-4">⚙️ Publication Settings</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <div className="flex items-center space-x-2 mb-2">
+                    <Switch 
+                      id="published" 
+                      checked={form.watch('published')}
+                      onCheckedChange={(checked) => form.setValue('published', checked)}
+                      disabled={isLoading}
+                    />
+                    <Label htmlFor="published">Publish immediately</Label>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    If unchecked, the event will be saved as a draft
+                  </p>
+                </div>
+
+                <div>
+                  <div className="flex items-center space-x-2 mb-2">
+                    <Switch 
+                      id="featured" 
+                      checked={form.watch('featured')}
+                      onCheckedChange={(checked) => form.setValue('featured', checked)}
+                      disabled={isLoading}
+                    />
+                    <Label htmlFor="featured">Feature on homepage</Label>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    Featured events appear in the showcase area
+                  </p>
+                </div>
               </div>
             </div>
 
