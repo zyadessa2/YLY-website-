@@ -207,8 +207,8 @@ export default function DashboardPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
-          <p className="text-gray-600 dark:text-gray-300 mt-1">
+          <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
+          <p className="text-muted-foreground mt-1">
             Welcome back, {user?.email || "Admin"}! 
             {isAdmin && <span className="ml-2 text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">Admin</span>}
           </p>
@@ -220,14 +220,14 @@ export default function DashboardPage() {
         {statCards.map((stat) => (
           <Card key={stat.title}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              <CardTitle className="text-sm font-medium text-muted-foreground">
                 {stat.title}
               </CardTitle>
               <stat.icon className={`h-4 w-4 ${stat.color}`} />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stat.value}</div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{stat.description}</p>
+              <p className="text-xs text-muted-foreground mt-1">{stat.description}</p>
             </CardContent>
           </Card>
         ))}
@@ -235,7 +235,7 @@ export default function DashboardPage() {
       
       {/* Quick Actions */}
       <div>
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+        <h2 className="text-xl font-semibold text-foreground mb-4">
           Quick Actions
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -278,7 +278,7 @@ export default function DashboardPage() {
                   >
                     <div>
                       <p className="font-medium">{getText(news)}</p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-muted-foreground">
                         {new Date(news.createdAt).toLocaleDateString()}
                       </p>
                     </div>
@@ -288,7 +288,7 @@ export default function DashboardPage() {
                   </div>
                 ))
               ) : (
-                <p className="text-gray-500 text-center py-4">No recent news</p>
+                <p className="text-muted-foreground text-center py-4">No recent news</p>
               )}
             </div>
           </CardContent>
@@ -311,7 +311,7 @@ export default function DashboardPage() {
                   >
                     <div>
                       <p className="font-medium">{getText(event)}</p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-muted-foreground">
                         {new Date(event.eventDate).toLocaleDateString()}
                       </p>
                     </div>
@@ -323,7 +323,7 @@ export default function DashboardPage() {
                   </div>
                 ))
               ) : (
-                <p className="text-gray-500 text-center py-4">
+                <p className="text-muted-foreground text-center py-4">
                   No recent events
                 </p>
               )}

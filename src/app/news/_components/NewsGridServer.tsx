@@ -21,10 +21,10 @@ export async function NewsGridServer() {
       ) : (
         <div className="flex min-h-[400px] items-center justify-center">
           <div className="text-center">
-            <p className="text-lg text-gray-500 mb-2">
+            <p className="text-lg text-muted-foreground mb-2">
               No news articles available at the moment.
             </p>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-muted-foreground/70">
               Please check back later or ensure the backend server is running.
             </p>
           </div>

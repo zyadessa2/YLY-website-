@@ -159,14 +159,14 @@ export default function DashboardSidebar() {
       {/* Sidebar */}
       <div
         className={cn(
-          "fixed left-0 top-0 z-50 h-full bg-white border-r border-gray-200 transition-all duration-300",
+          "fixed left-0 top-0 z-50 h-full bg-background border-r border-border transition-all duration-300",
           isCollapsed ? "w-16" : "w-64"
         )}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+        <div className="flex items-center justify-between p-4 border-b border-border">
           {!isCollapsed && (
-            <h1 className="text-xl font-bold text-gray-900">YLY Dashboard</h1>
+            <h1 className="text-xl font-bold text-foreground">YLY Dashboard</h1>
           )}
           <Button
             variant="ghost"
@@ -195,7 +195,7 @@ export default function DashboardSidebar() {
                     onClick={() => toggleExpanded(item.name)}
                     className={cn(
                       "w-full flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md transition-colors",
-                      "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                      "text-foreground hover:text-foreground hover:bg-accent"
                     )}
                   >
                     <div className="flex items-center">
@@ -232,7 +232,7 @@ export default function DashboardSidebar() {
                             "flex items-center px-3 py-2 text-sm rounded-md transition-colors",
                             pathname === child.href
                               ? "bg-primary text-primary-foreground"
-                              : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                              : "text-muted-foreground hover:text-foreground hover:bg-accent"
                           )}
                         >
                           <child.icon className="mr-3 h-4 w-4" />
@@ -252,7 +252,7 @@ export default function DashboardSidebar() {
                   "flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors",
                   pathname === item.href
                     ? "bg-primary text-primary-foreground"
-                    : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                    : "text-foreground hover:text-foreground hover:bg-accent"
                 )}
               >
                 <item.icon className="mr-3 h-5 w-5" />
@@ -263,11 +263,11 @@ export default function DashboardSidebar() {
         </nav>
 
         {/* Logout Button */}
-        <div className="p-4 border-t border-gray-200">
+        <div className="p-4 border-t border-border">
           <Button
             onClick={handleLogout}
             variant="ghost"
-            className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50"
+            className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10"
           >
             <LogOut className="mr-3 h-5 w-5" />
             {!isCollapsed && <span>Logout</span>}
