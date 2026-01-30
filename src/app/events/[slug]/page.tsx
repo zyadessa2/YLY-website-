@@ -1,6 +1,5 @@
 import { eventsService } from "@/lib/api";
-import { processImageUrl } from "@/lib/image-upload";
-import { getDriveImageUrl, isDriveUrl } from "@/lib/utils";
+import { getSafeImageUrl, isGoogleDriveUrl, convertDriveUrl } from "@/lib/utils/google-drive-image";
 import { notFound } from "next/navigation";
 import { EventDetailHero } from "../_components/EventDetailHero";
 import { EventContent } from "../_components/EventContent";
@@ -30,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       openGraph: {
         title: title,
         description: description,
-        images: [processImageUrl(event.coverImage) || "/images/hero.jpg"],
+        images: [getSafeImageUrl(event.coverImage)],
       },
     };
   } catch (error) {
@@ -65,16 +64,14 @@ export default async function EventDetailPage({ params }: Props) {
     const content = event.arabicContent || event.content;
     const location = event.arabicLocation || event.location;
     
-    // Handle cover image - could be Drive URL or regular URL
-    const rawCoverImage = event.coverImage || "/images/hero.jpg";
-    const coverImage = isDriveUrl(rawCoverImage) 
-      ? getDriveImageUrl(rawCoverImage) 
-      : (processImageUrl(rawCoverImage) || "/images/hero.jpg");
+    // Get cover image using utility function
+    const coverImage = getSafeImageUrl(event.coverImage);
     
+    // Process content images
     const contentImages = event.contentImages?.map(img => {
-      if (isDriveUrl(img)) return getDriveImageUrl(img);
-      return processImageUrl(img) || img;
-    }) || [];
+      if (isGoogleDriveUrl(img)) return convertDriveUrl(img);
+      return img;
+    }).filter(Boolean) || [];
 
     return (
       <div dir="rtl" className="min-h-screen bg-background">

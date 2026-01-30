@@ -10,7 +10,7 @@ import Image from "next/image";
 import { GovernorateNewsProps } from "@/types/governorate";
 import { governoratesService } from "@/lib/api";
 import { timeAgo } from "@/lib/utils/date-format";
-import { getDriveImageUrl, isDriveUrl } from "@/lib/utils/drive-image";
+import { getNextImageProps } from "@/lib/utils/google-drive-image";
 import { truncateHtml } from "@/lib/utils/sanitize-html";
 
 interface NewsItemData {
@@ -128,17 +128,19 @@ export function GovernorateNews({ governorateName, governorateId }: GovernorateN
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {news.map((item) => (
+          {news.map((item) => {
+            const imageProps = getNextImageProps(item.coverImage, '/images/placeholder-news.jpg');
+            return (
             <Link href={`/news/${item.slug}`} key={item._id}>
               <Card className="group h-full overflow-hidden hover:shadow-lg transition-all duration-300">
                 <div className="relative aspect-video overflow-hidden">
                   <Image
-                    src={getDriveImageUrl(item.coverImage) || '/images/placeholder-news.jpg'}
+                    src={imageProps.src}
                     alt={item.arabicTitle || item.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    unoptimized={isDriveUrl(item.coverImage)}
+                    unoptimized={imageProps.unoptimized}
                   />
                 </div>
                 <CardContent className="p-4">
@@ -158,7 +160,8 @@ export function GovernorateNews({ governorateName, governorateId }: GovernorateN
                 </CardContent>
               </Card>
             </Link>
-          ))}
+            );
+          })}
         </div>
 
         <div className="text-center mt-8">

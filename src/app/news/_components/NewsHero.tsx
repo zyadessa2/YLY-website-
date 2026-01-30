@@ -1,8 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 export const NewsHero = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <section className="relative h-[80vh] overflow-hidden">
       {/* Background with overlay */}
@@ -19,18 +26,23 @@ export const NewsHero = () => {
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-10 flex h-full items-center justify-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+      <div className="relative z-10 flex h-full items-center justify-center px-4">
+        <motion.div
+          initial={false}
+          animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{
             duration: 0.8,
             ease: [0.4, 0, 0.2, 1],
           }}
-          className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-6xl font-bold text-transparent md:text-8xl"
+          className="text-center"
         >
-          Latest News
-        </motion.h1>
+          <h1 className="text-6xl font-bold text-white md:text-8xl mb-4 leading-tight drop-shadow-2xl">
+            أحدث الأخبار
+          </h1>
+          <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto drop-shadow-lg">
+            تابع آخر الأخبار والإنجازات من جميع المحافظات
+          </p>
+        </motion.div>
       </div>
 
       {/* Wave Divider */}
@@ -41,9 +53,11 @@ export const NewsHero = () => {
           preserveAspectRatio="none"
         >
           <motion.path
-            initial={{ d: "M0,0 L1200,0 L1200,120 L0,120 Z" }}
-            animate={{
+            initial={false}
+            animate={mounted ? {
               d: "M0,120 L0,60 C150,90 350,0 650,60 C950,120 1050,60 1200,40 L1200,120 Z",
+            } : {
+              d: "M0,0 L1200,0 L1200,120 L0,120 Z"
             }}
             transition={{
               duration: 5,

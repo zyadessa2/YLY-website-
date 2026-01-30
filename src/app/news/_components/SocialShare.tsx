@@ -9,7 +9,7 @@ import {
   Link as LinkIcon,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface SocialShareProps {
   url: string;
@@ -19,16 +19,24 @@ interface SocialShareProps {
 
 export const SocialShare = ({ url, title, description }: SocialShareProps) => {
   const [showTooltip, setShowTooltip] = useState(false);
+  const [currentUrl, setCurrentUrl] = useState(url);
+
+  useEffect(() => {
+    // Get the actual current URL from browser
+    if (typeof window !== 'undefined') {
+      setCurrentUrl(window.location.href);
+    }
+  }, []);
 
   const shareLinks = {
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-      url
+      currentUrl
     )}`,
     twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-      url
+      currentUrl
     )}&text=${encodeURIComponent(title)}`,
     linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
-      url
+      currentUrl
     )}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(
       description
     )}`,
@@ -36,7 +44,7 @@ export const SocialShare = ({ url, title, description }: SocialShareProps) => {
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard.writeText(currentUrl);
       setShowTooltip(true);
       setTimeout(() => setShowTooltip(false), 2000);
     } catch (err) {

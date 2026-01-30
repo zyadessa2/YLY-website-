@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { CalendarIcon, MapPinIcon, ClockIcon, UsersIcon, BuildingIcon } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+// import { Badge } from "@/components/ui/badge";
 
 interface EventDetailHeroProps {
   title: string;
@@ -23,7 +23,7 @@ export const EventDetailHero = ({
   location,
   image,
   governorate,
-  registrationEnabled,
+  // registrationEnabled,
   currentParticipants,
   maxParticipants,
 }: EventDetailHeroProps) => {
@@ -121,11 +121,11 @@ export const EventDetailHero = ({
                   <span>{currentParticipants || 0}/{maxParticipants}</span>
                 </div>
               )}
-              {registrationEnabled !== undefined && (
+              {/* {registrationEnabled !== undefined && (
                 <Badge variant={registrationEnabled ? "default" : "secondary"}>
                   {registrationEnabled ? "التسجيل مفتوح" : "التسجيل مغلق"}
                 </Badge>
-              )}
+              )} */}
             </div>
             <motion.div
               initial={{ opacity: 0, width: 0 }}

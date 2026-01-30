@@ -244,10 +244,28 @@ export const NavbarLogo = () => {
   return (
     <a
       href="#"
-      className="relative z-20 mr-4 flex flex-col items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
+      className="group relative z-20 mr-2 flex items-center gap-1 px-1 py-1 text-sm font-normal text-black"
     >
-      <Image src="/logo.webp" alt="logo" width={80} height={80} />
-      {/* <span className="font-light text-black dark:text-white">ylyMinistry</span> */}
+      {/* Modern gradient glow behind logos */}
+      <div className="absolute inset-0 -m-2 rounded-full bg-gradient-to-br from-blue-500/30 via-purple-500/30 to-pink-500/30 opacity-80 blur-xl transition-all duration-300 group-hover:opacity-100 group-hover:blur-2xl dark:from-blue-400/40 dark:via-purple-400/40 dark:to-pink-400/40" />
+      {/* Dark backdrop for contrast */}
+      <div className="absolute inset-0 -m-0.5 rounded-full bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 shadow-xl transition-all duration-300 group-hover:shadow-2xl dark:from-slate-700 dark:via-slate-800 dark:to-slate-700" />
+      {/* MOYAS Logo */}
+      <Image 
+        src="/MOYAS WHITE (1).png" 
+        alt="MOYAS Logo" 
+        width={44} 
+        height={44}
+        className="relative z-10 drop-shadow-2xl transition-transform duration-300 group-hover:scale-105"
+      />
+      {/* YLY Union Logo */}
+      <Image 
+        src="/White_YLY Union (1).png" 
+        alt="YLY Union Logo" 
+        width={44} 
+        height={44}
+        className="relative z-10 drop-shadow-2xl transition-transform duration-300 group-hover:scale-105"
+      />
     </a>
   );
 };

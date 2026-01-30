@@ -11,7 +11,7 @@ import Image from "next/image";
 import { GovernorateEventsProps } from "@/types/governorate";
 import { governoratesService } from "@/lib/api";
 import { formatShortDate } from "@/lib/utils/date-format";
-import { getDriveImageUrl, isDriveUrl } from "@/lib/utils/drive-image";
+import { getNextImageProps } from "@/lib/utils/google-drive-image";
 import { getEventRegistrationStatus } from "@/lib/utils/event-status";
 
 interface EventItemData {
@@ -145,18 +145,19 @@ export function GovernorateEvents({ governorateName, governorateId }: Governorat
               maxParticipants: event.maxParticipants,
               published: event.published,
             });
+            const imageProps = getNextImageProps(event.coverImage, '/images/placeholder-event.jpg');
 
             return (
               <Link href={`/events/${event.slug}`} key={event._id}>
                 <Card className="group h-full overflow-hidden hover:shadow-lg transition-all duration-300">
                   <div className="relative aspect-video overflow-hidden">
                     <Image
-                      src={getDriveImageUrl(event.coverImage) || '/images/placeholder-event.jpg'}
+                      src={imageProps.src}
                       alt={event.arabicTitle || event.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      unoptimized={isDriveUrl(event.coverImage)}
+                      unoptimized={imageProps.unoptimized}
                     />
                     <div className="absolute top-2 right-2">
                       <Badge 

@@ -9,22 +9,36 @@ interface TitleMotionProps {
 
 const TitleMotion = ({ title, className = "" }: TitleMotionProps) => {
   return (
-    <motion.h2
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, ease: "easeOut" }}
-      className={`bg-clip-text text-transparent text-center 
-        bg-gradient-to-r from-primary via-primary/80 to-secondary
-        dark:from-primary dark:via-secondary dark:to-primary
-        text-5xl md:text-5xl lg:text-7xl 
-        font-sans py-2 md:py-10 
-        relative z-20 
-        font-bold tracking-tight 
-        mt-10 
-        ${className}`}
-    >
-      {title}
-    </motion.h2>
+    <div className="relative w-full flex flex-col items-center justify-center mb-12 px-4">
+      {/* Decorative line */}
+      <motion.div
+        initial={{ width: 0 }}
+        whileInView={{ width: "80px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="h-1 bg-gradient-to-r from-primary to-purple-600 rounded-full mb-6 flex-shrink-0"
+      />
+      
+      {/* Title */}
+      <motion.h2
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className={`text-4xl md:text-5xl lg:text-6xl font-bold text-center text-foreground tracking-tight leading-tight px-2 ${className}`}
+        style={{
+          fontFamily: "'Inter', 'Cairo', sans-serif",
+        }}
+      >
+        {title}
+      </motion.h2>
+      
+      {/* Decorative underline */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+        className="h-1 w-32 bg-gradient-to-r from-purple-600 to-primary rounded-full mt-3 origin-center flex-shrink-0"
+      />
+    </div>
   );
 };
 

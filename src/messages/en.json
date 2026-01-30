@@ -22,7 +22,23 @@
       "title": "Who We Are?",
       "description": "We are the Ministry of Youth and Sports YLY Union (Youth Leading Youth), A union launched by the Ministry of Youth and Sports since Dr. Ashraf Sobhi assumed the position of Minister of Youth and Sports in 2018 🇪🇬 as an initiative, then in 2025 it was transformed into a union by decree No. 1173 of 2025",
       "description2": "A national youth union that brings together Egyptian youth from all governorates in various committees (training, media, culture, social media, sports, public relations, marketing, projects and development... and others).",
-      "readMore": "Read More"
+      "readMore": "Read More",
+      "vision": {
+        "title": "Our Vision",
+        "description": "Building a generation of young leaders capable of making positive change in society"
+      },
+      "mission": {
+        "title": "Our Mission",
+        "description": "Empowering youth through training, events, and effective community participation"
+      },
+      "values": {
+        "title": "Our Values",
+        "description": "Innovation, collaboration, transparency, and excellence in everything we do"
+      },
+      "impact": {
+        "title": "Our Impact",
+        "description": "Wide activity across all governorates with local and international partnerships"
+      }
     },
     "vision": {
       "title": "Our Goal",

@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { eventsService, EventItem } from "@/lib/api";
-import { processImageUrl } from "@/lib/image-upload";
-import { getDriveImageUrl, isDriveUrl } from "@/lib/utils";
+import { getNextImageProps } from "@/lib/utils/google-drive-image";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -12,15 +11,10 @@ interface RelatedEventsProps {
   currentEventId: string;
 }
 
-// Helper functions to get display text and image URL from event item
+// Helper functions
 const getTitle = (event: EventItem): string => event.title || event.arabicTitle || '';
 const getDescription = (event: EventItem): string => event.description || event.arabicDescription || '';
 const getLocation = (event: EventItem): string => event.location || event.arabicLocation || '';
-const getImage = (event: EventItem): string => {
-  const raw = event.coverImage || "/images/eventLogos/YLY-Competition-1024x1024.png";
-  return getDriveImageUrl(raw) || processImageUrl(raw) || "/images/eventLogos/YLY-Competition-1024x1024.png";
-};
-const isGoogleDrive = (event: EventItem): boolean => isDriveUrl(event.coverImage);
 
 export const RelatedEvents = ({ currentEventId }: RelatedEventsProps) => {
   const [relatedEvents, setRelatedEvents] = useState<EventItem[]>([]);
@@ -65,7 +59,9 @@ export const RelatedEvents = ({ currentEventId }: RelatedEventsProps) => {
 
       {/* Desktop Layout: Image right, content left, stacked vertically */}
       <div className="hidden lg:block space-y-4">
-        {relatedEvents.map((event, index) => (
+        {relatedEvents.map((event, index) => {
+          const imageProps = getNextImageProps(event.coverImage, "/images/eventLogos/YLY-Competition-1024x1024.png");
+          return (
           <motion.div
             key={event._id}
             initial={{ opacity: 0, y: 20 }}
@@ -84,7 +80,7 @@ export const RelatedEvents = ({ currentEventId }: RelatedEventsProps) => {
                 </p>
                 <div className="text-xs text-muted-foreground flex items-center gap-2">
                   <span>
-                    📅 {new Date(event.eventDate).toLocaleDateString()}
+                    📅 {new Date(event.eventDate).toLocaleDateString("ar-EG")}
                   </span>
                   <span>📍 {getLocation(event)}</span>
                 </div>
@@ -93,21 +89,24 @@ export const RelatedEvents = ({ currentEventId }: RelatedEventsProps) => {
               {/* Image Right */}
               <div className="w-24 h-20 relative flex-shrink-0">
                 <Image
-                  src={getImage(event)}
+                  src={imageProps.src}
                   alt={getTitle(event)}
                   fill
                   className="object-cover"
-                  unoptimized={isGoogleDrive(event)}
+                  unoptimized={imageProps.unoptimized}
                 />
               </div>
             </Link>
           </motion.div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Mobile Layout: Grid style */}
       <div className="lg:hidden grid grid-cols-1 gap-4">
-        {relatedEvents.map((event, index) => (
+        {relatedEvents.map((event, index) => {
+          const imageProps = getNextImageProps(event.coverImage, "/images/eventLogos/YLY-Competition-1024x1024.png");
+          return (
           <motion.div
             key={event._id}
             initial={{ opacity: 0, y: 20 }}
@@ -119,11 +118,11 @@ export const RelatedEvents = ({ currentEventId }: RelatedEventsProps) => {
               {/* Image Top */}
               <div className="w-full h-32 relative">
                 <Image
-                  src={getImage(event)}
+                  src={imageProps.src}
                   alt={getTitle(event)}
                   fill
                   className="object-cover"
-                  unoptimized={isGoogleDrive(event)}
+                  unoptimized={imageProps.unoptimized}
                 />
               </div>
 
@@ -137,14 +136,15 @@ export const RelatedEvents = ({ currentEventId }: RelatedEventsProps) => {
                 </p>
                 <div className="text-xs text-muted-foreground flex items-center gap-2">
                   <span>
-                    📅 {new Date(event.eventDate).toLocaleDateString()}
+                    📅 {new Date(event.eventDate).toLocaleDateString("ar-EG")}
                   </span>
                   <span>📍 {getLocation(event)}</span>
                 </div>
               </div>
             </Link>
           </motion.div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

@@ -5,8 +5,7 @@ import { NewsContent } from "../_components/NewsContent";
 import { RelatedNews } from "../_components/RelatedNews";
 import { SocialShare } from "../_components/SocialShare";
 import { notFound } from "next/navigation";
-import { processImageUrl } from "@/lib/image-upload";
-import { getDriveImageUrl, isDriveUrl } from "@/lib/utils";
+import { getSafeImageUrl, isGoogleDriveUrl, convertDriveUrl } from "@/lib/utils/google-drive-image";
 
 interface NewsPageProps {
   params: Promise<{
@@ -31,7 +30,7 @@ export async function generateMetadata({
       openGraph: {
         title: title,
         description: description,
-        images: [processImageUrl(news.coverImage) || "/images/hero.jpg"],
+        images: [getSafeImageUrl(news.coverImage)],
       },
     };
   } catch (error) {
@@ -71,16 +70,14 @@ export default async function NewsDetailPage({ params }: NewsPageProps) {
     const content = news.arabicContent || news.content;
     const author = news.arabicAuthor || news.author || 'YLY Team';
     
-    // Handle cover image - could be Drive URL or regular URL
-    const rawCoverImage = news.coverImage || "/images/hero.jpg";
-    const coverImage = isDriveUrl(rawCoverImage) 
-      ? getDriveImageUrl(rawCoverImage) 
-      : (processImageUrl(rawCoverImage) || "/images/hero.jpg");
+    // Get cover image using utility function
+    const coverImage = getSafeImageUrl(news.coverImage);
     
+    // Process content images
     const contentImages = news.contentImages?.map(img => {
-      if (isDriveUrl(img)) return getDriveImageUrl(img);
-      return processImageUrl(img) || img;
-    }) || [];
+      if (isGoogleDriveUrl(img)) return convertDriveUrl(img);
+      return img;
+    }).filter(Boolean) || [];
 
     return (
       <div dir="rtl" className="min-h-screen bg-background">
@@ -102,7 +99,7 @@ export default async function NewsDetailPage({ params }: NewsPageProps) {
               <NewsContent content={content} images={contentImages} />
               {/* Social Share */}
               <SocialShare
-                url={`${process.env.NEXT_PUBLIC_BASE_URL || ""}/news/${slug}`}
+                url={slug}
                 title={title}
                 description={description}
               />

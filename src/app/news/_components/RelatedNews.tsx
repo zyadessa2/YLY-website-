@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { newsService, NewsItem } from "@/lib/api";
-import { processImageUrl } from "@/lib/image-upload";
-import { getDriveImageUrl, isDriveUrl } from "@/lib/utils";
+import { getNextImageProps } from "@/lib/utils/google-drive-image";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -12,14 +11,9 @@ interface RelatedNewsProps {
   currentNewsId: string;
 }
 
-// Helper to get display text and image URL from news item
+// Helper functions
 const getTitle = (news: NewsItem): string => news.title || news.arabicTitle || '';
 const getDescription = (news: NewsItem): string => news.description || news.arabicDescription || '';
-const getImage = (news: NewsItem): string => {
-  const raw = news.coverImage || "/images/hero.jpg";
-  return getDriveImageUrl(raw) || processImageUrl(raw) || "/images/hero.jpg";
-};
-const isGoogleDrive = (news: NewsItem): boolean => isDriveUrl(news.coverImage);
 
 export const RelatedNews = ({ currentNewsId }: RelatedNewsProps) => {
   const [relatedArticles, setRelatedArticles] = useState<NewsItem[]>([]);
@@ -64,7 +58,9 @@ export const RelatedNews = ({ currentNewsId }: RelatedNewsProps) => {
 
       {/* Desktop Layout: Image right, content left, stacked vertically */}
       <div className="hidden lg:block space-y-4">
-        {relatedArticles.map((news, index) => (
+        {relatedArticles.map((news, index) => {
+          const imageProps = getNextImageProps(news.coverImage);
+          return (
           <motion.div
             key={news._id}
             initial={{ opacity: 0, y: 20 }}
@@ -82,28 +78,31 @@ export const RelatedNews = ({ currentNewsId }: RelatedNewsProps) => {
                   {getDescription(news)}
                 </p>
                 <div className="text-xs text-muted-foreground">
-                  {new Date(news.createdAt).toLocaleDateString()}
+                  {new Date(news.createdAt).toLocaleDateString("ar-EG")}
                 </div>
               </div>
 
               {/* Image Right */}
               <div className="w-24 h-20 relative flex-shrink-0">
                 <Image
-                  src={getImage(news)}
+                  src={imageProps.src}
                   alt={getTitle(news)}
                   fill
                   className="object-cover"
-                  unoptimized={isGoogleDrive(news)}
+                  unoptimized={imageProps.unoptimized}
                 />
               </div>
             </Link>
           </motion.div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Mobile Layout: Grid style */}
       <div className="lg:hidden grid grid-cols-1 gap-4">
-        {relatedArticles.map((news, index) => (
+        {relatedArticles.map((news, index) => {
+          const imageProps = getNextImageProps(news.coverImage);
+          return (
           <motion.div
             key={news._id}
             initial={{ opacity: 0, y: 20 }}
@@ -115,11 +114,11 @@ export const RelatedNews = ({ currentNewsId }: RelatedNewsProps) => {
               {/* Image Top */}
               <div className="w-full h-32 relative">
                 <Image
-                  src={getImage(news)}
+                  src={imageProps.src}
                   alt={getTitle(news)}
                   fill
                   className="object-cover"
-                  unoptimized={isGoogleDrive(news)}
+                  unoptimized={imageProps.unoptimized}
                 />
               </div>
 
@@ -132,12 +131,13 @@ export const RelatedNews = ({ currentNewsId }: RelatedNewsProps) => {
                   {getDescription(news)}
                 </p>
                 <div className="text-xs text-muted-foreground">
-                  {new Date(news.createdAt).toLocaleDateString()}
+                  {new Date(news.createdAt).toLocaleDateString("ar-EG")}
                 </div>
               </div>
             </Link>
           </motion.div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

@@ -82,7 +82,7 @@ export const NewsDetailHero = ({
           animate={{ opacity: 1, y: 0 }}
           className="max-w-4xl text-center"
         >
-          <h1 className="mb-4 bg-gradient-to-r from-white to-white/80 bg-clip-text text-4xl font-bold text-transparent md:text-6xl">
+          <h1 className="mb-4 text-4xl font-bold text-white md:text-6xl leading-tight px-2">
             {title}
           </h1>
           <div className="flex flex-col items-center justify-center space-y-2 text-white">

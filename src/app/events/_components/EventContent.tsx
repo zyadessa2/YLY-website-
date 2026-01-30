@@ -13,7 +13,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { eventsService, EventItem } from "@/lib/api";
 import { getEventRegistrationStatus } from "@/lib/utils/event-status";
 import { formatDate, formatTime } from "@/lib/utils/date-format";
-import { isDriveUrl } from "@/lib/utils";
+import { getNextImageProps } from "@/lib/utils/google-drive-image";
 import { 
   CalendarIcon, 
   ClockIcon, 
@@ -242,24 +242,27 @@ export const EventContent = ({
           transition={{ delay: 0.2 }}
           className="my-8 grid gap-6 md:grid-cols-2"
         >
-          {images.map((image, index) => (
-            <motion.div
-              key={image}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3 + index * 0.1 }}
-              className="relative aspect-video overflow-hidden rounded-xl"
-            >
-              <Image
-                src={image}
-                alt={title || 'Event image'}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                unoptimized={isDriveUrl(image)}
-              />
-            </motion.div>
-          ))}
+          {images.map((image, index) => {
+            const { src, unoptimized } = getNextImageProps(image);
+            return (
+              <motion.div
+                key={image}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 + index * 0.1 }}
+                className="relative aspect-video overflow-hidden rounded-xl"
+              >
+                <Image
+                  src={src}
+                  unoptimized={unoptimized}
+                  alt={title || 'Event image'}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </motion.div>
+            );
+          })}
         </motion.div>
       )}
 

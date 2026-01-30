@@ -7,7 +7,7 @@
  */
 
 /**
- * Convert Google Drive URL to direct image URL using lh3.googleusercontent.com
+ * Convert Google Drive URL to direct image URL
  * This format works better with Next.js Image optimization
  * 
  * Supports various Drive URL formats:
@@ -20,7 +20,12 @@ export function getDriveImageUrl(driveUrl: string | null | undefined): string {
   if (!driveUrl) return '';
   
   // If it's already a direct URL or not a Drive URL, return as-is
-  if (!driveUrl.includes('drive.google.com')) {
+  if (!driveUrl.includes('drive.google.com') && !driveUrl.includes('googleusercontent.com')) {
+    return driveUrl;
+  }
+  
+  // If already converted, return as-is
+  if (driveUrl.includes('googleusercontent.com') || driveUrl.includes('uc?export=view&id=') || driveUrl.includes('uc?id=')) {
     return driveUrl;
   }
   
@@ -28,8 +33,8 @@ export function getDriveImageUrl(driveUrl: string | null | undefined): string {
   const fileId = extractDriveFileId(driveUrl);
   
   if (fileId) {
-    // Use lh3.googleusercontent.com format which works better with Next.js
-    return `https://lh3.googleusercontent.com/d/${fileId}`;
+    // Use uc?id format - most compatible with img tag
+    return `https://drive.google.com/uc?id=${fileId}`;
   }
   
   // Return original URL if no pattern matched
@@ -80,14 +85,29 @@ export function isDriveUrl(url: string | null | undefined): boolean {
 export function extractDriveFileId(driveUrl: string | null | undefined): string | null {
   if (!driveUrl) return null;
   
+  // Remove any trailing parameters and clean the URL
+  const cleanUrl = driveUrl.split('?')[0].split('#')[0].trim();
+  
   const patterns = [
-    /\/file\/d\/([a-zA-Z0-9_-]+)/,
-    /id=([a-zA-Z0-9_-]+)/,
-    /\/d\/([a-zA-Z0-9_-]+)/,
+    /\/file\/d\/([a-zA-Z0-9_-]+)/,           // /file/d/FILE_ID
+    /\/d\/([a-zA-Z0-9_-]+)/,                 // /d/FILE_ID
+    /id=([a-zA-Z0-9_-]+)/,                   // ?id=FILE_ID
+    /\/open\?id=([a-zA-Z0-9_-]+)/,           // /open?id=FILE_ID
+    /\/uc\?id=([a-zA-Z0-9_-]+)/,             // /uc?id=FILE_ID
+    /googleusercontent\.com\/d\/([a-zA-Z0-9_-]+)/, // googleusercontent.com/d/FILE_ID
   ];
   
+  // Try with full URL first
   for (const pattern of patterns) {
     const match = driveUrl.match(pattern);
+    if (match && match[1]) {
+      return match[1];
+    }
+  }
+  
+  // Try with cleaned URL
+  for (const pattern of patterns) {
+    const match = cleanUrl.match(pattern);
     if (match && match[1]) {
       return match[1];
     }

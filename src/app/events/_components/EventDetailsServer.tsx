@@ -15,7 +15,7 @@ export async function EventDetailsServer() {
 
   return (
     <section className="relative mx-auto max-w-7xl px-4 py-16">
-      <TitleMotion title="More Details" className="mb-12" />
+      <TitleMotion title=" احدث الفاعليات" className="mb-12" />
       {eventsData.length > 0 ? (
         <EventDetailsClient initialData={eventsData} />
       ) : (

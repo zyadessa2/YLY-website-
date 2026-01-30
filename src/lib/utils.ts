@@ -6,6 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 // Re-export utility functions
+export * from './utils/google-drive-image';
 export * from './utils/drive-image';
 export * from './utils/date-format';
 export * from './utils/event-status';

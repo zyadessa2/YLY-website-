@@ -2,16 +2,15 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles, Calendar } from "lucide-react";
 import { useTranslations } from "next-intl";
-// import FloatingCta from "@/components/my-components/FloatingCta";
-
 
 const Hero = () => {
   const t = useTranslations('home')
+  
   return (    
-  <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
+  <section className="relative h-screen flex items-center justify-center overflow-hidden pt-32">
+      {/* Background Image with Enhanced Overlay */}
       <div className="absolute inset-0">
         <Image
           src="/images/hero.jpg"
@@ -20,27 +19,21 @@ const Hero = () => {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50 backdrop-blur-xs" />
+        {/* Darker gradient overlay for better readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/70 to-black/75" />
       </div>
 
       {/* Content */}
       <div className="container mx-auto px-4 relative z-10 text-center">
         <div className="max-w-5xl mx-auto">
+          
+          {/* Clean, Simple Title */}
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 text-center"
+            className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 text-white drop-shadow-2xl"
           >
-           {/* اتحاد وزارة الشباب والرياضة YLY */}
-          </motion.h1>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 text-center"
-          >
-            {/* Youth Leading Youth */}
             {t(`hero.title`)}
           </motion.h1>
 
@@ -48,25 +41,45 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl text-white/90 mb-8 text-center"
+            className="text-xl md:text-2xl text-white/95 mb-12 leading-relaxed font-medium drop-shadow-lg max-w-3xl mx-auto"
           >
             {t(`hero.description`)}
-            {/* Building tomorrow&apos;s leaders today through youth empowerment and
-            community engagement. */}
-          </motion.p>          <motion.div
+          </motion.p>
+
+          {/* Clean CTA Buttons */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex justify-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <Link
               href="/news"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-accent hover:bg-accent/90 
-              text-white rounded-lg transition-all duration-300 transform hover:scale-105 group"
+              className="group relative inline-flex items-center gap-3 px-10 py-5 bg-white text-purple-600 rounded-xl 
+              font-bold text-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-white/30"
             >
-              {t(`hero.button`)}
-              {/* Learn More */}
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <span className="relative z-10 flex items-center gap-3">
+                <Sparkles className="w-5 h-5" />
+                {t(`hero.button`)}
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+              </span>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500"
+                initial={{ x: '-100%' }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.3 }}
+              />
+            </Link>
+
+            <Link
+              href="/events"
+              className="group inline-flex items-center gap-3 px-10 py-5 bg-white/10 backdrop-blur-sm border-2 border-white/80 
+              text-white rounded-xl font-bold text-lg transition-all duration-300 hover:scale-105 
+              hover:bg-white/20 hover:shadow-2xl hover:shadow-white/20"
+            >
+              <Calendar className="w-5 h-5" />
+              الفعاليات
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
             </Link>
           </motion.div>
         </div>
@@ -83,8 +96,16 @@ const Hero = () => {
         }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
-        <div className="w-6 h-10 border-2 border-white/50 rounded-full p-1">
-          <div className="w-1.5 h-3 bg-white/70 rounded-full mx-auto" />
+        <div className="w-6 h-10 border-2 border-white/60 rounded-full p-1 bg-white/5 backdrop-blur-sm">
+          <motion.div 
+            className="w-1.5 h-3 bg-white rounded-full mx-auto"
+            animate={{ y: [0, 12, 0] }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
         </div>
       </motion.div>
 

@@ -24,16 +24,16 @@ export const EventHero = () => {
       {/* Hero Content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
           className="max-w-4xl text-center"
         >
-          <h1 className="mb-4 bg-gradient-to-r from-white to-white/80 bg-clip-text text-4xl font-bold text-transparent md:text-6xl">
-            YLY Events
+          <h1 className="mb-6 text-5xl font-bold text-white md:text-7xl leading-tight drop-shadow-2xl">
+            فعاليات YLY
           </h1>
-          <p className="text-lg text-white/90 md:text-xl">
-            Join us in our mission to empower youth through transformative
-            events
+          <p className="text-lg text-white/90 md:text-2xl max-w-3xl mx-auto drop-shadow-lg">
+            انضم إلينا في رحلة تمكين الشباب من خلال فعاليات تحويلية ملهمة
           </p>
         </motion.div>
       </div>
