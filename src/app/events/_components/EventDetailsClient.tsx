@@ -51,6 +51,7 @@ export const EventDetailsClient = ({
       }),
       link: `/events/${event.slug}`,
       unoptimized: imageProps.unoptimized,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       status: (event as any).status || computedStatus,
     };
   });
