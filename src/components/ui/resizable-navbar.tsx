@@ -8,6 +8,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { LanguageSwitcher } from "../LanguageSwitcher";
+import { useLocale } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
@@ -241,6 +242,8 @@ export const MobileNavToggle = ({
 };
 
 export const NavbarLogo = () => {
+  const locale = useLocale();
+  const isArabic = locale === "ar";
   return (
     <a
       href="#"
@@ -250,22 +253,42 @@ export const NavbarLogo = () => {
       <div className="absolute inset-0 -m-2 rounded-full bg-gradient-to-br from-blue-500/30 via-purple-500/30 to-pink-500/30 opacity-80 blur-xl transition-all duration-300 group-hover:opacity-100 group-hover:blur-2xl dark:from-blue-400/40 dark:via-purple-400/40 dark:to-pink-400/40" />
       {/* Dark backdrop for contrast */}
       <div className="absolute inset-0 -m-0.5 rounded-full bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 shadow-xl transition-all duration-300 group-hover:shadow-2xl dark:from-slate-700 dark:via-slate-800 dark:to-slate-700" />
-      {/* MOYAS Logo */}
-      <Image 
-        src="/MOYAS WHITE (1).png" 
-        alt="MOYAS Logo" 
-        width={44} 
-        height={44}
-        className="relative z-10 drop-shadow-2xl transition-transform duration-300 group-hover:scale-105"
-      />
-      {/* YLY Union Logo */}
-      <Image 
-        src="/White_YLY Union (1).png" 
-        alt="YLY Union Logo" 
-        width={44} 
-        height={44}
-        className="relative z-10 drop-shadow-2xl transition-transform duration-300 group-hover:scale-105"
-      />
+      {/* Logos: Arabic keeps original order, English reverses them */}
+      {isArabic ? (
+        <>
+          <Image
+            src="/MOYAS WHITE (1).png"
+            alt="MOYAS Logo"
+            width={44}
+            height={44}
+            className="relative z-10 drop-shadow-2xl transition-transform duration-300 group-hover:scale-105"
+          />
+          <Image
+            src="/White_YLY Union (1).png"
+            alt="YLY Union Logo"
+            width={44}
+            height={44}
+            className="relative z-10 drop-shadow-2xl transition-transform duration-300 group-hover:scale-105"
+          />
+        </>
+      ) : (
+        <>
+          <Image
+            src="/White_YLY Union (1).png"
+            alt="YLY Union Logo"
+            width={44}
+            height={44}
+            className="relative z-10 drop-shadow-2xl transition-transform duration-300 group-hover:scale-105"
+          />
+          <Image
+            src="/MOYAS WHITE (1).png"
+            alt="MOYAS Logo"
+            width={44}
+            height={44}
+            className="relative z-10 drop-shadow-2xl transition-transform duration-300 group-hover:scale-105"
+          />
+        </>
+      )}
     </a>
   );
 };
