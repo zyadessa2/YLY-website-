@@ -1,11 +1,11 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Facebook, Instagram, Linkedin, Send } from "lucide-react";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { NavbarLogo } from "@/components/ui/resizable-navbar";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 const SocialLink = ({
   href,
@@ -55,59 +55,33 @@ const Footer = () => {
       </div>
       {/* Content */}
       <div className="relative container mx-auto px-4 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16 justify-items-center text-center">
           {/* Logo Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col items-center md:items-start"
+            className="flex flex-col items-center"
           >
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-              <Image
-                src="/logo.webp"
-                alt="YLY Logo"
-                width={120}
-                height={120}
-                className="relative rounded-full"
-              />
+            <div className="relative">
+              <NavbarLogo />
             </div>
-            <h3 className="text-2xl font-semibold mt-6 mb-3 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            <h3 className="text-2xl font-semibold mt-6 mb-3 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent text-center">
               Youth Leading Youth
             </h3>
-            <p className="text-muted-foreground text-sm text-center md:text-left">
+            <p className="text-muted-foreground text-sm text-center">
               Empowering the next generation of leaders
             </p>
           </motion.div>
 
-          {/* Email Section */}
+          {/* Quick Links (from navigation) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex flex-col items-center md:items-start space-y-4"
+            className="flex flex-col items-center space-y-4"
           >
-            <h4 className="text-xl font-semibold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Stay Updated
-            </h4>
-            <div className="relative w-full max-w-md">
-              <Input
-                id="email"
-                type="email"
-                placeholder="Enter your email"
-                className="bg-white/5 border-primary/20 text-foreground placeholder:text-muted-foreground pr-12 focus:border-primary/50"
-              />
-              <Button
-                size="icon"
-                className="absolute right-1 top-1 h-8 w-8 bg-primary/20 hover:bg-primary/40"
-              >
-                <Send className="h-4 w-4" />
-              </Button>
-            </div>
-            <p className="text-muted-foreground text-sm">
-              Join us to receive updates and news
-            </p>
+            <NavLinks />
           </motion.div>
 
           {/* Social Links */}
@@ -115,7 +89,7 @@ const Footer = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col items-center md:items-start space-y-4"
+            className="flex flex-col items-center space-y-4"
           >
             <h4 className="text-xl font-semibold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               Connect With Us
@@ -172,3 +146,32 @@ const Footer = () => {
 };
 
 export default Footer;
+
+const NavLinks = () => {
+  const t = useTranslations("navigation");
+  const navItems = [
+    { name: t("home"), link: "/" },
+    { name: t("news"), link: "/news" },
+    { name: t("events"), link: "/events" },
+    { name: t("Governorate"), link: "/Governorate" },
+  ];
+
+  return (
+    <div className="flex flex-col items-center">
+      <h4 className="text-xl font-semibold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2 text-center">
+        {t("navigationTitle") || "Quick Links"}
+      </h4>
+      <div className="flex flex-col md:flex-row md:gap-4 gap-2 items-center">
+        {navItems.map((item, idx) => (
+          <Link
+            key={`footer-nav-${idx}`}
+            href={item.link}
+            className="text-sm text-muted-foreground hover:text-primary transition-colors"
+          >
+            {item.name}
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+};
