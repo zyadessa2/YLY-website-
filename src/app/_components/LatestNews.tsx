@@ -11,13 +11,20 @@ export default async function LatestNews() {
       sortBy: "createdAt",
       sortOrder: "desc"
     });
-    newsData = response.data || [];
+    newsData = response?.data || [];
   } catch (error) {
     console.error("Error fetching news:", error);
-    return null;
+    // Return empty state instead of null to avoid hydration issues
+    return (
+      <section className="py-20 px-4 bg-gradient-to-b from-background via-muted/10 to-background">
+        <div className="max-w-7xl mx-auto text-center">
+          <p className="text-muted-foreground">لا يمكن تحميل الأخبار حالياً</p>
+        </div>
+      </section>
+    );
   }
 
-  if (newsData.length === 0) {
+  if (!newsData || newsData.length === 0) {
     return null;
   }
 
