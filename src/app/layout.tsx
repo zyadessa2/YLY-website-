@@ -6,6 +6,7 @@ import { ThemeProviderWrapper } from "@/components/providers/theme-provider-wrap
 import { LayoutWrapper } from "@/components/providers/LayoutWrapper";
 import { NextIntlClientProvider } from "next-intl";
 import { cookies } from "next/headers";
+import { Analytics } from "@vercel/analytics/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -76,6 +77,7 @@ export default async function RootLayout({
             </div>
           </ThemeProviderWrapper>
         </NextIntlClientProvider>
+        <Analytics/>
       </body>
     </html>
   );
