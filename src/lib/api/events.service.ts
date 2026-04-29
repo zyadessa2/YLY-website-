@@ -58,6 +58,8 @@ export interface EventItem {
   arabicRequirements?: string;
   metaTitle?: string;
   metaDescription?: string;
+  arabicMetaTitle?: string;
+  arabicMetaDescription?: string;
   isUpcoming: boolean;
   isRegistrationOpen: boolean;
   createdBy?: EventCreator;
@@ -70,6 +72,7 @@ export interface CreateEventData {
   governorateId: string;
   title: string;
   arabicTitle: string;
+  slug?: string;
   description: string;
   arabicDescription: string;
   content: string;
@@ -96,6 +99,8 @@ export interface CreateEventData {
   arabicRequirements?: string;
   metaTitle?: string;
   metaDescription?: string;
+  arabicMetaTitle?: string;
+  arabicMetaDescription?: string;
 }
 
 export type UpdateEventData = Partial<CreateEventData>;

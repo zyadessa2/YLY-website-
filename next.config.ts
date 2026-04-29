@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/storage/v1/object/public/**",
       },
-      // Add a generic pattern for any Supabase project
+      // Any Supabase project
       {
         protocol: "https",
         hostname: "*.supabase.co",
@@ -36,6 +36,13 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",
+        port: "",
+        pathname: "/**",
+      },
+      // Allow any external HTTPS image source (user-provided URLs in events/news)
+      {
+        protocol: "https",
+        hostname: "**",
         port: "",
         pathname: "/**",
       },

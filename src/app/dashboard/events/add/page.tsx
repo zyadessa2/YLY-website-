@@ -24,81 +24,58 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+// Helper: convert YYYY-MM-DD to ISO 8601
+const dateToISO = (d?: string | null): string | undefined => {
+  if (!d) return undefined;
+  try { return new Date(d + 'T00:00:00.000Z').toISOString(); } catch { return undefined; }
+};
+
 // Form schema with bilingual support
 const schema = yup.object({
-  // English fields
-  title_en: yup
-    .string()
-    .required('English title is required')
-    .min(10, 'Title must be at least 10 characters')
-    .max(200, 'Title must be less than 200 characters'),
-  description_en: yup
-    .string()
-    .required('English description is required')
-    .min(20, 'Description must be at least 20 characters')
-    .max(500, 'Description must be less than 500 characters'),
-  content_en: yup
-    .string()
-    .required('English content is required')
-    .min(100, 'Content must be at least 100 characters'),
-  location_en: yup
-    .string()
-    .required('English location is required'),
-  
-  // Arabic fields
-  title_ar: yup
-    .string()
-    .required('Arabic title is required')
-    .min(10, 'Title must be at least 10 characters')
-    .max(200, 'Title must be less than 200 characters'),
-  description_ar: yup
-    .string()
-    .required('Arabic description is required')
-    .min(20, 'Description must be at least 20 characters')
-    .max(500, 'Description must be less than 500 characters'),
-  content_ar: yup
-    .string()
-    .required('Arabic content is required')
-    .min(100, 'Content must be at least 100 characters'),
-  location_ar: yup
-    .string()
-    .required('Arabic location is required'),
-  
-  // Common fields
-  event_date: yup
-    .string()
-    .required('Date is required'),
-  event_time: yup
-    .string()
-    .nullable(),
-  cover_image: yup
-    .string()
-    .url('Must be a valid URL')
-    .nullable(),
-  content_images: yup
-    .string()
-    .nullable(),
-  slug: yup
-    .string()
-    .required('Slug is required')
-    .matches(/^[a-z0-9-]+$/, 'Slug must contain only lowercase letters, numbers, and hyphens'),
-  registration_link: yup
-    .string()
-    .url('Must be a valid URL')
-    .nullable(),
-  max_participants: yup
-    .number()
-    .transform((value) => (isNaN(value) ? undefined : value))
-    .nullable(),
-  published: yup
-    .boolean()
-    .default(false),
-  featured: yup
-    .boolean()
-    .default(false),
-  governorateId: yup
-    .string()
-    .default(""),
+  // English
+  title_en: yup.string().required('English title is required').min(10, 'Min 10 chars').max(200, 'Max 200 chars'),
+  description_en: yup.string().required('English description is required').min(10, 'Min 10 chars').max(500, 'Max 500 chars'),
+  content_en: yup.string().required('English content is required').min(50, 'Min 50 chars'),
+  location_en: yup.string().required('English location is required'),
+  // Arabic
+  title_ar: yup.string().required('Arabic title is required').min(10, 'Min 10 chars').max(200, 'Max 200 chars'),
+  description_ar: yup.string().required('Arabic description is required').min(10, 'Min 10 chars').max(500, 'Max 500 chars'),
+  content_ar: yup.string().required('Arabic content is required').min(50, 'Min 50 chars'),
+  location_ar: yup.string().required('Arabic location is required'),
+  // Date & Time
+  event_date: yup.string().required('Event date is required'),
+  event_time: yup.string().nullable(),
+  end_date: yup.string().nullable(),
+  end_time: yup.string().nullable(),
+  // Images
+  cover_image: yup.string().url('Must be a valid URL').nullable(),
+  content_images: yup.string().nullable(),
+  // Slug
+  slug: yup.string().required('Slug is required').matches(/^[a-z0-9-]+$/, 'Lowercase letters, numbers, hyphens only'),
+  // Registration
+  registration_enabled: yup.boolean().default(false),
+  registration_deadline: yup.string().nullable(),
+  max_participants: yup.number().transform((v) => (isNaN(v) ? undefined : v)).nullable(),
+  // Publication
+  published: yup.boolean().default(false),
+  published_at: yup.string().nullable(),
+  featured: yup.boolean().default(false),
+  // Tags (comma-separated)
+  tags: yup.string().nullable(),
+  arabic_tags: yup.string().nullable(),
+  // Contact
+  contact_email: yup.string().email('Must be a valid email').nullable(),
+  contact_phone: yup.string().nullable(),
+  // Requirements
+  requirements: yup.string().nullable(),
+  arabic_requirements: yup.string().nullable(),
+  // SEO
+  meta_title: yup.string().nullable(),
+  meta_description: yup.string().nullable(),
+  arabic_meta_title: yup.string().nullable(),
+  arabic_meta_description: yup.string().nullable(),
+  // Governorate
+  governorateId: yup.string().default(''),
 }).required();
 
 type FormData = yup.InferType<typeof schema>;
@@ -125,19 +102,35 @@ export default function AddEventPage() {
       location_ar: '',
       event_date: '',
       event_time: '',
+      end_date: '',
+      end_time: '',
       cover_image: '',
       content_images: '',
       slug: '',
-      registration_link: '',
+      registration_enabled: false,
+      registration_deadline: '',
       max_participants: undefined,
       published: false,
+      published_at: '',
       featured: false,
-      governorateId: "",
+      tags: '',
+      arabic_tags: '',
+      contact_email: '',
+      contact_phone: '',
+      requirements: '',
+      arabic_requirements: '',
+      meta_title: '',
+      meta_description: '',
+      arabic_meta_title: '',
+      arabic_meta_description: '',
+      governorateId: '',
     },
   });
 
   // Auto-generate slug from English title
   const watchTitle = form.watch('title_en');
+  const registrationEnabled = form.watch('registration_enabled');
+  const isPublished = form.watch('published');
   React.useEffect(() => {
     if (watchTitle) {
       const slug = watchTitle
@@ -178,17 +171,14 @@ export default function AddEventPage() {
       setIsLoading(true);
       setError(null);
 
-      // Parse content images from comma-separated URLs
       const contentImagesArray = data.content_images
-        ? data.content_images.split(',').map(url => url.trim()).filter(Boolean)
+        ? data.content_images.split(',').map(url => url.trim()).filter(Boolean).slice(0, 10)
         : [];
+      const tagsArray = data.tags ? data.tags.split(',').map(t => t.trim()).filter(Boolean).slice(0, 20) : [];
+      const arabicTagsArray = data.arabic_tags ? data.arabic_tags.split(',').map(t => t.trim()).filter(Boolean).slice(0, 20) : [];
 
-      // Use selected governorate or empty for global
-      const governorateId = data.governorateId || '';
-
-      // Prepare event data with new API format (separate fields)
       const eventData = {
-        governorateId,
+        governorateId: data.governorateId || '',
         title: data.title_en,
         arabicTitle: data.title_ar,
         description: data.description_en,
@@ -197,26 +187,34 @@ export default function AddEventPage() {
         arabicContent: data.content_ar,
         location: data.location_en,
         arabicLocation: data.location_ar,
-        eventDate: data.event_date,
+        slug: data.slug,
+        eventDate: dateToISO(data.event_date) || data.event_date,
         eventTime: data.event_time || undefined,
+        endDate: dateToISO(data.end_date),
+        endTime: data.end_time || undefined,
         coverImage: data.cover_image || '',
         contentImages: contentImagesArray,
-        slug: data.slug,
-        registrationLink: data.registration_link || undefined,
+        registrationEnabled: data.registration_enabled,
+        registrationDeadline: dateToISO(data.registration_deadline),
         maxParticipants: data.max_participants || undefined,
         published: data.published,
+        publishedAt: isPublished && data.published_at ? dateToISO(data.published_at) : undefined,
         featured: data.featured,
+        tags: tagsArray.length > 0 ? tagsArray : undefined,
+        arabicTags: arabicTagsArray.length > 0 ? arabicTagsArray : undefined,
+        contactEmail: data.contact_email || undefined,
+        contactPhone: data.contact_phone || undefined,
+        requirements: data.requirements || undefined,
+        arabicRequirements: data.arabic_requirements || undefined,
+        metaTitle: data.meta_title || undefined,
+        metaDescription: data.meta_description || undefined,
+        arabicMetaTitle: data.arabic_meta_title || undefined,
+        arabicMetaDescription: data.arabic_meta_description || undefined,
       };
 
-      // Save to database using new API
       await eventsService.create(eventData);
-
       setSuccess(true);
-
-      // Redirect after success
-      setTimeout(() => {
-        router.push('/dashboard/events');
-      }, 1500);
+      setTimeout(() => { router.push('/dashboard/events'); }, 1500);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to create event';
       setError(errorMessage);
@@ -477,6 +475,27 @@ export default function AddEventPage() {
                   />
                 </div>
 
+                {/* End Date */}
+                <div>
+                  <Label htmlFor="end_date">End Date (optional)</Label>
+                  <Input
+                    id="end_date"
+                    type="date"
+                    disabled={isLoading}
+                    {...form.register('end_date')}
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="end_time">End Time (optional)</Label>
+                  <Input
+                    id="end_time"
+                    type="time"
+                    disabled={isLoading}
+                    {...form.register('end_time')}
+                  />
+                </div>
+
                 {/* Slug */}
                 <div>
                   <Label htmlFor="slug">URL Slug *</Label>
@@ -493,28 +512,41 @@ export default function AddEventPage() {
                   )}
                 </div>
 
-                {/* Registration Link */}
-                <div>
-                  <Label htmlFor="registration_link">Registration Link (optional)</Label>
-                  <Input
-                    id="registration_link"
-                    type="url"
-                    placeholder="https://example.com/register"
-                    disabled={isLoading}
-                    {...form.register('registration_link')}
-                  />
-                </div>
-
-                {/* Max Participants */}
-                <div>
-                  <Label htmlFor="max_participants">Max Participants (optional)</Label>
-                  <Input
-                    id="max_participants"
-                    type="number"
-                    placeholder="100"
-                    disabled={isLoading}
-                    {...form.register('max_participants')}
-                  />
+                {/* Registration */}
+                <div className="md:col-span-2">
+                  <div className="flex items-center space-x-2 mb-3">
+                    <Switch
+                      id="registration_enabled"
+                      checked={registrationEnabled}
+                      onCheckedChange={(checked) => form.setValue('registration_enabled', checked)}
+                      disabled={isLoading}
+                    />
+                    <Label htmlFor="registration_enabled">Enable Registration</Label>
+                  </div>
+                  {registrationEnabled && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                      <div>
+                        <Label htmlFor="registration_deadline">Registration Deadline</Label>
+                        <Input
+                          id="registration_deadline"
+                          type="date"
+                          disabled={isLoading}
+                          {...form.register('registration_deadline')}
+                        />
+                        <p className="text-sm text-gray-500 mt-1">Must be before event date</p>
+                      </div>
+                      <div>
+                        <Label htmlFor="max_participants">Max Participants</Label>
+                        <Input
+                          id="max_participants"
+                          type="number"
+                          placeholder="200"
+                          disabled={isLoading}
+                          {...form.register('max_participants')}
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Cover Image */}
@@ -561,6 +593,17 @@ export default function AddEventPage() {
                   <p className="text-sm text-gray-500">
                     If unchecked, the event will be saved as a draft
                   </p>
+                  {isPublished && (
+                    <div className="mt-3">
+                      <Label htmlFor="published_at">Publish Date (optional)</Label>
+                      <Input
+                        id="published_at"
+                        type="date"
+                        disabled={isLoading}
+                        {...form.register('published_at')}
+                      />
+                    </div>
+                  )}
                 </div>
 
                 <div>
@@ -576,6 +619,76 @@ export default function AddEventPage() {
                   <p className="text-sm text-gray-500">
                     Featured events appear in the showcase area
                   </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Tags Section */}
+            <div className="border rounded-lg p-6 bg-purple-50/30">
+              <h3 className="text-lg font-semibold mb-4">🏷️ Tags</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <Label htmlFor="tags">Tags (English) - comma separated, max 20</Label>
+                  <Input id="tags" placeholder="youth, forum, development" disabled={isLoading} {...form.register('tags')} />
+                </div>
+                <div dir="rtl">
+                  <Label htmlFor="arabic_tags">التاقات (عربي) - مفصولة بفاصلة</Label>
+                  <Input id="arabic_tags" placeholder="شباب، منتدى، تنمية" disabled={isLoading} {...form.register('arabic_tags')} />
+                </div>
+              </div>
+            </div>
+
+            {/* Contact Section */}
+            <div className="border rounded-lg p-6">
+              <h3 className="text-lg font-semibold mb-4">📞 Contact Info (optional)</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <Label htmlFor="contact_email">Contact Email</Label>
+                  <Input id="contact_email" type="email" placeholder="event@example.com" disabled={isLoading} {...form.register('contact_email')} />
+                  {form.formState.errors.contact_email && <p className="text-sm text-red-500 mt-1">{form.formState.errors.contact_email.message}</p>}
+                </div>
+                <div>
+                  <Label htmlFor="contact_phone">Contact Phone (Egyptian)</Label>
+                  <Input id="contact_phone" placeholder="01012345678" disabled={isLoading} {...form.register('contact_phone')} />
+                  <p className="text-sm text-gray-500 mt-1">Format: 01012345678 or +201012345678</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Requirements Section */}
+            <div className="border rounded-lg p-6">
+              <h3 className="text-lg font-semibold mb-4">📋 Requirements (optional)</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <Label htmlFor="requirements">Requirements (English)</Label>
+                  <Textarea id="requirements" placeholder="Participants must be 18+ years old" rows={3} disabled={isLoading} {...form.register('requirements')} />
+                </div>
+                <div dir="rtl">
+                  <Label htmlFor="arabic_requirements">المتطلبات (عربي)</Label>
+                  <Textarea id="arabic_requirements" placeholder="يجب أن يكون عمر المشاركين 18 سنة أو أكثر" rows={3} disabled={isLoading} {...form.register('arabic_requirements')} />
+                </div>
+              </div>
+            </div>
+
+            {/* SEO Section */}
+            <div className="border rounded-lg p-6 bg-yellow-50/30">
+              <h3 className="text-lg font-semibold mb-4">🔍 SEO (optional)</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <Label htmlFor="meta_title">Meta Title (English)</Label>
+                  <Input id="meta_title" placeholder="Annual Youth Forum 2026" disabled={isLoading} {...form.register('meta_title')} />
+                </div>
+                <div dir="rtl">
+                  <Label htmlFor="arabic_meta_title">عنوان الميتا (عربي)</Label>
+                  <Input id="arabic_meta_title" placeholder="منتدى الشباب السنوي 2026" disabled={isLoading} {...form.register('arabic_meta_title')} />
+                </div>
+                <div>
+                  <Label htmlFor="meta_description">Meta Description (English)</Label>
+                  <Textarea id="meta_description" placeholder="Join us for the annual youth forum..." rows={2} disabled={isLoading} {...form.register('meta_description')} />
+                </div>
+                <div dir="rtl">
+                  <Label htmlFor="arabic_meta_description">وصف الميتا (عربي)</Label>
+                  <Textarea id="arabic_meta_description" placeholder="انضم إلينا في منتدى الشباب السنوي..." rows={2} disabled={isLoading} {...form.register('arabic_meta_description')} />
                 </div>
               </div>
             </div>
