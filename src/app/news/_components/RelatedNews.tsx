@@ -12,8 +12,8 @@ interface RelatedNewsProps {
 }
 
 // Helper functions
-const getTitle = (news: NewsItem): string => news.title || news.arabicTitle || '';
-const getDescription = (news: NewsItem): string => news.description || news.arabicDescription || '';
+const getTitle = (news: NewsItem): string => news.arabicTitle || news.title || '';
+const getDescription = (news: NewsItem): string => news.arabicDescription || news.description || '';
 
 export const RelatedNews = ({ currentNewsId }: RelatedNewsProps) => {
   const [relatedArticles, setRelatedArticles] = useState<NewsItem[]>([]);

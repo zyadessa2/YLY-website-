@@ -15,8 +15,8 @@ interface NewsCardProps {
 
 export const NewsCard = ({ news, index, variant = "regular" }: NewsCardProps) => {
   // Get title and description
-  const title = news.title || news.arabicTitle || '';
-  const description = news.description || news.arabicDescription || '';
+  const title = news.arabicTitle || news.title || '';
+  const description = news.arabicDescription || news.description || '';
   
   // Get image props using the new utility function
   const imageProps = getNextImageProps(news.coverImage);

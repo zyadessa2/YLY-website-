@@ -82,7 +82,7 @@ function FeaturedNewsCard({ news }: { news: NewsItem }) {
           <div className="absolute inset-0">
             <Image
               src={imageProps.src}
-              alt={news.title || news.arabicTitle || "Featured News"}
+              alt={news.arabicTitle || news.title || "Featured News"}
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-110"
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -97,10 +97,10 @@ function FeaturedNewsCard({ news }: { news: NewsItem }) {
               <span>مميز</span>
             </div>
             <h3 className="text-3xl md:text-4xl font-bold mb-4 leading-tight group-hover:text-primary transition-colors">
-              {news.title || news.arabicTitle}
+              {news.arabicTitle || news.title}
             </h3>
             <p className="text-white/90 text-lg mb-4 line-clamp-2">
-              {news.description || news.arabicDescription}
+              {news.arabicDescription || news.description}
             </p>
             <div className="flex items-center gap-2 text-white/80">
               <Calendar className="w-4 h-4" />
@@ -130,7 +130,7 @@ function RegularNewsCard({ news, index }: { news: NewsItem; index: number }) {
           <div className="relative w-32 h-32 flex-shrink-0 rounded-xl overflow-hidden">
             <Image
               src={imageProps.src}
-              alt={news.title || news.arabicTitle || "News"}
+              alt={news.arabicTitle || news.title || "News"}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-110"
               sizes="128px"
@@ -141,10 +141,10 @@ function RegularNewsCard({ news, index }: { news: NewsItem; index: number }) {
           {/* Content */}
           <div className="flex-1 min-w-0">
             <h4 className="text-lg font-bold mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-              {news.title || news.arabicTitle}
+              {news.arabicTitle || news.title}
             </h4>
             <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
-              {news.description || news.arabicDescription}
+              {news.arabicDescription || news.description}
             </p>
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <Calendar className="w-3 h-3" />
