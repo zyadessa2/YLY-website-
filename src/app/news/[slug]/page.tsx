@@ -80,7 +80,7 @@ export default async function NewsDetailPage({ params }: NewsPageProps) {
     }).filter(Boolean) || [];
 
     return (
-      <div dir="rtl" className="min-h-screen bg-background">
+      <div dir="rtl" className="min-h-screen  bg-background">
         {/* Hero Section */}
         <NewsDetailHero
           title={title}
@@ -92,7 +92,7 @@ export default async function NewsDetailPage({ params }: NewsPageProps) {
         />
 
         {/* Main Content */}
-        <div className="container mx-auto px-4 py-8">
+        <div className=" mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* News Content */}
             <div className="lg:col-span-2">
